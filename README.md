@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Japan 2027 เว็บแผนเที่ยว (Next.js)
 
-## Getting Started
+เว็บส่วนตัวที่แสดงแผนจาก Google Sheet "Japan 2027" ต้องใส่รหัสผ่านก่อนดู
 
-First, run the development server:
+## รันบนเครื่อง
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd web
+npm install
+cp .env.example .env.local   # แล้วใส่ SITE_PASSWORD และ AUTH_SECRET
+npm run dev                  # เปิด http://localhost:3000
+npm run build && npm start   # ทดสอบแบบ production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+สร้าง AUTH_SECRET: `openssl rand -hex 32`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy ขึ้น Vercel (ฟรี)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. `npx vercel login` แล้ว `npx vercel` ในโฟลเดอร์ `web` ตอบคำถามตามค่าเริ่มต้น
+2. ตั้งตัวแปรใน Vercel → Project → Settings → Environment Variables
+   - `SITE_PASSWORD` รหัสผ่านที่จะใช้จริง ยาว 12 ตัวขึ้นไป
+   - `AUTH_SECRET` สุ่มใหม่ ไม่ใช้ค่าเดียวกับในเครื่อง
+3. `npx vercel --prod`
 
-## Learn More
+เปลี่ยนรหัสผ่านหรือ AUTH_SECRET แล้ว deploy ใหม่ ทุกเครื่องที่ login ไว้จะถูกออกจากระบบ
 
-To learn more about Next.js, take a look at the following resources:
+## การป้องกันข้อมูล
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/middleware.ts` กั้นทุกหน้ายกเว้น `/login` ถ้าไม่มี cookie ที่ถูกต้องจะเด้งไปหน้า login
+- `src/app/(trip)/layout.tsx` เช็ก cookie ซ้ำฝั่ง server อีกชั้น
+- cookie เป็น HMAC ของรหัสผ่าน ตั้งเป็น HttpOnly, Secure, SameSite=Lax อายุ 30 วัน
+- ข้อมูลแผนอยู่ใน `src/lib/plan.ts` ที่มี `import "server-only"` จึงไม่ติดไปกับไฟล์ JavaScript ของหน้าเว็บ
+- ใส่รหัสผิดจะหน่วง 1 วินาที ยังไม่มีการล็อกหลังใส่ผิดหลายครั้ง จึงควรใช้รหัสยาว
+- ตั้ง noindex และ robots.txt ห้าม search engine เก็บ
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## อัปเดตข้อมูล
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ข้อมูลเป็นสำเนาจากชีต (ดู `SNAPSHOT_DATE` ใน `src/lib/plan.ts`) แก้ชีตแล้วต้องอัปเดตไฟล์นี้และ deploy ใหม่
+ห้ามใส่เลขการจอง เลขพาสปอร์ต หรือข้อมูลบัตรลงในไฟล์นี้
