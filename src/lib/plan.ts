@@ -2,7 +2,7 @@ import "server-only";
 import { placeUrl, type RouteLeg } from "./maps";
 
 // สำเนาข้อมูลจาก Google Sheet "Japan 2027" (แท็บ Main แถว 2–8 และแท็บ ค่าใช้จ่าย)
-// ดึงเมื่อ 18 ต.ค. 2026 ถ้าแก้ชีตแล้วต้องอัปเดตไฟล์นี้ใหม่
+// ดึงเมื่อ 18 ต.ค. 2026 (รวมบัตร Noriorikun วันที่ 10 และ Owakudani วันที่ 13) ถ้าแก้ชีตแล้วต้องอัปเดตไฟล์นี้ใหม่
 // ไฟล์นี้ import ได้เฉพาะฝั่ง server เท่านั้น ข้อมูลจะไม่ติดไปกับ JavaScript ของหน้าเว็บ
 
 export const SNAPSHOT_DATE = "18 ต.ค. 2026";
@@ -66,7 +66,7 @@ export const trip = {
     "คืนวันที่ 14 พักที่ไหน แล้วแก้เส้นทางวันที่ 15 ที่ยังออกจาก Ikebukuro",
     "ร้านมื้อวันเกิดวันที่ 13 และช่วงว่าง 15:15–17:35 ที่ Motohakone",
     "โรงแรมคืนวันที่ 12 ใกล้ Saitama-Shintoshin",
-    "จะใช้บัตร Enoden Noriorikun วันที่ 10 ไหม (บัตร Izuhakone ไม่คุ้มกับแผน Owakudani)",
+    "ไม่ต้องซื้อบัตร Izuhakone 1Day Bus Free (ไม่คุ้มกับแผน Owakudani) ส่วนบัตร Enoden Noriorikun วันที่ 10 เลือกไว้ก่อนแล้ว",
   ],
 };
 
@@ -208,7 +208,7 @@ const baseDays: Omit<Day, "routes">[] = [
 14:20 Enoden Shichirigahama → 14:27 Inamuragasaki เดิน 3–5 นาทีถึง Cafe Yoridokoro (เปิด 07:00–18:00 ปิดวันอังคาร)
 15:37 Enoden Inamuragasaki → 15:43 Hase เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in (เปิดถึง 17:30) แล้วแวะ KANNON COFFEE
 17:35 Enoden Hase → 18:07 Fujisawa ไม่ต้องเปลี่ยนรถ
-หมายเหตุ: Enoden ออกทุก 14 นาที`,
+หมายเหตุ: Enoden ออกทุก 14 นาที ใช้บัตร Noriorikun (เลือกไว้ก่อน) ขึ้นลงได้ไม่จำกัด ถ้าเหนื่อยนั่ง Enoden จาก Kamakurakokomae ไป Shichirigahama แทนเดินได้โดยไม่จ่ายเพิ่ม`,
     rain: `ฝนปรอย: ไปตามแผน พกร่ม ถ้าทะเลมองไม่เห็นให้ข้าม Kamakurakokomae, Koshigoe Rakko Park และ Shichirigahama นั่ง Enoden จาก Fujisawa ตรงไป Inamuragasaki (Cafe Yoridokoro อยู่ในร่ม) และ Hase ดูพระใหญ่
 ฝนหนักหรือเหนื่อยจากบินข้ามคืน: พักที่ Fujisawa แล้วย้ายเส้นชายทะเลไปบ่ายวันที่ 11 แทน Hayama
 ถ้าช้ากว่าแผน ตัดตามลำดับ: KANNON COFFEE, เวลาที่หาด Shichirigahama`,
@@ -223,11 +223,12 @@ const baseDays: Omit<Day, "routes">[] = [
     ],
     costs: [
       { name: "Narita → Fujisawa: Keisei Main Line ถึง Keisei-Funabashi 758 + JR จาก Funabashi เปลี่ยนที่ Shinagawa 1,408", type: "ค่าเดินทาง", yen: 2166, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
-      { name: "Enoden Fujisawa → Kamakurakokomae", type: "ค่าเดินทาง", yen: 260, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
-      { name: "Enoden Shichirigahama → Inamuragasaki (แวะ Cafe Yoridokoro)", type: "ค่าเดินทาง", yen: 200, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
-      { name: "Enoden Inamuragasaki → Hase", type: "ค่าเดินทาง", yen: 200, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "รวมใน Noriorikun: Enoden Fujisawa → Kamakurakokomae (ตั๋วปกติ 260)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "รวมใน Noriorikun: Enoden Shichirigahama → Inamuragasaki แวะ Cafe Yoridokoro (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "รวมใน Noriorikun: Enoden Inamuragasaki → Hase (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "พระใหญ่ Kamakura (Kotoku-in)", type: "ค่าเข้า", yen: 300, status: "เช็กแล้ว", source: "kotoku-in.jp" },
-      { name: "Enoden Hase → Fujisawa", type: "ค่าเดินทาง", yen: 310, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "รวมใน Noriorikun: Enoden Hase → Fujisawa (ตั๋วปกติ 310)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "บัตร Enoden 1 วัน Noriorikun (เลือกไว้ก่อน) แทนตั๋ว 4 เที่ยว 260 + 200 + 200 + 310 = 970 ประหยัด 170 ขึ้นลงได้ไม่จำกัดทั้งสาย ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa หรือแบบดิจิทัล", type: "ค่าเดินทาง", yen: 800, status: "เช็กแล้ว", source: "enoden.co.jp (ราคาปี 2026 ตั๋วปกติจาก transit.yahoo.co.jp)" },
       { name: "ทางข้ามรถไฟ Kamakurakokomae, Koshigoe Rakko Park, หาด Shichirigahama และถนนคนเดินหน้าพระใหญ่ (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว" },
     ],
     board: `1. Narita: สถานีรถไฟ Keisei ใต้อาคารผู้โดยสาร ขึ้น Keisei Main Line (Rapid) ขบวนไป Keisei-Ueno 08:33 จาก Narita Airport หรือ 08:36 จาก Airport Terminal 2 (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
@@ -255,7 +256,8 @@ const baseDays: Omit<Day, "routes">[] = [
 ☐ Cafe Yoridokoro: ถามร้านว่าจองที่นั่งริมหน้าต่างหรือบาร์ด้านนอกได้ไหม โทร 0467-40-5737 (บางแหล่งบอกว่าจองไม่ได้ ต้องต่อคิว บางแหล่งบอกว่าเริ่มรับจองที่นั่งเคาน์เตอร์ตั้งแต่ ก.ย. 2024)
 
 พกไป
-☐ ซื้อหรือเติมบัตร IC (Suica / PASMO) ที่ Narita ใช้ได้ทั้ง Keisei, JR และ Enoden ค่ารถและค่าเข้าวันนี้ 3,436 เยนต่อคน (ไม่รวมค่าอาหารที่ Cafe Yoridokoro และ KANNON COFFEE)
+☐ บัตร Enoden 1 วัน Noriorikun 800 เยน (เลือกไว้ก่อน) ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa ก่อนขึ้นขบวน 12:50 หรือซื้อแบบดิจิทัล ขึ้นลง Enoden ได้ไม่จำกัดทั้งวัน
+☐ ซื้อหรือเติมบัตร IC (Suica / PASMO) ที่ Narita ใช้กับ Keisei และ JR ค่ารถและค่าเข้าวันนี้ 3,266 เยนต่อคน (ไม่รวมค่าอาหารที่ Cafe Yoridokoro และ KANNON COFFEE)
 ☐ เงินสดสำหรับค่าเข้าพระใหญ่และคาเฟ่ (ยังไม่ได้เช็กว่ารับบัตรไหม)
 ☐ ร่มพับ
 
