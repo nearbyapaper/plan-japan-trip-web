@@ -5,6 +5,8 @@ import { dayTotal, days, getDay, toThb } from "@/lib/plan";
 import TextBlock from "@/components/TextBlock";
 import Checklist from "@/components/Checklist";
 import { dirUrl, type TravelMode } from "@/lib/maps";
+import { getDayMaps } from "@/lib/minimap";
+import MiniMap from "@/components/MiniMap";
 import { Card, Collapsible, Pill, SectionTitle, accentClass, baht, yen } from "@/components/ui";
 
 const modeIcon: Record<TravelMode, string> = { transit: "🚆", walking: "🚶", driving: "🚗" };
@@ -34,6 +36,7 @@ export default async function DayPage({ params }: Props) {
   const prev = days[idx - 1];
   const next = days[idx + 1];
   const total = dayTotal(day);
+  const maps = getDayMaps(day.slug);
 
   return (
     <div className="space-y-4">
@@ -58,6 +61,13 @@ export default async function DayPage({ params }: Props) {
         <SectionTitle icon="📍">ภาพรวมวันนี้</SectionTitle>
         <TextBlock text={day.place} />
       </Card>
+
+      {maps.length > 0 && (
+        <Card>
+          <SectionTitle icon="🗾">แผนที่ย่อ</SectionTitle>
+          <MiniMap maps={maps} />
+        </Card>
+      )}
 
       <Card>
         <SectionTitle icon="🕘">ไทม์ไลน์</SectionTitle>
@@ -111,7 +121,8 @@ export default async function DayPage({ params }: Props) {
         </Card>
       )}
 
-      {day.maps.length > 0 && (
+      {/* วันที่มีแผนที่ย่อ ใช้หมุดบนแผนที่แทนรายการลิงก์ */}
+      {day.maps.length > 0 && maps.length === 0 && (
         <Card>
           <SectionTitle icon="🗺">สถานที่ใน Google Maps</SectionTitle>
           <div className="flex flex-wrap gap-2">

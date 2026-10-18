@@ -45,3 +45,88 @@ details > summary::-webkit-details-marker {
 details[open] > summary .chev {
   transform: rotate(90deg);
 }
+
+/* แผนที่ย่อ (Leaflet) */
+.mm-map img {
+  max-width: none;
+}
+.mm-pin span {
+  display: flex;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+.mm-map .leaflet-popup-content {
+  margin: 12px;
+  font-family: var(--font-thai), ui-sans-serif, system-ui, sans-serif;
+}
+.mm-pop .mm-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #1d1b18;
+}
+.mm-pop .mm-n {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 11px;
+}
+.mm-pop .mm-photos {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-bottom: 4px;
+}
+.mm-pop .mm-photos a {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.mm-pop .mm-photos img {
+  display: block;
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.mm-pop .mm-photos a:only-child img {
+  width: 256px;
+}
+.mm-pop .mm-credit {
+  margin: 0 0 6px;
+  font-size: 10px;
+  color: #6b665d;
+}
+.mm-pop .mm-desc {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #3a362f;
+}
+.mm-pop .mm-gmaps {
+  display: inline-block;
+  border-radius: 9999px;
+  background: #c2410c;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff !important;
+  text-decoration: none;
+}
