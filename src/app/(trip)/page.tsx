@@ -27,7 +27,7 @@ export default function Overview() {
         </Card>
         <Card className="!p-4">
           <p className="text-xs text-ink-2">ตั๋วเครื่องบิน 2 คน</p>
-          <p className="mt-1 text-2xl font-bold tabular-nums">฿33,760</p>
+          <p className="mt-1 text-2xl font-bold tabular-nums">฿33,230</p>
           <p className="text-sm text-ink-2">รวมกระเป๋าโหลด</p>
         </Card>
       </div>

@@ -54,7 +54,7 @@ export const trip = {
     { code: "TG682", route: "BKK 22:45 → HND T3 06:55", date: "9 → 10 มิ.ย." },
     { code: "TG677", route: "NRT T1 17:25 → BKK 21:55", date: "15 มิ.ย." },
   ],
-  flightNote: "33,760 บาทสำหรับ 2 คน รวมกระเป๋าโหลดคนละ 1 ใบ",
+  flightNote: "33,230 บาทสำหรับ 2 คน (จองแล้ว) รวมกระเป๋าโหลดคนละ 1 ใบ",
   stays: [
     { nights: "10–11 มิ.ย.", place: "Smile Hotel Shonan Fujisawa", status: "เลือกไว้ก่อน (3,572 บาท 2 คืน)" },
     { nights: "12 มิ.ย.", place: "ใกล้ Saitama-Shintoshin", status: "ยังไม่ได้เลือกโรงแรม" },
