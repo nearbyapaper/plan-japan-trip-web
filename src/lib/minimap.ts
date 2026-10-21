@@ -21,9 +21,9 @@ type PinDef = {
 
 const pins = {
   // วันที่ 10
-  narita: { name: "Narita Airport (Terminal 1)", lat: 35.7654, lng: 140.38599, kind: "station", desc: "08:33 ขึ้น Keisei Main Line (Rapid) ไม่ใช่ Skyliner หรือ Access Express", q: "Narita Airport Terminal 1 Station" },
-  keiseiFunabashi: { name: "Keisei-Funabashi / JR Funabashi", lat: 35.69989, lng: 139.9863, kind: "station", desc: "09:33 ถึง เดิน 5 นาทีไป JR Funabashi ขึ้น JR Sobu Rapid 09:46", q: "Keisei Funabashi Station" },
-  shinagawa: { name: "Shinagawa", lat: 35.62748, lng: 139.73777, kind: "station", desc: "10:19 ถึงชานชาลา 15 เดินไปชานชาลา 12 ขึ้น JR Tokaido Line 10:26", q: "Shinagawa Station" },
+  narita: { name: "Narita Airport (Terminal 1)", lat: 35.7654, lng: 140.38599, kind: "station", desc: "เครื่องลง 06:55 ขึ้น Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) 08:55 ไม่ใช่ Skyliner หรือ Access Express", q: "Narita Airport Terminal 1 Station" },
+  keiseiFunabashi: { name: "Keisei-Funabashi / JR Funabashi", lat: 35.69989, lng: 139.9863, kind: "station", desc: "09:45 ถึง เดิน 5 นาทีไป JR Funabashi ขึ้น JR Sobu Rapid ขบวนไป Zushi 09:58", q: "Keisei Funabashi Station" },
+  musashiKosugi: { name: "Musashi-Kosugi", lat: 35.57562, lng: 139.65968, kind: "station", desc: "10:44 ถึงชานชาลา 3 รอที่ชานชาลาเดิม ขึ้น JR Shonan-Shinjuku Line (Rapid) 10:50", q: "Musashi-Kosugi Station" },
   fujisawa: { name: "Fujisawa · Smile Hotel Shonan Fujisawa", lat: 35.339, lng: 139.48523, kind: "hotel", desc: "สถานี Fujisawa และโรงแรม Smile Hotel Shonan Fujisawa ฝั่งทางออกใต้ (เดิน 2–5 นาที ยังไม่ได้เช็ก) หมุดนี้ปักที่สถานี เพราะ OpenStreetMap ไม่มีพิกัดโรงแรม สถานี Enoden อยู่ฝั่งทางออกใต้", q: "Smile Hotel Shonan Fujisawa" },
   kamakurakokomae: { name: "สถานี Kamakurakokomae", lat: 35.30672, lng: 139.50071, kind: "station", desc: "13:07 ถึงด้วย Enoden ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที", q: "Kamakurakokomae Station" },
   crossing: { name: "ทางข้ามรถไฟ Slam Dunk · Koshigoe Rakko Park", lat: 35.3066, lng: 139.50209, kind: "spot", desc: "ฉากเปิดของอนิเมะ Slam Dunk เห็นรถไฟ Enoden วิ่งผ่านหน้าทะเล Shonan คนเยอะ ห้ามยืนถ่ายรูปบนถนน Koshigoe Rakko Park เป็นสวนเล็กติดทางข้าม ใช้ยืนถ่ายรูปแทนได้ เข้าฟรี", q: "Kamakurakokomae Crossing" },
@@ -87,7 +87,7 @@ const dayMaps: Record<string, MapDef[]> = {
   "10": [
     {
       title: "เช้า: Narita → Fujisawa",
-      steps: ["narita", ["keiseiFunabashi", "transit"], ["shinagawa", "transit"], ["fujisawa", "transit"]],
+      steps: ["narita", ["keiseiFunabashi", "transit"], ["musashiKosugi", "transit"], ["fujisawa", "transit"]],
     },
     {
       title: "บ่าย: เส้นชายทะเล Enoden",

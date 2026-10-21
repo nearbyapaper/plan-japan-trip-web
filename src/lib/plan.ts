@@ -79,10 +79,10 @@ const SHIMAMURA = "ファッションセンターしまむら 高田馬場店";
 const routes: Record<string, RouteLeg[]> = {
   "9": [{ to: "Suvarnabhumi Airport", mode: "driving", note: "จากที่อยู่ตอนนี้ไปสุวรรณภูมิ" }],
   "10": [
-    { time: "08:33", from: "Narita Airport Terminal 1 Station", to: "Keisei Funabashi Station", mode: "transit", note: "Keisei Main Line (Rapid)" },
-    { time: "09:33", from: "Keisei Funabashi Station", to: "JR Funabashi Station", mode: "walking", note: "เดินเปลี่ยนสถานี 5 นาที" },
-    { time: "09:46", from: "JR Funabashi Station", to: "Shinagawa Station", mode: "transit", note: "JR Sobu Rapid" },
-    { time: "10:26", from: "Shinagawa Station", to: "Fujisawa Station", mode: "transit", note: "JR Tokaido Line" },
+    { time: "08:55", from: "Narita Airport Terminal 1 Station", to: "Keisei Funabashi Station", mode: "transit", note: "Keisei Main Line (特急 Limited Express)" },
+    { time: "09:45", from: "Keisei Funabashi Station", to: "JR Funabashi Station", mode: "walking", note: "เดินเปลี่ยนสถานี 5 นาที" },
+    { time: "09:58", from: "JR Funabashi Station", to: "Musashi-Kosugi Station", mode: "transit", note: "JR Sobu Rapid ขบวนไป Zushi" },
+    { time: "10:50", from: "Musashi-Kosugi Station", to: "Fujisawa Station", mode: "transit", note: "JR Shonan-Shinjuku Line (Rapid) ชานชาลาเดียวกัน" },
     { from: "Fujisawa Station", to: HOTEL_FUJISAWA, mode: "walking", note: "ฝากกระเป๋า" },
     { time: "12:50", from: "Enoden Fujisawa Station", to: "Kamakurakokomae Station", mode: "transit", note: "Enoden" },
     { from: "Kamakurakokomae Station", to: "Kamakurakokomae Crossing", mode: "walking", note: "ทางข้ามรถไฟ 3 นาที" },
@@ -199,10 +199,10 @@ const baseDays: Omit<Day, "routes">[] = [
 บ่าย: เส้นชายทะเล Enoden หลังบินข้ามคืน: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
 เย็น: กลับ Fujisawa เช็กอิน
 พัก Fujisawa ที่ Smile Hotel Shonan Fujisawa (คืนที่ 1 จาก 2)`,
-    howto: `08:33 Keisei Main Line (Rapid) Narita Airport (หรือ 08:36 Airport Terminal 2) → 09:33 Keisei-Funabashi เดิน 5 นาทีไป JR Funabashi
-09:46 JR Sobu Rapid → 10:19 Shinagawa
-10:26 JR Tokaido Line → 11:04 Fujisawa
-(Narita → Fujisawa 2,166 เยน เปลี่ยนรถ 2 ครั้ง ราว 2 ชม. 30 นาที เป็นรอบตัวอย่าง เผื่อเวลาผ่าน ตม. และรับกระเป๋า)
+    howto: `08:55 Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) Narita Airport (หรือ 08:59 Airport Terminal 2) → 09:45 Keisei-Funabashi เดิน 5 นาทีไป JR Funabashi
+09:58 JR Sobu Rapid → 10:44 Musashi-Kosugi
+10:50 JR Shonan-Shinjuku Line (Rapid) ชานชาลาเดียวกัน → 11:21 Fujisawa
+(Narita → Fujisawa 2,166 เยน เปลี่ยนรถ 2 ครั้ง ราว 2 ชม. 30 นาที เป็นรอบตัวอย่าง เครื่องลง 06:55 เผื่อเวลาผ่าน ตม. และรับกระเป๋าราว 2 ชม.)
 12:50 Enoden Fujisawa → 13:07 Kamakurakokomae ไม่ต้องเปลี่ยนรถ ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม
 13:40 เดินเลียบทะเลไป Shichirigahama 1 สถานี
 14:20 Enoden Shichirigahama → 14:27 Inamuragasaki เดิน 3–5 นาทีถึง Cafe Yoridokoro (เปิด 07:00–18:00 ปิดวันอังคาร)
@@ -222,7 +222,7 @@ const baseDays: Omit<Day, "routes">[] = [
       { name: "KANNON COFFEE kamakura", url: m("KANNON%20COFFEE%20kamakura%20Kanagawa") },
     ],
     costs: [
-      { name: "Narita → Fujisawa: Keisei Main Line ถึง Keisei-Funabashi 758 + JR จาก Funabashi เปลี่ยนที่ Shinagawa 1,408", type: "ค่าเดินทาง", yen: 2166, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "Narita → Fujisawa: Keisei Main Line ถึง Keisei-Funabashi 758 + JR จาก Funabashi เปลี่ยนที่ Musashi-Kosugi 1,408", type: "ค่าเดินทาง", yen: 2166, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Fujisawa → Kamakurakokomae (ตั๋วปกติ 260)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Shichirigahama → Inamuragasaki แวะ Cafe Yoridokoro (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Inamuragasaki → Hase (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
@@ -231,9 +231,9 @@ const baseDays: Omit<Day, "routes">[] = [
       { name: "บัตร Enoden 1 วัน Noriorikun (เลือกไว้ก่อน) แทนตั๋ว 4 เที่ยว 260 + 200 + 200 + 310 = 970 ประหยัด 170 ขึ้นลงได้ไม่จำกัดทั้งสาย ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa หรือแบบดิจิทัล", type: "ค่าเดินทาง", yen: 800, status: "เช็กแล้ว", source: "enoden.co.jp (ราคาปี 2026 ตั๋วปกติจาก transit.yahoo.co.jp)" },
       { name: "ทางข้ามรถไฟ Kamakurakokomae, Koshigoe Rakko Park, หาด Shichirigahama และถนนคนเดินหน้าพระใหญ่ (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว" },
     ],
-    board: `1. Narita: สถานีรถไฟ Keisei ใต้อาคารผู้โดยสาร ขึ้น Keisei Main Line (Rapid) ขบวนไป Keisei-Ueno 08:33 จาก Narita Airport หรือ 08:36 จาก Airport Terminal 2 (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
-2. ลง Keisei-Funabashi 09:33 เดิน 5 นาทีไปสถานี JR Funabashi
-3. JR Funabashi ชานชาลา 3: ขึ้น JR Sobu Rapid ขบวนไป Kurihama 09:46 ลง Shinagawa 10:19 (ชานชาลา 15) เดินไปชานชาลา 12 ขึ้น JR Tokaido Line ขบวนไป Hiratsuka 10:26 ลง Fujisawa 11:04
+    board: `1. Narita: สถานีรถไฟ Keisei ใต้อาคารผู้โดยสาร ขึ้น Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) ขบวนไป Keisei-Ueno 08:55 จาก Narita Airport (ชานชาลา 2) หรือ 08:59 จาก Airport Terminal 2 (ชานชาลา 3) (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
+2. ลง Keisei-Funabashi 09:45 เดิน 5 นาทีไปสถานี JR Funabashi
+3. JR Funabashi ชานชาลา 3: ขึ้น JR Sobu Rapid ขบวนไป Zushi 09:58 ลง Musashi-Kosugi 10:44 (ชานชาลา 3) รอที่ชานชาลาเดิม ขึ้น JR Shonan-Shinjuku Line (Rapid) ขบวนไป Hiratsuka 10:50 ลง Fujisawa 11:21 (ไม่แนะนำรอบ 09:50 เพราะเหลือเวลาเดินเปลี่ยนสถานีแค่ 5 นาที)
 4. Fujisawa: ฝากกระเป๋าที่ Smile Hotel Shonan Fujisawa (ฝั่งทางออกใต้) กินข้าวเที่ยงแถวสถานี
 5. Fujisawa สถานี Enoden (ฝั่งทางออกใต้): ขึ้น Enoden ขบวนไป Kamakura 12:50 (รอบก่อนหน้า 12:36)
 6. นั่ง Enoden 17 นาที ไม่ต้องเปลี่ยนรถ ลง Kamakurakokomae 13:07
@@ -252,7 +252,7 @@ const baseDays: Omit<Day, "routes">[] = [
 • KANNON COFFEE kamakura: คาเฟ่เล็กแถว Hase ขึ้นชื่อเรื่องเครปและคุกกี้รูปพระใหญ่
 • Fujisawa: เมืองใหญ่ของย่าน Shonan เป็นต้นสาย Enoden และจุดตัดของ JR Tokaido Line กับ Odakyu มีห้างและร้านอาหารรอบสถานีทั้งสองฝั่ง`,
     checklist: `ต้องจองล่วงหน้า
-☐ Smile Hotel Shonan Fujisawa 2 คืน (10–11 มิ.ย.) เช็กอิน 15:00 ถามว่าฝากกระเป๋าก่อนเช็กอินได้ไหม (ถึงราว 11:10)
+☐ Smile Hotel Shonan Fujisawa 2 คืน (10–11 มิ.ย.) เช็กอิน 15:00 ถามว่าฝากกระเป๋าก่อนเช็กอินได้ไหม (ถึงราว 11:25)
 ☐ Cafe Yoridokoro: ถามร้านว่าจองที่นั่งริมหน้าต่างหรือบาร์ด้านนอกได้ไหม โทร 0467-40-5737 (บางแหล่งบอกว่าจองไม่ได้ ต้องต่อคิว บางแหล่งบอกว่าเริ่มรับจองที่นั่งเคาน์เตอร์ตั้งแต่ ก.ย. 2024)
 
 พกไป
@@ -265,8 +265,8 @@ const baseDays: Omit<Day, "routes">[] = [
 ☐ ต้องออกจาก Inamuragasaki ไม่เกิน 16:05 เพื่อเข้าพระใหญ่ก่อนปิด 17:30
 
 ระวัง
-☐ ที่ Narita ขึ้น Keisei Main Line เท่านั้น ไม่ขึ้น Skyliner หรือ Access Express และต้องลงที่ Keisei-Funabashi
-☐ ที่ Funabashi ขึ้น JR Sobu Rapid แล้วต้องเปลี่ยนเป็น JR Tokaido Line ที่ Shinagawa เพราะ Sobu Rapid ไม่ผ่าน Fujisawa
+☐ ที่ Narita ขึ้น Keisei Main Line เท่านั้น ขบวน 特急 (Limited Express) ไม่เสียค่าเพิ่ม ขึ้นได้ ไม่ขึ้น Skyliner หรือ Access Express และต้องลงที่ Keisei-Funabashi
+☐ ที่ Funabashi ขึ้น JR Sobu Rapid ขบวนไป Zushi แล้วลงเปลี่ยนที่ Musashi-Kosugi ขึ้น JR Shonan-Shinjuku Line ชานชาลาเดียวกัน เพราะขบวนไป Zushi ไม่จอด Fujisawa
 ☐ ที่ทางข้ามรถไฟ Slam Dunk ห้ามยืนถ่ายรูปบนถนน
 
 ยังไม่ได้เช็ก
