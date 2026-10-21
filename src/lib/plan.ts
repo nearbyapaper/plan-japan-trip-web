@@ -51,7 +51,7 @@ export const trip = {
   dates: "9–15 มิ.ย. 2027",
   people: 2,
   flights: [
-    { code: "TG640", route: "BKK 22:10 → NRT 06:20", date: "9 → 10 มิ.ย." },
+    { code: "TG682", route: "BKK 22:45 → NRT 06:55", date: "9 → 10 มิ.ย." },
     { code: "TG677", route: "NRT 17:25 → BKK 21:55", date: "15 มิ.ย." },
   ],
   flightNote: "33,760 บาทสำหรับ 2 คน รวมกระเป๋าโหลดคนละ 1 ใบ",
@@ -165,7 +165,7 @@ const baseDays: Omit<Day, "routes">[] = [
     title: "ออกเดินทางจากกรุงเทพ",
     stay: "บนเครื่อง",
     accent: "slate",
-    place: `ออกเดินทางจากกรุงเทพตอนค่ำ: TG640 BKK 22:10 → NRT 06:20 (10 มิ.ย.)`,
+    place: `ออกเดินทางจากกรุงเทพตอนค่ำ: TG682 BKK 22:45 → NRT 06:55 (10 มิ.ย.)`,
     howto: `การบินไทย บินตรงจากสุวรรณภูมิ กระเป๋าโหลดรวมในตั๋ว 1 ใบต่อคน`,
     rain: "-",
     rainStat: "-",
@@ -174,7 +174,7 @@ const baseDays: Omit<Day, "routes">[] = [
     board: `สนามบินสุวรรณภูมิ (BKK) เคาน์เตอร์การบินไทย`,
     details: "",
     checklist: `ก่อนเดินทาง
-☐ พาสปอร์ตทั้งสองคน และตั๋ว TG640 / TG677
+☐ พาสปอร์ตทั้งสองคน และตั๋ว TG682 / TG677
 ☐ จองที่พัก 3 คืนแรก: Fujisawa 2 คืน (10–11 มิ.ย. เลือก Smile Hotel Shonan Fujisawa ไว้ก่อน) และใกล้ Saitama-Shintoshin 1 คืน (12 มิ.ย. คืนคอนเสิร์ต ควรจองก่อน)
 ☐ คืนวันที่ 13–14 ยังไม่ได้เลือกเมืองที่พัก
 ☐ เช็กเอกสารเข้าเมืองญี่ปุ่นที่ต้องกรอกล่วงหน้า (ยังไม่ได้เช็กกฎปี 2027)
@@ -186,7 +186,7 @@ const baseDays: Omit<Day, "routes">[] = [
 
 วันนี้
 ☐ กระเป๋าโหลดคนละ 1 ใบ รวมในตั๋วแล้ว
-☐ ถึงสุวรรณภูมิเผื่อเวลาก่อนเครื่องออก 22:10`,
+☐ ถึงสุวรรณภูมิเผื่อเวลาก่อนเครื่องออก 22:45`,
   },
   {
     slug: "10",
@@ -195,7 +195,7 @@ const baseDays: Omit<Day, "routes">[] = [
     title: "ถึง Narita · เส้นชายทะเล Enoden",
     stay: "Smile Hotel Shonan Fujisawa (คืนที่ 1/2)",
     accent: "sky",
-    place: `ถึง Narita 06:20 เข้าเมือง นั่งรถไฟไป Fujisawa ฝากกระเป๋าที่โรงแรม กินข้าวเที่ยง
+    place: `ถึง Narita 06:55 เข้าเมือง นั่งรถไฟไป Fujisawa ฝากกระเป๋าที่โรงแรม กินข้าวเที่ยง
 บ่าย: เส้นชายทะเล Enoden หลังบินข้ามคืน: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
 เย็น: กลับ Fujisawa เช็กอิน
 พัก Fujisawa ที่ Smile Hotel Shonan Fujisawa (คืนที่ 1 จาก 2)`,
