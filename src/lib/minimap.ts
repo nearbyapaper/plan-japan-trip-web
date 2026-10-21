@@ -21,15 +21,14 @@ type PinDef = {
 
 const pins = {
   // วันที่ 10
-  narita: { name: "Narita Airport (Terminal 1)", lat: 35.7654, lng: 140.38599, kind: "station", desc: "เครื่องลง 06:55 ขึ้น Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) 08:55 ไม่ใช่ Skyliner หรือ Access Express", q: "Narita Airport Terminal 1 Station" },
-  keiseiFunabashi: { name: "Keisei-Funabashi / JR Funabashi", lat: 35.69989, lng: 139.9863, kind: "station", desc: "09:45 ถึง เดิน 5 นาทีไป JR Funabashi ขึ้น JR Sobu Rapid ขบวนไป Zushi 09:58", q: "Keisei Funabashi Station" },
-  musashiKosugi: { name: "Musashi-Kosugi", lat: 35.57562, lng: 139.65968, kind: "station", desc: "10:44 ถึงชานชาลา 3 รอที่ชานชาลาเดิม ขึ้น JR Shonan-Shinjuku Line (Rapid) 10:50", q: "Musashi-Kosugi Station" },
+  haneda: { name: "Haneda Airport Terminal 3", lat: 35.5450118, lng: 139.7670385, kind: "station", desc: "เครื่องลง 06:55 ขึ้น Keikyu Airport Line (Express) ขบวนไป Kanazawa-Bunko 08:04 ชานชาลา 2 ไม่ต้องเปลี่ยนรถถึง Yokohama", q: "Haneda Airport Terminal 3 Station Keikyu" },
+  yokohama10: { name: "Yokohama", lat: 35.4660109, lng: 139.6226361, kind: "station", desc: "08:31 ถึง Keikyu ชานชาลา 1 เดินไป JR ชานชาลา 6 ขึ้น JR Tokaido Line 08:41", q: "Yokohama Station" },
   fujisawa: { name: "Fujisawa · Smile Hotel Shonan Fujisawa", lat: 35.339, lng: 139.48523, kind: "hotel", desc: "สถานี Fujisawa และโรงแรม Smile Hotel Shonan Fujisawa ฝั่งทางออกใต้ (เดิน 2–5 นาที ยังไม่ได้เช็ก) หมุดนี้ปักที่สถานี เพราะ OpenStreetMap ไม่มีพิกัดโรงแรม สถานี Enoden อยู่ฝั่งทางออกใต้", q: "Smile Hotel Shonan Fujisawa" },
-  kamakurakokomae: { name: "สถานี Kamakurakokomae", lat: 35.30672, lng: 139.50071, kind: "station", desc: "13:07 ถึงด้วย Enoden ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที", q: "Kamakurakokomae Station" },
+  kamakurakokomae: { name: "สถานี Kamakurakokomae", lat: 35.30672, lng: 139.50071, kind: "station", desc: "10:47 ถึงด้วย Enoden ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที", q: "Kamakurakokomae Station" },
   crossing: { name: "ทางข้ามรถไฟ Slam Dunk · Koshigoe Rakko Park", lat: 35.3066, lng: 139.50209, kind: "spot", desc: "ฉากเปิดของอนิเมะ Slam Dunk เห็นรถไฟ Enoden วิ่งผ่านหน้าทะเล Shonan คนเยอะ ห้ามยืนถ่ายรูปบนถนน Koshigoe Rakko Park เป็นสวนเล็กติดทางข้าม ใช้ยืนถ่ายรูปแทนได้ เข้าฟรี", q: "Kamakurakokomae Crossing" },
-  shichirigahama: { name: "หาด Shichirigahama", lat: 35.306, lng: 139.5108, kind: "spot", desc: "หาดทรายสีดำยาวเลียบทางรถไฟ Enoden มองเห็นเกาะ Enoshima วันฟ้าเปิดเห็นฟูจิไกลๆ ขึ้น Enoden ต่อที่สถานี Shichirigahama 14:20", q: "Shichirigahama Beach" },
+  shichirigahama: { name: "หาด Shichirigahama", lat: 35.306, lng: 139.5108, kind: "spot", desc: "หาดทรายสีดำยาวเลียบทางรถไฟ Enoden มองเห็นเกาะ Enoshima วันฟ้าเปิดเห็นฟูจิไกลๆ ขึ้น Enoden ต่อที่สถานี Shichirigahama 12:42", q: "Shichirigahama Beach" },
   inamuragasaki: { name: "Inamuragasaki · Cafe Yoridokoro", lat: 35.30436, lng: 139.5219, kind: "food", desc: "Cafe Yoridokoro อยู่ห่างสถานี 3–5 นาที ร้านในบ้านไม้เก่าข้างทางข้ามรถไฟ นั่งริมหน้าต่างเห็น Enoden วิ่งผ่าน ขึ้นชื่อชุดปลาตากแห้งย่าง เปิด 07:00–18:00 ปิดวันอังคาร คิวยาว หมุดนี้ปักที่สถานี Inamuragasaki", q: "ヨリドコロ 稲村ヶ崎" },
-  hase: { name: "สถานี Hase", lat: 35.3115, lng: 139.53563, kind: "station", desc: "15:43 ถึง ขากลับขึ้น Enoden ไป Fujisawa 17:35 (ขึ้นฝั่งตรงข้ามกับขบวนไป Kamakura)", q: "Hase Station Kanagawa" },
+  hase: { name: "สถานี Hase", lat: 35.3115, lng: 139.53563, kind: "station", desc: "14:47 ถึง ขากลับขึ้น Enoden ไป Fujisawa 17:35 (ขึ้นฝั่งตรงข้ามกับขบวนไป Kamakura)", q: "Hase Station Kanagawa" },
   kotokuin: { name: "พระใหญ่ Kotoku-in · KANNON COFFEE", lat: 35.3165, lng: 139.53573, kind: "spot", desc: "พระพุทธรูปสำริดสูงราว 11.3 เมตร นั่งกลางแจ้ง ค่าเข้า 300 เยน เปิดถึง 17:30 เดินถนนคนเดินจากสถานี Hase 7 นาที KANNON COFFEE (เครปและคุกกี้รูปพระใหญ่) อยู่แถวนี้", q: "Kotoku-in Great Buddha" },
 
   // วันที่ 11
@@ -86,11 +85,11 @@ type MapDef = { title: string; note?: string; steps: Step[] };
 const dayMaps: Record<string, MapDef[]> = {
   "10": [
     {
-      title: "เช้า: Narita → Fujisawa",
-      steps: ["narita", ["keiseiFunabashi", "transit"], ["musashiKosugi", "transit"], ["fujisawa", "transit"]],
+      title: "เช้า: Haneda T3 → Fujisawa",
+      steps: ["haneda", ["yokohama10", "transit"], ["fujisawa", "transit"]],
     },
     {
-      title: "บ่าย: เส้นชายทะเล Enoden",
+      title: "10:30–18:07: เส้นชายทะเล Enoden",
       note: "ใช้บัตร Noriorikun ขึ้นลง Enoden ได้ไม่จำกัด",
       steps: [
         "fujisawa",

@@ -51,8 +51,8 @@ export const trip = {
   dates: "9–15 มิ.ย. 2027",
   people: 2,
   flights: [
-    { code: "TG682", route: "BKK 22:45 → NRT 06:55", date: "9 → 10 มิ.ย." },
-    { code: "TG677", route: "NRT 17:25 → BKK 21:55", date: "15 มิ.ย." },
+    { code: "TG682", route: "BKK 22:45 → HND T3 06:55", date: "9 → 10 มิ.ย." },
+    { code: "TG677", route: "NRT T1 17:25 → BKK 21:55", date: "15 มิ.ย." },
   ],
   flightNote: "33,760 บาทสำหรับ 2 คน รวมกระเป๋าโหลดคนละ 1 ใบ",
   stays: [
@@ -79,17 +79,15 @@ const SHIMAMURA = "ファッションセンターしまむら 高田馬場店";
 const routes: Record<string, RouteLeg[]> = {
   "9": [{ to: "Suvarnabhumi Airport", mode: "driving", note: "จากที่อยู่ตอนนี้ไปสุวรรณภูมิ" }],
   "10": [
-    { time: "08:55", from: "Narita Airport Terminal 1 Station", to: "Keisei Funabashi Station", mode: "transit", note: "Keisei Main Line (特急 Limited Express)" },
-    { time: "09:45", from: "Keisei Funabashi Station", to: "JR Funabashi Station", mode: "walking", note: "เดินเปลี่ยนสถานี 5 นาที" },
-    { time: "09:58", from: "JR Funabashi Station", to: "Musashi-Kosugi Station", mode: "transit", note: "JR Sobu Rapid ขบวนไป Zushi" },
-    { time: "10:50", from: "Musashi-Kosugi Station", to: "Fujisawa Station", mode: "transit", note: "JR Shonan-Shinjuku Line (Rapid) ชานชาลาเดียวกัน" },
+    { time: "08:04", from: "Haneda Airport Terminal 3 Station", to: "Yokohama Station", mode: "transit", note: "Keikyu Airport Line (Express) ขบวนไป Kanazawa-Bunko" },
+    { time: "08:41", from: "Yokohama Station", to: "Fujisawa Station", mode: "transit", note: "JR Tokaido Line" },
     { from: "Fujisawa Station", to: HOTEL_FUJISAWA, mode: "walking", note: "ฝากกระเป๋า" },
-    { time: "12:50", from: "Enoden Fujisawa Station", to: "Kamakurakokomae Station", mode: "transit", note: "Enoden" },
+    { time: "10:30", from: "Enoden Fujisawa Station", to: "Kamakurakokomae Station", mode: "transit", note: "Enoden" },
     { from: "Kamakurakokomae Station", to: "Kamakurakokomae Crossing", mode: "walking", note: "ทางข้ามรถไฟ 3 นาที" },
-    { time: "13:40", from: "Kamakurakokomae Station", to: "Shichirigahama Station", mode: "walking", note: "เดินเลียบทะเล" },
-    { time: "14:20", from: "Shichirigahama Station", to: "Inamuragasaki Station", mode: "transit", note: "Enoden" },
-    { from: "Inamuragasaki Station", to: YORIDOKORO, mode: "walking", note: "Cafe Yoridokoro 3–5 นาที" },
-    { time: "15:37", from: "Inamuragasaki Station", to: "Hase Station Kanagawa", mode: "transit", note: "Enoden" },
+    { time: "11:30", from: "Kamakurakokomae Station", to: "Shichirigahama Station", mode: "walking", note: "เดินเลียบทะเล" },
+    { time: "12:42", from: "Shichirigahama Station", to: "Inamuragasaki Station", mode: "transit", note: "Enoden" },
+    { from: "Inamuragasaki Station", to: YORIDOKORO, mode: "walking", note: "Cafe Yoridokoro ข้าวเที่ยง 3–5 นาที" },
+    { time: "14:41", from: "Inamuragasaki Station", to: "Hase Station Kanagawa", mode: "transit", note: "Enoden" },
     { from: "Hase Station Kanagawa", to: "Kotoku-in Great Buddha", mode: "walking", note: "ถนนคนเดินหน้าพระใหญ่ 7 นาที" },
     { time: "17:35", from: "Hase Station Kanagawa", to: "Fujisawa Station", mode: "transit", note: "Enoden กลับ" },
     { from: "Fujisawa Station", to: HOTEL_FUJISAWA, mode: "walking", note: "กลับโรงแรม" },
@@ -165,7 +163,7 @@ const baseDays: Omit<Day, "routes">[] = [
     title: "ออกเดินทางจากกรุงเทพ",
     stay: "บนเครื่อง",
     accent: "slate",
-    place: `ออกเดินทางจากกรุงเทพตอนค่ำ: TG682 BKK 22:45 → NRT 06:55 (10 มิ.ย.)`,
+    place: `ออกเดินทางจากกรุงเทพตอนค่ำ: TG682 BKK 22:45 → HND T3 06:55 (10 มิ.ย.)`,
     howto: `การบินไทย บินตรงจากสุวรรณภูมิ กระเป๋าโหลดรวมในตั๋ว 1 ใบต่อคน`,
     rain: "-",
     rainStat: "-",
@@ -192,22 +190,23 @@ const baseDays: Omit<Day, "routes">[] = [
     slug: "10",
     date: "2027-06-10 (พฤหัส)",
     short: "10 มิ.ย. พฤหัส",
-    title: "ถึง Narita · เส้นชายทะเล Enoden",
+    title: "ถึง Haneda · เส้นชายทะเล Enoden",
     stay: "Smile Hotel Shonan Fujisawa (คืนที่ 1/2)",
     accent: "sky",
-    place: `ถึง Narita 06:55 เข้าเมือง นั่งรถไฟไป Fujisawa ฝากกระเป๋าที่โรงแรม กินข้าวเที่ยง
-บ่าย: เส้นชายทะเล Enoden หลังบินข้ามคืน: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
+    place: `ถึง Haneda T3 06:55 นั่ง Keikyu + JR ไป Fujisawa ถึงราว 09:00 ฝากกระเป๋าที่โรงแรม กินข้าวเช้า
+10:30–17:35: เส้นชายทะเล Enoden แบบไม่เร่งหลังบินข้ามคืน ข้าวเที่ยงที่ Cafe Yoridokoro: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
 เย็น: กลับ Fujisawa เช็กอิน
 พัก Fujisawa ที่ Smile Hotel Shonan Fujisawa (คืนที่ 1 จาก 2)`,
-    howto: `08:55 Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) Narita Airport (หรือ 08:59 Airport Terminal 2) → 09:45 Keisei-Funabashi เดิน 5 นาทีไป JR Funabashi
-09:58 JR Sobu Rapid → 10:44 Musashi-Kosugi
-10:50 JR Shonan-Shinjuku Line (Rapid) ชานชาลาเดียวกัน → 11:21 Fujisawa
-(Narita → Fujisawa 2,166 เยน เปลี่ยนรถ 2 ครั้ง ราว 2 ชม. 30 นาที เป็นรอบตัวอย่าง เครื่องลง 06:55 เผื่อเวลาผ่าน ตม. และรับกระเป๋าราว 2 ชม.)
-12:50 Enoden Fujisawa → 13:07 Kamakurakokomae ไม่ต้องเปลี่ยนรถ ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม
-13:40 เดินเลียบทะเลไป Shichirigahama 1 สถานี
-14:20 Enoden Shichirigahama → 14:27 Inamuragasaki เดิน 3–5 นาทีถึง Cafe Yoridokoro (เปิด 07:00–18:00 ปิดวันอังคาร)
-15:37 Enoden Inamuragasaki → 15:43 Hase เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in (เปิดถึง 17:30) แล้วแวะ KANNON COFFEE
-17:35 Enoden Hase → 18:07 Fujisawa ไม่ต้องเปลี่ยนรถ
+    howto: `เครื่องลง Haneda T3 06:55 ผ่าน ตม. รับกระเป๋า ซื้อหรือเติมบัตร IC เผื่อราว 1 ชม.
+08:04 Keikyu Airport Line (Express) Haneda Airport Terminal 3 → 08:31 Yokohama ไม่ต้องเปลี่ยนรถ
+08:41 JR Tokaido Line → 09:01 Fujisawa
+(Haneda T3 → Fujisawa 803 เยน เปลี่ยนรถ 1 ครั้ง ราว 1 ชม. รอบสำรอง: Keikyu 08:40 → Yokohama 09:11 → JR 09:18 → Fujisawa 09:43)
+09:15 ฝากกระเป๋าที่โรงแรม กินข้าวเช้าและพักแถวสถานี Fujisawa
+10:30 Enoden Fujisawa → 10:47 Kamakurakokomae ไม่ต้องเปลี่ยนรถ ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม
+11:30 เดินเลียบทะเลไป Shichirigahama 1 สถานี เดินเล่นที่หาดถึงราว 12:35
+12:42 Enoden Shichirigahama → 12:49 Inamuragasaki เดิน 3–5 นาทีถึง Cafe Yoridokoro กินข้าวเที่ยง (เปิด 07:00–18:00 ปิดวันอังคาร คิวมักยาว)
+14:41 Enoden Inamuragasaki → 14:47 Hase เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in (เปิดถึง 17:30) แล้วแวะ KANNON COFFEE
+17:35 Enoden Hase → 18:07 Fujisawa ไม่ต้องเปลี่ยนรถ (ถ้าเหนื่อยกลับรอบก่อนหน้าได้)
 หมายเหตุ: Enoden ออกทุก 14 นาที ใช้บัตร Noriorikun (เลือกไว้ก่อน) ขึ้นลงได้ไม่จำกัด ถ้าเหนื่อยนั่ง Enoden จาก Kamakurakokomae ไป Shichirigahama แทนเดินได้โดยไม่จ่ายเพิ่ม`,
     rain: `ฝนปรอย: ไปตามแผน พกร่ม ถ้าทะเลมองไม่เห็นให้ข้าม Kamakurakokomae, Koshigoe Rakko Park และ Shichirigahama นั่ง Enoden จาก Fujisawa ตรงไป Inamuragasaki (Cafe Yoridokoro อยู่ในร่ม) และ Hase ดูพระใหญ่
 ฝนหนักหรือเหนื่อยจากบินข้ามคืน: พักที่ Fujisawa แล้วย้ายเส้นชายทะเลไปบ่ายวันที่ 11 แทน Hayama
@@ -222,7 +221,7 @@ const baseDays: Omit<Day, "routes">[] = [
       { name: "KANNON COFFEE kamakura", url: m("KANNON%20COFFEE%20kamakura%20Kanagawa") },
     ],
     costs: [
-      { name: "Narita → Fujisawa: Keisei Main Line ถึง Keisei-Funabashi 758 + JR จาก Funabashi เปลี่ยนที่ Musashi-Kosugi 1,408", type: "ค่าเดินทาง", yen: 2166, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "Haneda T3 → Fujisawa: Keikyu Airport Line ถึง Yokohama 363 + JR Tokaido Line 440", type: "ค่าเดินทาง", yen: 803, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Fujisawa → Kamakurakokomae (ตั๋วปกติ 260)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Shichirigahama → Inamuragasaki แวะ Cafe Yoridokoro (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รวมใน Noriorikun: Enoden Inamuragasaki → Hase (ตั๋วปกติ 200)", type: "ค่าเดินทาง", yen: 0, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
@@ -231,17 +230,16 @@ const baseDays: Omit<Day, "routes">[] = [
       { name: "บัตร Enoden 1 วัน Noriorikun (เลือกไว้ก่อน) แทนตั๋ว 4 เที่ยว 260 + 200 + 200 + 310 = 970 ประหยัด 170 ขึ้นลงได้ไม่จำกัดทั้งสาย ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa หรือแบบดิจิทัล", type: "ค่าเดินทาง", yen: 800, status: "เช็กแล้ว", source: "enoden.co.jp (ราคาปี 2026 ตั๋วปกติจาก transit.yahoo.co.jp)" },
       { name: "ทางข้ามรถไฟ Kamakurakokomae, Koshigoe Rakko Park, หาด Shichirigahama และถนนคนเดินหน้าพระใหญ่ (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว" },
     ],
-    board: `1. Narita: สถานีรถไฟ Keisei ใต้อาคารผู้โดยสาร ขึ้น Keisei Main Line (特急 Limited Express ไม่เสียค่าเพิ่ม) ขบวนไป Keisei-Ueno 08:55 จาก Narita Airport (ชานชาลา 2) หรือ 08:59 จาก Airport Terminal 2 (ชานชาลา 3) (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
-2. ลง Keisei-Funabashi 09:45 เดิน 5 นาทีไปสถานี JR Funabashi
-3. JR Funabashi ชานชาลา 3: ขึ้น JR Sobu Rapid ขบวนไป Zushi 09:58 ลง Musashi-Kosugi 10:44 (ชานชาลา 3) รอที่ชานชาลาเดิม ขึ้น JR Shonan-Shinjuku Line (Rapid) ขบวนไป Hiratsuka 10:50 ลง Fujisawa 11:21 (ไม่แนะนำรอบ 09:50 เพราะเหลือเวลาเดินเปลี่ยนสถานีแค่ 5 นาที)
-4. Fujisawa: ฝากกระเป๋าที่ Smile Hotel Shonan Fujisawa (ฝั่งทางออกใต้) กินข้าวเที่ยงแถวสถานี
-5. Fujisawa สถานี Enoden (ฝั่งทางออกใต้): ขึ้น Enoden ขบวนไป Kamakura 12:50 (รอบก่อนหน้า 12:36)
-6. นั่ง Enoden 17 นาที ไม่ต้องเปลี่ยนรถ ลง Kamakurakokomae 13:07
-7. Kamakurakokomae: ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม (ห่างสถานีราว 130 เมตร) แล้วเดินเลียบทะเลไปสถานี Shichirigahama (ยังไม่ได้เช็กเวลาเดิน เผื่อไว้ 15 นาที) หาดอยู่ห่างสถานี 3 นาที
-8. Shichirigahama: ขึ้น Enoden ขบวนไป Kamakura 14:20 ลง Inamuragasaki 14:27 (รอบถัดไป 14:34 และ 14:48) เดิน 3–5 นาทีถึง Cafe Yoridokoro อยู่ข้างทางข้ามรถไฟ
-9. Inamuragasaki ชานชาลา 2: ขึ้น Enoden ขบวนไป Kamakura 15:37 ลง Hase 15:43 (รอบถัดไป 15:51 และ 16:05) เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in
-10. Hase: ขึ้น Enoden ขบวนไป Fujisawa 17:35 ลงปลายทาง Fujisawa 18:07 (รอบถัดไป 17:49 ถึง 18:21) ขึ้นฝั่งตรงข้ามกับขบวนไป Kamakura
-11. Fujisawa: เดินกลับ Smile Hotel Shonan Fujisawa เช็กอิน`,
+    board: `1. Haneda T3: ผ่าน ตม. แล้วเดินไปสถานี Keikyu ในอาคาร T3 ซื้อหรือเติมบัตร IC (Suica / PASMO) ขึ้น Keikyu Airport Line (Express) ขบวนไป Kanazawa-Bunko 08:04 ชานชาลา 2 ไม่ต้องเปลี่ยนรถถึง Yokohama (ถ้าขึ้นขบวนไป Inzai Nihon-Idai ต้องลงเปลี่ยนที่ Tenkubashi)
+2. Yokohama: ลง 08:31 ชานชาลา 1 เดินไป JR ชานชาลา 6 ขึ้น JR Tokaido Line ขบวนไป Odawara 08:41 ลง Fujisawa 09:01 (รอบสำรอง: Keikyu 08:40 ขบวนไป Zushi·Hayama ถึง Yokohama 09:11 ต่อ JR Tokaido 09:18 ถึง Fujisawa 09:43)
+3. Fujisawa: ฝากกระเป๋าที่ Smile Hotel Shonan Fujisawa (ฝั่งทางออกใต้) กินข้าวเช้าและพักแถวสถานี
+4. Fujisawa สถานี Enoden (ฝั่งทางออกใต้): ขึ้น Enoden ขบวนไป Kamakura 10:30 (รอบถัดไป 10:44 และ 10:58)
+5. นั่ง Enoden 17 นาที ไม่ต้องเปลี่ยนรถ ลง Kamakurakokomae 10:47
+6. Kamakurakokomae: ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม (ห่างสถานีราว 130 เมตร) แล้วเดินเลียบทะเลไปสถานี Shichirigahama (ยังไม่ได้เช็กเวลาเดิน เผื่อไว้ 15 นาที) หาดอยู่ห่างสถานี 3 นาที
+7. Shichirigahama: ขึ้น Enoden ขบวนไป Kamakura 12:42 ลง Inamuragasaki 12:49 (รอบถัดไป 12:56 และ 13:10) เดิน 3–5 นาทีถึง Cafe Yoridokoro อยู่ข้างทางข้ามรถไฟ กินข้าวเที่ยง
+8. Inamuragasaki ชานชาลา 2: ขึ้น Enoden ขบวนไป Kamakura 14:41 ลง Hase 14:47 (รอบถัดไป 14:55 และ 15:09) เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in
+9. Hase: ขึ้น Enoden ขบวนไป Fujisawa 17:35 ลงปลายทาง Fujisawa 18:07 (รอบถัดไป 17:49 ถึง 18:21) ขึ้นฝั่งตรงข้ามกับขบวนไป Kamakura
+10. Fujisawa: เดินกลับ Smile Hotel Shonan Fujisawa เช็กอิน`,
     details: `• Enoden: รถไฟสายเล็กจาก Fujisawa ถึง Kamakura วิ่งผ่านย่านบ้านคนแล้วออกเลียบทะเลช่วง Koshigoe ถึง Inamuragasaki จาก Fujisawa ถึง Kamakurakokomae 17 นาที
 • ทางข้ามรถไฟ Kamakurakokomae: ฉากเปิดของอนิเมะ Slam Dunk เห็นรถไฟ Enoden วิ่งผ่านหน้าทะเล Shonan และเกาะ Enoshima คนเยอะ มีเจ้าหน้าที่คุม ห้ามยืนถ่ายรูปบนถนน
 • Koshigoe Rakko Park (腰越ラッコ公園): สวนเล็กๆ ติดทางข้ามรถไฟ Slam Dunk มองเห็นทางข้าม รถไฟ Enoden และทะเลจากในสวน ใช้เป็นที่ยืนถ่ายรูปแทนการยืนบนถนนได้ เข้าฟรี
@@ -252,25 +250,24 @@ const baseDays: Omit<Day, "routes">[] = [
 • KANNON COFFEE kamakura: คาเฟ่เล็กแถว Hase ขึ้นชื่อเรื่องเครปและคุกกี้รูปพระใหญ่
 • Fujisawa: เมืองใหญ่ของย่าน Shonan เป็นต้นสาย Enoden และจุดตัดของ JR Tokaido Line กับ Odakyu มีห้างและร้านอาหารรอบสถานีทั้งสองฝั่ง`,
     checklist: `ต้องจองล่วงหน้า
-☐ Smile Hotel Shonan Fujisawa 2 คืน (10–11 มิ.ย.) เช็กอิน 15:00 ถามว่าฝากกระเป๋าก่อนเช็กอินได้ไหม (ถึงราว 11:25)
+☐ Smile Hotel Shonan Fujisawa 2 คืน (10–11 มิ.ย.) เช็กอิน 15:00 ถามว่าฝากกระเป๋าก่อนเช็กอินได้ไหม (ถึงราว 09:15)
 ☐ Cafe Yoridokoro: ถามร้านว่าจองที่นั่งริมหน้าต่างหรือบาร์ด้านนอกได้ไหม โทร 0467-40-5737 (บางแหล่งบอกว่าจองไม่ได้ ต้องต่อคิว บางแหล่งบอกว่าเริ่มรับจองที่นั่งเคาน์เตอร์ตั้งแต่ ก.ย. 2024)
 
 พกไป
-☐ บัตร Enoden 1 วัน Noriorikun 800 เยน (เลือกไว้ก่อน) ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa ก่อนขึ้นขบวน 12:50 หรือซื้อแบบดิจิทัล ขึ้นลง Enoden ได้ไม่จำกัดทั้งวัน
-☐ ซื้อหรือเติมบัตร IC (Suica / PASMO) ที่ Narita ใช้กับ Keisei และ JR ค่ารถและค่าเข้าวันนี้ 3,266 เยนต่อคน (ไม่รวมค่าอาหารที่ Cafe Yoridokoro และ KANNON COFFEE)
+☐ บัตร Enoden 1 วัน Noriorikun 800 เยน (เลือกไว้ก่อน) ซื้อที่ตู้ขายตั๋วสถานี Enoden Fujisawa ก่อนขึ้นขบวน 10:30 หรือซื้อแบบดิจิทัล ขึ้นลง Enoden ได้ไม่จำกัดทั้งวัน
+☐ ซื้อหรือเติมบัตร IC (Suica / PASMO) ที่ Haneda ใช้กับ Keikyu และ JR ค่ารถและค่าเข้าวันนี้ 1,903 เยนต่อคน (ไม่รวมค่าอาหารที่ Cafe Yoridokoro และ KANNON COFFEE)
 ☐ เงินสดสำหรับค่าเข้าพระใหญ่และคาเฟ่ (ยังไม่ได้เช็กว่ารับบัตรไหม)
 ☐ ร่มพับ
 
 เวลา
-☐ ต้องออกจาก Inamuragasaki ไม่เกิน 16:05 เพื่อเข้าพระใหญ่ก่อนปิด 17:30
+☐ ต้องออกจาก Inamuragasaki ไม่เกิน 16:05 เพื่อเข้าพระใหญ่ก่อนปิด 17:30 (แผนออก 14:41)
 
 ระวัง
-☐ ที่ Narita ขึ้น Keisei Main Line เท่านั้น ขบวน 特急 (Limited Express) ไม่เสียค่าเพิ่ม ขึ้นได้ ไม่ขึ้น Skyliner หรือ Access Express และต้องลงที่ Keisei-Funabashi
-☐ ที่ Funabashi ขึ้น JR Sobu Rapid ขบวนไป Zushi แล้วลงเปลี่ยนที่ Musashi-Kosugi ขึ้น JR Shonan-Shinjuku Line ชานชาลาเดียวกัน เพราะขบวนไป Zushi ไม่จอด Fujisawa
+☐ ขาไปลง Haneda T3 ไม่ใช่ Narita ที่สถานี Keikyu ดูปลายทางขบวน ขบวนไป Kanazawa-Bunko หรือ Zushi·Hayama ถึง Yokohama ไม่ต้องเปลี่ยนรถ
 ☐ ที่ทางข้ามรถไฟ Slam Dunk ห้ามยืนถ่ายรูปบนถนน
 
 ยังไม่ได้เช็ก
-☐ การบินไทยใช้ Terminal ไหนที่ Narita
+☐ เวลาผ่าน ตม. ที่ Haneda T3 ช่วงเช้า (แผนเผื่อไว้ราว 1 ชม.)
 ☐ เวลาเดิน Kamakurakokomae ไป Shichirigahama และระยะเดินจริงจาก Smile Hotel ไปสถานี Fujisawa (แหล่งข้อมูลบอก 2–5 นาที)
 ☐ เวลาปิดของ KANNON COFFEE และราคาเมนูของ Cafe Yoridokoro`,
   },
@@ -630,7 +627,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     stay: "กลับถึงกรุงเทพ 21:55",
     accent: "slate",
     place: `เช้า: ช้อปของฝากสั้นๆ แล้วเช็กเอาต์
-บ่าย: ไป Narita กลับกรุงเทพ TG677 NRT 17:25 → BKK 21:55`,
+บ่าย: ไป Narita กลับกรุงเทพ TG677 NRT T1 17:25 → BKK 21:55`,
     howto: `13:09 JR Yamanote Ikebukuro → Nippori ต่อ Keisei Main Line เปลี่ยนรถที่ Keisei-Sakura → 14:45 สนามบิน (ราว 1 ชม. 40 นาที)
 ควรถึง Narita ราว 15:00
 หมายเหตุ: ยังเป็นแผนเก่าที่ออกจาก Ikebukuro ต้องแก้เมื่อรู้ที่พักคืนวันที่ 14`,
@@ -642,7 +639,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     ],
     board: `1. Ikebukuro ชานชาลา 7: ขึ้น JR Yamanote 13:09 ลง Nippori 13:22
 2. Nippori ชานชาลา 2: ขึ้น Keisei Main Line ไป Keisei-Narita 13:30 ลง Keisei-Sakura 14:20 (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
-3. Keisei-Sakura: ต่อรถไป Narita Airport 14:23 ถึง Airport Terminal 2 14:45 สถานีถัดไปคือ Narita Airport ของ Terminal 1 (ยังไม่ได้เช็กว่าการบินไทยใช้อาคารไหน)`,
+3. Keisei-Sakura: ต่อรถไป Narita Airport 14:23 ผ่าน Airport Terminal 2 14:45 อย่าลง นั่งต่ออีก 1 สถานีถึงปลายสาย Narita Airport ซึ่งคือ Terminal 1 ที่ TG677 ออก`,
     details: `ของฝากรอบสถานี Ikebukuro ไม่ต้องเดินทางไกล
 • ชั้นใต้ดินห้าง Seibu และ Tobu (depachika): ขนมกล่องของฝากและเบนโตะ ติดกับสถานี
 • Sunshine City: ห้างใหญ่ฝั่งตะวันออก เดินจากสถานีราว 10 นาที มีร้านขนม ร้านคาแรกเตอร์ และร้านของใช้
@@ -660,8 +657,8 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 ☐ ออกจาก Ikebukuro 13:09 ชานชาลา 7 ถึง Narita 14:45 เครื่องออก 17:25
 ☐ ขึ้น Keisei Main Line เท่านั้น ไม่ขึ้น Skyliner หรือ Access Express
 
-ยังไม่ได้เช็ก
-☐ การบินไทยใช้ Terminal ไหนที่ Narita (ลงผิดสถานีจะเสียเวลา)`,
+ระวัง
+☐ TG677 ออกจาก Narita Terminal 1 ลงสถานีปลายสาย Narita Airport อย่าลงที่ Airport Terminal 2`,
   },
 ];
 
