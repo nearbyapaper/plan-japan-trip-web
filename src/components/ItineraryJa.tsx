@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { daysJa, tripJa, type JaDay } from "@/lib/plan-ja";
 import { Card, SectionTitle } from "@/components/ui";
+import PrintButton from "@/components/PrintButton";
 
 function Schedule({ day }: { day: JaDay }) {
   return (
@@ -57,7 +58,10 @@ export function OverviewJa() {
     <div lang="ja" className="space-y-4">
       <section className="py-2">
         <p className="text-sm font-medium text-accent">Japan 2027</p>
-        <h1 className="mt-1 text-3xl font-bold">{tripJa.title}</h1>
+        <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-3xl font-bold">{tripJa.title}</h1>
+          <PrintButton />
+        </div>
       </section>
 
       <Basics />
@@ -84,6 +88,7 @@ export function OverviewJa() {
               <p className="text-sm text-ink-2">{s.nights}</p>
               <p className="font-semibold">{s.name}</p>
               <p className="text-[15px]">{s.address}</p>
+              <p className="text-[15px]">TEL {s.tel}</p>
             </div>
           ))}
         </div>
@@ -103,7 +108,7 @@ export function DayJa({ day }: { day: JaDay }) {
   return (
     <div lang="ja" className="space-y-4">
       <DayCard day={day} />
-      <Link href="/" className="inline-block rounded-full border border-line px-4 py-2 text-sm hover:border-accent">
+      <Link href="/" className="no-print inline-block rounded-full border border-line px-4 py-2 text-sm hover:border-accent">
         ← 旅行日程表（全日程）
       </Link>
     </div>

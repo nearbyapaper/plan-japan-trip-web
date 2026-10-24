@@ -130,3 +130,26 @@ details[open] > summary .chev {
   color: #fff !important;
   text-decoration: none;
 }
+
+/* พิมพ์ / บันทึก PDF: ใช้สีพื้นขาว ซ่อนหัวเว็บและปุ่ม */
+@media print {
+  :root {
+    --bg: #fff;
+    --surface: #fff;
+    --ink: #000;
+    --ink-2: #444;
+    --line: #ccc;
+    --accent: #000;
+  }
+  header,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  section {
+    break-inside: avoid;
+  }
+}

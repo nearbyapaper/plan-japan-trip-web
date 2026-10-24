@@ -3,7 +3,7 @@ import { placeUrl } from "./maps";
 import { photos, type Photo } from "./minimap-photos";
 
 // แผนที่ย่อรายวัน: หมุดเรียงตามลำดับในไทม์ไลน์ เชื่อมด้วยเส้นตรง (ไม่ใช่แนวรางหรือถนนจริง)
-// พิกัดจาก OpenStreetMap (Nominatim) ดึงเมื่อ 18 ต.ค. 2026 หมุดย่านโตเกียววันที่ 12–14 ดึงเพิ่ม 23 ต.ค. 2026
+// พิกัดจาก OpenStreetMap (Nominatim) ดึงเมื่อ 18 ต.ค. 2026 หมุดย่านโตเกียววันที่ 12–14 ดึงเพิ่ม 23 ต.ค. 2026 หมุดวันที่ 15 ดึงเพิ่ม 24 ต.ค. 2026
 // จุดที่ OpenStreetMap ไม่มีพิกัด (Smile Hotel, Cafe Yoridokoro, KANNON COFFEE, ร้านย่าน Morito) ไม่ได้ปักแยก
 // แต่เขียนไว้ในรายละเอียดของหมุดที่อยู่ใกล้ที่สุดแทน
 
@@ -57,8 +57,8 @@ const pins = {
   arena: { name: "GMO ARENA saitama · Radiohead", lat: 35.89512, lng: 139.63075, kind: "spot", desc: "คอนเสิร์ต Radiohead 18:00 ชื่อเดิม Saitama Super Arena เดินจากสถานี 3 นาที เปิดประตู 15:30 เลิกราว 20:05–20:30 (ค่าประมาณ)", q: "Saitama Super Arena" },
 
   // วันที่ 13
-  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "09:48 ถึงจาก Kayabacho (รอบสำรองถึง 10:11 Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องฝากกระเป๋า ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:30 ขากลับ Odakyu 18:51 ไป Yoyogi-Uehara แล้วต่อรถใต้ดินถึง Kayabacho 20:49", q: "Odawara Station" },
-  owakudani: { name: "Owakudani (หุบควันภูเขาไฟ)", lat: 35.24442, lng: 139.01958, kind: "spot", desc: "11:19 ลงรถบัส J03 ป้าย 大涌谷 หุบภูเขาไฟที่ยังมีควันกำมะถัน ลานชมวิวและร้านไข่ดำ เดินเที่ยวราว 30 นาที เปิดราว 09:00–16:00 (ยังไม่ได้ยืนยัน) ซื้อตั๋วกระเช้าเที่ยวเดียว 2,000 เยนที่สถานี ขึ้นกระเช้าไป Togendai (桃源台行) ไม่เกิน 11:53 ถ้ากระเช้าหยุด: รถบัส J03 12:14 ไป Hakone-en", q: "Owakudani" },
+  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "09:48 ถึงจาก Kayabacho (รอบสำรองถึง 10:11 Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องฝากกระเป๋า ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:10 (รอบสำรอง 10:30) ขากลับ Odakyu 18:51 ไป Yoyogi-Uehara แล้วต่อรถใต้ดินถึง Kayabacho 20:49", q: "Odawara Station" },
+  owakudani: { name: "Owakudani (หุบควันภูเขาไฟ)", lat: 35.24442, lng: 139.01958, kind: "spot", desc: "10:59 ลงรถบัส J03 ป้าย 大涌谷 หุบภูเขาไฟที่ยังมีควันกำมะถัน ลานชมวิวและร้านไข่ดำ เดินเที่ยวราว 50 นาที เปิดราว 09:00–16:00 (ยังไม่ได้ยืนยัน) ซื้อตั๋วกระเช้าเที่ยวเดียว 2,000 เยนที่สถานี ขึ้นกระเช้าไป Togendai (桃源台行) ไม่เกิน 11:53 ถ้ากระเช้าหยุด: รถบัส J03 12:14 ไป Hakone-en", q: "Owakudani" },
   togendai: { name: "Togendai (กระเช้า → รถบัส Odakyu)", lat: 35.23791, lng: 138.9953, kind: "station", desc: "12:23 ถึงด้วยกระเช้า (ผ่าน Ubako ไม่ต้องลง) เดินราว 5 นาทีไปป้าย 箱根桃源台 ขึ้นรถบัส Odakyu ไป Hakone-en 12:30 (570 เยน บัตร Izuhakone ใช้ไม่ได้)", q: "Hakone Ropeway Togendai Station" },
   hakoneen: { name: "Hakone-en Aquarium", lat: 35.21224, lng: 139.00931, kind: "spot", desc: "12:45 ถึง พิพิธภัณฑ์สัตว์น้ำริมทะเลสาบ Ashi ลานแมวน้ำไบคาล ค่าเข้า 1,600 เยน เข้าได้ถึง 16:00 กินข้าวเที่ยงในบริเวณ Hakone-en รถบัสต่อ 14:00", q: "Hakone-en Aquarium" },
   motohakone: { name: "Motohakone-ko (ริมทะเลสาบ Ashi)", lat: 35.20283, lng: 139.0306, kind: "spot", desc: "14:12 ลงรถบัส 15:15–17:35 เวลาว่าง (ยังไม่ได้ใส่แผน) ขากลับขึ้นรถบัส Izuhakone 17:43 ไป Odawara", q: "Motohakone-ko" },
@@ -75,10 +75,14 @@ const pins = {
   nagasakiPark: { name: "Nagasaki Park", lat: 35.5218, lng: 138.75748, kind: "spot", desc: "มุมถ่ายรูปยอดนิยม วิวโล่ง เห็นฟูจิเด่น (สวนริมทะเลสาบที่คลิปเรียก Memorial Park อยู่ระหว่างสะพานกับจุดนี้ ยังไม่ได้เช็กชื่อจริง)", q: "Nagasaki Park Fujikawaguchiko" },
   oishiPark: { name: "Oishi Park", lat: 35.52329, lng: 138.74654, kind: "food", desc: "สวนดอกไม้ตามฤดูริมทะเลสาบ มีร้านของกินและของฝาก คลิปแนะนำไอศกรีมโคนแป้งคุกกี้ 650 เยน คนเยอะ", q: "Oishi Park Fujikawaguchiko" },
   yagisaki: { name: "Yagisaki Park", lat: 35.51211, lng: 138.75586, kind: "spot", desc: "จุดที่เจ้าของคลิปชอบที่สุด หน้าร้อนมีลาเวนเดอร์ ขากลับปั่นเข้าหาฟูจิ (จุดพักอีกฝั่งทะเลสาบในคลิปยังไม่รู้ชื่อ จึงไม่ได้ปัก)", q: "Yagisaki Park Fujikawaguchiko" },
-  shinjuku: { name: "สถานี Shinjuku", lat: 35.6916, lng: 139.69968, kind: "station", desc: "17:18 JR Yamanote ชานชาลา 15 ไป Takadanobaba ขาไป Shimokitazawa เปลี่ยนเป็น Odakyu ชานชาลา 5 ขบวน 18:50", q: "Shinjuku Station" },
-  takadanobaba: { name: "สถานี Takadanobaba", lat: 35.71348, lng: 139.70447, kind: "station", desc: "17:22 ถึง ออกทางออก Toyama (戸山口) ของสถานี Seibu ขาออก JR Yamanote 18:38 ชานชาลา 2", q: "Takadanobaba Station" },
-  shimamura: { name: "Shimamura สาขา Takadanobaba", lat: 35.71192, lng: 139.70478, kind: "spot", desc: "ร้านเสื้อผ้าราคาถูกที่คนญี่ปุ่นใส่ ถูกกว่า GU และ UNIQLO เปิด 10:00–20:00 (ยังไม่ได้ยืนยันกับเว็บ Shimamura) 17:30–18:30", q: "ファッションセンターしまむら 高田馬場店" },
-  shimokitazawa: { name: "Shimokitazawa", lat: 35.66127, lng: 139.66692, kind: "food", desc: "18:58 ถึง ย่านเสื้อผ้ามือสองที่ใหญ่ที่สุด ร้านอยู่ทั้งฝั่งเหนือและใต้ของสถานี หลายร้านปิดราว 20:00 กินข้าวเย็นที่นี่", q: "Shimokitazawa Station" },
+  shinjuku: { name: "สถานี Shinjuku", lat: 35.6916, lng: 139.69968, kind: "station", desc: "16:55 ลงรถบัสที่ Busta Shinjuku เดินไปสถานี Odakyu ขึ้นขบวน Rapid Express 17:10 ไป Shimokitazawa ไม่ต้องเปลี่ยนรถ (ยังไม่ได้เช็กเวลาเดิน)", q: "Shinjuku Station" },
+  takadanobaba: { name: "สถานี Takadanobaba", lat: 35.71348, lng: 139.70447, kind: "station", desc: "วันที่ 15: 09:50 ถึงด้วย Tozai Line จาก Kayabacho ออกทางออก Toyama (戸山口) ของสถานี Seibu ขาออก Tozai 11:00 ชานชาลา 1 ไป Nihombashi", q: "Takadanobaba Station" },
+  shimamura: { name: "Shimamura สาขา Takadanobaba", lat: 35.71192, lng: 139.70478, kind: "spot", desc: "ร้านเสื้อผ้าราคาถูกที่คนญี่ปุ่นใส่ ถูกกว่า GU และ UNIQLO เปิด 10:00–20:00 (ยังไม่ได้ยืนยันกับเว็บ Shimamura) วันที่ 15 ช้อป 10:00–11:00", q: "ファッションセンターしまむら 高田馬場店" },
+  shimokitazawa: { name: "Shimokitazawa", lat: 35.66127, lng: 139.66692, kind: "food", desc: "17:18 ถึง ย่านเสื้อผ้ามือสองที่ใหญ่ที่สุด ร้านอยู่ทั้งฝั่งเหนือและใต้ของสถานี หลายร้านปิดราว 20:00 กินข้าวเย็นที่นี่", q: "Shimokitazawa Station" },
+  // วันที่ 15
+  nihombashi: { name: "สถานี Nihombashi", lat: 35.68165, lng: 139.7762, kind: "station", desc: "11:15 ถึงด้วย Tozai Line จาก Takadanobaba เดินไป COREDO Muromachi (ยังไม่ได้เช็กทางออก)", q: "Nihombashi Station" },
+  coredo: { name: "COREDO Muromachi", lat: 35.68677, lng: 139.77488, kind: "food", desc: "11:20–12:05 ของฝาก: Ninben ร้านปลาโอแห้ง มีบาร์ซุปดาชิ (COREDO Muromachi 1 ชั้น 1 เปิด 11:00), Kayanoya ซองซุปดาชิ (COREDO Muromachi 3 ชั้น 1), Nihonbashi Kiya มีดและเครื่องครัว", q: "コレド室町1" },
+  amazake: { name: "Amazake Yokocho (Ningyocho)", lat: 35.68613, lng: 139.78514, kind: "food", desc: "12:05–12:45 ถนนร้านเก่า ขนมญี่ปุ่นและของทำมือ แล้วเดินกลับโรงแรมรับกระเป๋า 12:50 ถ้าช้าให้ข้าม (ยังไม่ได้เช็กระยะเดิน)", q: "甘酒横丁" },
 } satisfies Record<string, PinDef>;
 
 type PinId = keyof typeof pins;
@@ -199,18 +203,32 @@ const dayMaps: Record<string, MapDef[]> = {
       ],
     },
     {
-      title: "เย็น–ค่ำ: Shimamura · Shimokitazawa · กลับโรงแรม",
+      title: "เย็น–ค่ำ: Shimokitazawa · กลับโรงแรม",
       steps: [
         "busta",
         ["shinjuku", "walking"],
-        ["takadanobaba", "transit"],
-        ["shimamura", "walking"],
-        ["takadanobaba", "walking"],
-        ["shinjuku", "transit"],
         ["shimokitazawa", "transit"],
         ["shibuya", "transit"],
         ["suitengumae", "transit"],
         ["hotelTokyo", "walking"],
+      ],
+    },
+  ],
+  "15": [
+    {
+      title: "เช้า: Shimamura · ของฝาก Nihonbashi",
+      note: "เช็กเอาต์ 09:20 ฝากกระเป๋า รับกระเป๋า 12:50 แล้วขึ้น Toei Asakusa Line ที่ Ningyocho 13:07 ไป Narita ไม่ต้องเปลี่ยนรถ (อยู่นอกแผนที่)",
+      steps: [
+        "hotelTokyo",
+        ["kayabacho", "walking"],
+        ["takadanobaba", "transit"],
+        ["shimamura", "walking"],
+        ["takadanobaba", "walking"],
+        ["nihombashi", "transit"],
+        ["coredo", "walking"],
+        ["amazake", "walking"],
+        ["hotelTokyo", "walking"],
+        ["ningyocho", "walking"],
       ],
     },
   ],
