@@ -57,7 +57,7 @@ const pins = {
   arena: { name: "GMO ARENA saitama · Radiohead", lat: 35.89512, lng: 139.63075, kind: "spot", desc: "คอนเสิร์ต Radiohead 18:00 ชื่อเดิม Saitama Super Arena เดินจากสถานี 3 นาที เปิดประตู 15:30 เลิกราว 20:05–20:30 (ค่าประมาณ)", q: "Saitama Super Arena" },
 
   // วันที่ 13
-  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "10:11 ถึงจาก Kayabacho (Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องฝากกระเป๋า ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:30 ขากลับ Odakyu 18:51 ไป Yoyogi-Uehara แล้วต่อรถใต้ดินถึง Kayabacho 20:49", q: "Odawara Station" },
+  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "09:48 ถึงจาก Kayabacho (รอบสำรองถึง 10:11 Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องฝากกระเป๋า ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:30 ขากลับ Odakyu 18:51 ไป Yoyogi-Uehara แล้วต่อรถใต้ดินถึง Kayabacho 20:49", q: "Odawara Station" },
   owakudani: { name: "Owakudani (หุบควันภูเขาไฟ)", lat: 35.24442, lng: 139.01958, kind: "spot", desc: "11:19 ลงรถบัส J03 ป้าย 大涌谷 หุบภูเขาไฟที่ยังมีควันกำมะถัน ลานชมวิวและร้านไข่ดำ เดินเที่ยวราว 30 นาที เปิดราว 09:00–16:00 (ยังไม่ได้ยืนยัน) ซื้อตั๋วกระเช้าเที่ยวเดียว 2,000 เยนที่สถานี ขึ้นกระเช้าไป Togendai (桃源台行) ไม่เกิน 11:53 ถ้ากระเช้าหยุด: รถบัส J03 12:14 ไป Hakone-en", q: "Owakudani" },
   togendai: { name: "Togendai (กระเช้า → รถบัส Odakyu)", lat: 35.23791, lng: 138.9953, kind: "station", desc: "12:23 ถึงด้วยกระเช้า (ผ่าน Ubako ไม่ต้องลง) เดินราว 5 นาทีไปป้าย 箱根桃源台 ขึ้นรถบัส Odakyu ไป Hakone-en 12:30 (570 เยน บัตร Izuhakone ใช้ไม่ได้)", q: "Hakone Ropeway Togendai Station" },
   hakoneen: { name: "Hakone-en Aquarium", lat: 35.21224, lng: 139.00931, kind: "spot", desc: "12:45 ถึง พิพิธภัณฑ์สัตว์น้ำริมทะเลสาบ Ashi ลานแมวน้ำไบคาล ค่าเข้า 1,600 เยน เข้าได้ถึง 16:00 กินข้าวเที่ยงในบริเวณ Hakone-en รถบัสต่อ 14:00", q: "Hakone-en Aquarium" },
@@ -170,7 +170,7 @@ const dayMaps: Record<string, MapDef[]> = {
   "13": [
     {
       title: "Hakone วันเกิดแฟน",
-      note: "เช้านั่ง Tokyo Metro + Odakyu จาก Kayabacho (เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) มา Odawara 10:11 ค่ำกลับทางเดิมถึง Kayabacho 20:49 (อยู่นอกแผนที่)",
+      note: "เช้านั่ง Tokyo Metro + Odakyu จาก Kayabacho (เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ออก 07:50 มา Odawara 09:48 ค่ำกลับทางเดิมถึง Kayabacho 20:49 (อยู่นอกแผนที่)",
       steps: [
         "odawara",
         ["owakudani", "bus"],

@@ -115,7 +115,7 @@ const routes: Record<string, RouteLeg[]> = {
     { from: "Omiya Station Saitama", to: "Kayabacho Station", mode: "transit", note: "JR → Ueno → Hibiya Line (เที่ยวสุดท้ายจาก Saitama-Shintoshin 23:15)" },
   ],
   "13": [
-    { time: "08:13", from: "Kayabacho Station", to: "Odawara Station", mode: "transit", note: "Tozai → Otemachi → Chiyoda Line → Yoyogi-Uehara → Odakyu 快速急行 08:45" },
+    { time: "07:50", from: "Kayabacho Station", to: "Odawara Station", mode: "transit", note: "Tozai → Otemachi → Chiyoda Line → Yoyogi-Uehara → Odakyu 快速急行 08:26 ถึง 09:48" },
     { time: "10:30", from: "Odawara Station", to: "Owakudani", mode: "transit", note: "รถบัส Izuhakone J03 (大涌谷経由 箱根園行) ทางออกตะวันออก ป้าย 5" },
     { time: "11:53", from: "Owakudani Station", to: "Togendai Station", mode: "transit", note: "Hakone Ropeway เที่ยวเดียว 2,000 เยน ผ่าน Ubako ไม่ต้องลง" },
     { time: "12:30", from: "Togendai Station", to: "Hakone-en", mode: "transit", note: "รถบัส Odakyu ป้าย 箱根桃源台 (บัตร Izuhakone ใช้ไม่ได้)" },
@@ -478,7 +478,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 ราว 15:15–17:35 เวลาว่างที่ Motohakone (รอผู้ใช้หาที่มาลง)
 เย็น: รถบัสกลับ Odawara นั่งรถไฟกลับ Kayabacho ถึง 20:49
 พัก Almont Inn Nihonbashi (คืนที่ 2 จาก 3 เลือกไว้ก่อน)`,
-    howto: `08:13 Tozai Kayabacho → 08:16 Otemachi เปลี่ยนเป็น Chiyoda Line 08:24 → 08:44 Yoyogi-Uehara เปลี่ยนเป็น Odakyu ขบวน 快速急行 08:45 → 10:11 Odawara เปลี่ยนรถ 2 ครั้ง 1 ชม. 58 นาที 1,057 เยน (เผื่อเวลาถึงรถบัส 10:30 อยู่ 19 นาที)
+    howto: `07:50 Tozai Kayabacho → 07:53 Otemachi เปลี่ยนเป็น Chiyoda Line 08:04 → 08:23 Yoyogi-Uehara เปลี่ยนเป็น Odakyu ขบวน 快速急行 08:26 (มีเวลาเปลี่ยน 3 นาที) → 09:48 Odawara เปลี่ยนรถ 2 ครั้ง 1 ชม. 58 นาที 1,057 เยน (เผื่อเวลาถึงรถบัส 10:30 อยู่ 42 นาที ถ้าพลาดขบวน 08:26 ให้ขึ้นขบวน 08:45 ถึง 10:11 ยังทันรถบัส เดิมออก 08:13 เปลี่ยนรถที่ Yoyogi-Uehara มีเวลาแค่ 1 นาที)
 10:30 รถบัส Izuhakone J03 (大涌谷経由 箱根園行) ทางออกตะวันออก ป้าย 5 → 11:19 Owakudani (รอบสำรอง 10:55 ถึง 11:44)
 11:20–11:50 เดินเที่ยว Owakudani
 11:53 Hakone Ropeway Owakudani → 12:23 Togendai (ผ่าน Ubako ไม่ต้องลง)
@@ -516,7 +516,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "Odawara → Kayabacho: Odakyu ขบวน 快速急行 ถึง Yoyogi-Uehara, Chiyoda Line ถึง Otemachi แล้ว Tozai (เปลี่ยนรถ 2 ครั้ง ไม่เสียค่าเพิ่ม เดิม JR ผ่าน Shimbashi 1,773)", type: "ค่าเดินทาง", yen: 1057, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันอาทิตย์ 25 ต.ค. 2026)" },
       { name: "Hakone Shrine และโทริอิริมน้ำ (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว", source: "hakonenavi.jp" },
     ],
-    board: `1. Kayabacho: ขึ้น Tozai Line ขบวนไป Mitaka 08:13 ลง Otemachi 08:16 เปลี่ยนเป็น Chiyoda Line ขบวน 準急 ไป Seijogakuen-mae 08:24 ลง Yoyogi-Uehara 08:44 เปลี่ยนเป็น Odakyu ขบวน 快速急行 ไป Odawara 08:45 ลง Odawara 10:11 (มีเวลาเปลี่ยนรถ 1 นาที ยังไม่ได้เช็กว่าเป็นชานชาลาฝั่งตรงข้ามไหม ทางเลือก: Hibiya Line 08:13 ลง Hibiya 08:21 ขึ้น Chiyoda Line ขบวนเดียวกัน 08:28)
+    board: `1. Kayabacho: ขึ้น Tozai Line ขบวนไป Mitaka 07:50 ชานชาลา 4 ลง Otemachi 07:53 เปลี่ยนเป็น Chiyoda Line ไป Yoyogi-Uehara 08:04 ชานชาลา 5 ลง Yoyogi-Uehara 08:23 ชานชาลา 2 เปลี่ยนเป็น Odakyu ขบวน 快速急行 ไป Odawara 08:26 ชานชาลา 1 ลง Odawara 09:48 ชานชาลา 8 (มีเวลาเปลี่ยนรถ 3 นาที ถ้าพลาดให้ขึ้นขบวน 08:45 ถึง 10:11 ยังทันรถบัส 10:30 ทางเลือก: Hibiya Line 07:53 ลง Hibiya 08:01 ขึ้น Chiyoda Line 08:07 ต่อ Odakyu ขบวนเดียวกัน)
 2. Odawara: ไม่ต้องฝากกระเป๋า (พัก Almont Inn Nihonbashi 3 คืน) เดินไปทางออกตะวันออก
 3. Odawara ทางออกตะวันออก ป้ายรถบัส 5: ขึ้นรถบัส Izuhakone สาย J03 ไป Hakone-en ผ่าน Owakudani (J03 大涌谷経由 箱根園行) 10:30 ลงป้าย Owakudani (大涌谷) 11:19 (รอบสำรอง 10:55 ถึง 11:44) ต้องเป็นรถบัส Izuhakone ไม่ใช่ Hakone Tozan วันคนเยอะรถอาจไม่ผ่าน Owakudani ถ้าเป็นแบบนั้นให้นั่งไปลงปลายทาง Hakone-en
 4. Owakudani: เดินจากป้ายราว 5 นาทีถึงลานชมวิวและสถานีกระเช้า เที่ยวราว 30 นาที
@@ -544,7 +544,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 ☐ เงินสด และร่มพับ
 
 เวลา
-☐ ออกจาก Kayabacho 08:13
+☐ ออกจาก Kayabacho 07:50 (รอบสำรอง 08:13 ถึง Odawara 10:11)
 ☐ รถบัส J03 ที่ Odawara 10:30 ป้าย 5 ดูว่าป้ายหน้ารถมีคำว่า 大涌谷経由
 ☐ ขึ้นกระเช้าที่ Owakudani ไม่เกิน 11:53 เพื่อทันรถบัส Odakyu 12:30 ที่ Togendai
 ☐ Hakone-en Aquarium เข้าได้ถึง 16:00
