@@ -7,6 +7,9 @@ import Checklist from "@/components/Checklist";
 import { dirUrl, type TravelMode } from "@/lib/maps";
 import { getDayMaps } from "@/lib/minimap";
 import MiniMap from "@/components/MiniMap";
+import { getLang } from "@/lib/lang";
+import { getDayJa } from "@/lib/plan-ja";
+import { DayJa } from "@/components/ItineraryJa";
 import { Card, Collapsible, Pill, SectionTitle, accentClass, baht, yen } from "@/components/ui";
 
 const modeIcon: Record<TravelMode, string> = { transit: "🚆", walking: "🚶", driving: "🚗" };
@@ -31,6 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DayPage({ params }: Props) {
   const day = getDay((await params).slug);
   if (!day) notFound();
+  const ja = (await getLang()) === "ja" ? getDayJa(day.slug) : undefined;
+  if (ja) return <DayJa day={ja} />;
 
   const idx = days.indexOf(day);
   const prev = days[idx - 1];

@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { SHEET_URL, SNAPSHOT_DATE, THB_PER_JPY, dayTotal, days, toThb, trip, tripTotal } from "@/lib/plan";
 import { Card, Pill, SectionTitle, accentClass, baht, yen } from "@/components/ui";
+import { getLang } from "@/lib/lang";
+import { OverviewJa } from "@/components/ItineraryJa";
 
-export default function Overview() {
+export default async function Overview() {
+  if ((await getLang()) === "ja") return <OverviewJa />;
   const total = tripTotal();
   const estimated = days.flatMap((d) => d.costs).filter((c) => c.status === "ประมาณ").reduce((s, c) => s + c.yen, 0);
 

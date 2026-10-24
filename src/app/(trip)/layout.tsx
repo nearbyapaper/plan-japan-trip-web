@@ -4,18 +4,21 @@ import { redirect } from "next/navigation";
 import { COOKIE_NAME, isValidToken } from "@/lib/auth";
 import { days } from "@/lib/plan";
 import { logout } from "../login/actions";
+import { getLang } from "@/lib/lang";
+import LangToggle from "@/components/LangToggle";
 
 // ด่านที่สอง: เช็ก cookie ซ้ำฝั่ง server ก่อนแสดงข้อมูล เผื่อ middleware ถูกข้าม
 export default async function TripLayout({ children }: { children: React.ReactNode }) {
   const token = (await cookies()).get(COOKIE_NAME)?.value;
   if (!(await isValidToken(token))) redirect("/login");
+  const lang = await getLang();
 
   return (
     <div className="min-h-dvh">
       <header className="sticky top-0 z-10 border-b border-line bg-bg/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3">
           <Link href="/" className="font-bold">
-            🗾 Japan 2027
+            🗾<span className="hidden sm:inline"> Japan 2027</span>
           </Link>
           <nav className="-mx-1 flex flex-1 gap-1 overflow-x-auto px-1 text-sm">
             {days.map((d) => (
@@ -28,9 +31,10 @@ export default async function TripLayout({ children }: { children: React.ReactNo
               </Link>
             ))}
           </nav>
+          <LangToggle lang={lang} />
           <form action={logout}>
             <button className="shrink-0 rounded-full border border-line px-3 py-1 text-xs text-ink-2 hover:text-ink">
-              ออก
+              {lang === "ja" ? "ログアウト" : "ออก"}
             </button>
           </form>
         </div>
