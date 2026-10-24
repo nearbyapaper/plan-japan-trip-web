@@ -18,6 +18,7 @@ const legStyle: Record<LegMode, { color: string; dash?: string; label: string }>
   walking: { color: "#78716c", dash: "2 7", label: "เดิน" },
   bike: { color: "#16a34a", dash: "10 6", label: "จักรยาน" },
   ropeway: { color: "#9333ea", label: "กระเช้า" },
+  taxi: { color: "#ca8a04", dash: "6 4", label: "แท็กซี่" },
 };
 
 const esc = (s: string) =>

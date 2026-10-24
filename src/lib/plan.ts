@@ -2,10 +2,10 @@ import "server-only";
 import { placeUrl, type RouteLeg } from "./maps";
 
 // สำเนาข้อมูลจาก Google Sheet "Japan 2027" (แท็บ Main แถว 2–8 และแท็บ ค่าใช้จ่าย)
-// ดึงเมื่อ 18 ต.ค. 2026 (รวมบัตร Noriorikun วันที่ 10 และ Owakudani วันที่ 13) ถ้าแก้ชีตแล้วต้องอัปเดตไฟล์นี้ใหม่
+// ดึงเมื่อ 18 ต.ค. 2026 วันที่ 12–15 และที่พักดึงใหม่ 23 ต.ค. 2026 (Almont Inn Nihonbashi เลือกไว้ก่อน) ถ้าแก้ชีตแล้วต้องอัปเดตไฟล์นี้ใหม่
 // ไฟล์นี้ import ได้เฉพาะฝั่ง server เท่านั้น ข้อมูลจะไม่ติดไปกับ JavaScript ของหน้าเว็บ
 
-export const SNAPSHOT_DATE = "18 ต.ค. 2026";
+export const SNAPSHOT_DATE = "24 ต.ค. 2026";
 export const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1tDcJ_97EXKyNxRpZhIWOs061kpxK-KjEGFRAtWnxBKE/edit";
 
@@ -57,15 +57,12 @@ export const trip = {
   flightNote: "33,230 บาทสำหรับ 2 คน (จองแล้ว) รวมกระเป๋าโหลดคนละ 1 ใบ",
   stays: [
     { nights: "10–11 มิ.ย.", place: "Smile Hotel Shonan Fujisawa", status: "เลือกไว้ก่อน (3,572 บาท 2 คืน)" },
-    { nights: "12 มิ.ย.", place: "ใกล้ Saitama-Shintoshin", status: "ยังไม่ได้เลือกโรงแรม" },
-    { nights: "13 มิ.ย.", place: "โตเกียว (ใกล้ Shinjuku จะสะดวกกับรถบัสเช้าวันที่ 14)", status: "ยังไม่ได้เลือกโรงแรม" },
-    { nights: "14 มิ.ย.", place: "ยังไม่ได้เลือก", status: "ยังไม่ได้เลือก" },
+    { nights: "12–14 มิ.ย.", place: "Almont Inn Nihonbashi (ห้องเตียงใหญ่ 14 ตร.ม.)", status: "เลือกไว้ก่อน ยังไม่ได้จอง (7,205 บาท 3 คืน ยกเลิกฟรี รวมอาหารเช้า) สำรอง: APA Hotel Ueno Ekimae" },
   ],
   pending: [
-    "โรงแรมคืนวันที่ 13 ในโตเกียว (แล้วเพิ่มค่ารถ Odawara → ที่พัก และที่พัก → Busta Shinjuku)",
-    "คืนวันที่ 14 พักที่ไหน แล้วแก้เส้นทางวันที่ 15 ที่ยังออกจาก Ikebukuro",
+    "จอง Almont Inn Nihonbashi 3 คืน (12–14 มิ.ย. เลือกไว้ก่อน รอคุยกับแฟน ห้อง 14 ตร.ม. เหลือน้อย)",
     "ร้านมื้อวันเกิดวันที่ 13 และช่วงว่าง 15:15–17:35 ที่ Motohakone",
-    "โรงแรมคืนวันที่ 12 ใกล้ Saitama-Shintoshin",
+    "Shimamura จะอยู่วันไหน (ตอนนี้อยู่วันที่ 14)",
     "ไม่ต้องซื้อบัตร Izuhakone 1Day Bus Free (ไม่คุ้มกับแผน Owakudani) ส่วนบัตร Enoden Noriorikun วันที่ 10 เลือกไว้ก่อนแล้ว",
   ],
 };
@@ -74,6 +71,7 @@ export const trip = {
 const HOTEL_FUJISAWA = "Smile Hotel Shonan Fujisawa";
 const YORIDOKORO = "ヨリドコロ 稲村ヶ崎";
 const SHIMAMURA = "ファッションセンターしまむら 高田馬場店";
+const HOTEL_TOKYO = "Almont Inn Tokyo Nihonbashi";
 
 // เส้นทางทีละช่วงตามไทม์ไลน์ใน Main คอลัมน์ C
 const routes: Record<string, RouteLeg[]> = {
@@ -88,7 +86,8 @@ const routes: Record<string, RouteLeg[]> = {
     { time: "12:42", from: "Shichirigahama Station", to: "Inamuragasaki Station", mode: "transit", note: "Enoden" },
     { from: "Inamuragasaki Station", to: YORIDOKORO, mode: "walking", note: "Cafe Yoridokoro ข้าวเที่ยง 3–5 นาที" },
     { time: "14:41", from: "Inamuragasaki Station", to: "Hase Station Kanagawa", mode: "transit", note: "Enoden" },
-    { from: "Hase Station Kanagawa", to: "Kotoku-in Great Buddha", mode: "walking", note: "ถนนคนเดินหน้าพระใหญ่ 7 นาที" },
+    { from: "Hase Station Kanagawa", to: "御霊神社 鎌倉", mode: "walking", note: "ศาลเจ้า Goryo ราว 300 ม." },
+    { from: "御霊神社 鎌倉", to: "Kotoku-in Great Buddha", mode: "walking", note: "กลับทางสถานี Hase แล้วถนนคนเดินหน้าพระใหญ่" },
     { time: "17:35", from: "Hase Station Kanagawa", to: "Fujisawa Station", mode: "transit", note: "Enoden กลับ" },
     { from: "Fujisawa Station", to: HOTEL_FUJISAWA, mode: "walking", note: "กลับโรงแรม" },
   ],
@@ -96,25 +95,27 @@ const routes: Record<string, RouteLeg[]> = {
     { time: "09:02", from: "Fujisawa Station", to: "Kamakura Station", mode: "transit", note: "JR Tokaido → เปลี่ยนที่ Ofuna → JR Shonan-Shinjuku 09:12" },
     { from: "Kamakura Station", to: "Tsurugaoka Hachimangu", mode: "walking", note: "ทางออกตะวันออก 10 นาที" },
     { from: "Tsurugaoka Hachimangu", to: "Kamakura Station", via: "Komachi-dori", mode: "walking", note: "ผ่าน Komachi-dori" },
-    { time: "13:34", from: "Kamakura Station", to: "Zushi Station", mode: "transit", note: "JR Yokosuka" },
-    { from: "Zushi Station", to: "Morito Daimyojin", mode: "transit", note: "รถบัส Keikyu 逗11 / 逗12 ป้าย 3" },
+    { time: "13:24", from: "Kamakura Station", to: "Zushi Station", mode: "transit", note: "JR Yokosuka ชานชาลา 1" },
+    { time: "13:40", from: "Zushi Station", to: "Morito Daimyojin", mode: "transit", note: "รถบัส Keikyu 逗12 ป้าย 3 ทางออกตะวันออก" },
     { from: "Morito Daimyojin", to: "Hayama Marina", mode: "walking", note: "เดินเที่ยวย่าน Morito" },
-    { from: "Hayama Marina", to: "Zushi Station", mode: "transit", note: "รถบัสป้าย Abuzuri" },
-    { time: "18:34", from: "Zushi Station", to: "Fujisawa Station", mode: "transit", note: "JR เปลี่ยนที่ Ofuna" },
+    { time: "18:17", from: "Hayama Marina", to: "Zushi Station", mode: "transit", note: "รถบัส 逗12 ป้าย Abuzuri" },
+    { time: "18:41", from: "Zushi Station", to: "Fujisawa Station", mode: "transit", note: "JR เปลี่ยนที่ Ofuna" },
   ],
   "12": [
-    { time: "08:12", from: "Fujisawa Station", to: "Oi Keibajo Mae Station", mode: "transit", note: "เปลี่ยนที่ Yokohama และ Tenkubashi" },
+    { time: "08:01", from: "Fujisawa Station", to: "Tokyo Station", mode: "transit", note: "JR Ueno-Tokyo Line ไม่ต้องเปลี่ยนรถ" },
+    { time: "08:55", from: "Tokyo Station Yaesu", to: HOTEL_TOKYO, mode: "driving", note: "แท็กซี่ไปฝากกระเป๋า ราว 2.5 กม." },
+    { from: HOTEL_TOKYO, to: "Kayabacho Station", mode: "walking", note: "5 นาที" },
+    { time: "09:26", from: "Kayabacho Station", to: "Oi Keibajo Mae Station", mode: "transit", note: "Tozai → Ginza Line → JR → Tokyo Monorail" },
     { from: "Oi Keibajo Mae Station", to: "Ohi Racecourse", mode: "walking", note: "ตลาดนัด Tokyo City Flea Market" },
-    { time: "12:03", from: "Oi Keibajo Mae Station", to: "Saitama-Shintoshin Station", mode: "transit", note: "Monorail → Hamamatsucho → JR Keihin-Tohoku" },
-    { from: "Saitama-Shintoshin Station", to: "Cocoon City", mode: "walking", note: "ข้าวเที่ยง" },
-    { time: "13:45", from: "Saitama-Shintoshin Station", to: "Musashi Ichinomiya Hikawa Shrine", mode: "transit", note: "ถ้ายังมีแรง: JR ไป Omiya แล้วเดิน" },
-    { from: "Musashi Ichinomiya Hikawa Shrine", to: "Omiya Park", mode: "walking" },
-    { from: "Omiya Park", to: "Saitama-Shintoshin Station", mode: "transit", note: "กลับไปพักที่โรงแรม" },
+    { time: "12:03", from: "Oi Keibajo Mae Station", to: "Kayabacho Station", mode: "transit", note: "Monorail → เดินไป Daimon → Toei Asakusa → Hibiya Line" },
+    { from: "Kayabacho Station", to: HOTEL_TOKYO, mode: "walking", note: "เช็กอิน พักในห้อง 15:00–16:00" },
+    { time: "16:11", from: "Kayabacho Station", to: "Saitama-Shintoshin Station", mode: "transit", note: "Hibiya Line → Ueno → JR Takasaki 16:32" },
     { time: "17:00", from: "Saitama-Shintoshin Station", to: "Saitama Super Arena", mode: "walking", note: "GMO ARENA saitama 3 นาที" },
-    { time: "09:32", from: "Fujisawa Station", to: "Saitama-Shintoshin Station", mode: "transit", note: "แผนวันฝน / ตลาดงด: JR ตรง ไม่เปลี่ยนรถ" },
+    { from: "Saitama Super Arena", to: "Omiya Station Saitama", mode: "walking", note: "หลังคอนเสิร์ต เดินราว 20 นาที เลี่ยงคนแน่น" },
+    { from: "Omiya Station Saitama", to: "Kayabacho Station", mode: "transit", note: "JR → Ueno → Hibiya Line (เที่ยวสุดท้ายจาก Saitama-Shintoshin 23:15)" },
   ],
   "13": [
-    { time: "08:05", from: "Saitama-Shintoshin Station", to: "Odawara Station", mode: "transit", note: "JR ไม่ต้องเปลี่ยนรถ" },
+    { time: "08:13", from: "Kayabacho Station", to: "Odawara Station", mode: "transit", note: "Tozai → Otemachi → Chiyoda Line → Yoyogi-Uehara → Odakyu 快速急行 08:45" },
     { time: "10:30", from: "Odawara Station", to: "Owakudani", mode: "transit", note: "รถบัส Izuhakone J03 (大涌谷経由 箱根園行) ทางออกตะวันออก ป้าย 5" },
     { time: "11:53", from: "Owakudani Station", to: "Togendai Station", mode: "transit", note: "Hakone Ropeway เที่ยวเดียว 2,000 เยน ผ่าน Ubako ไม่ต้องลง" },
     { time: "12:30", from: "Togendai Station", to: "Hakone-en", mode: "transit", note: "รถบัส Odakyu ป้าย 箱根桃源台 (บัตร Izuhakone ใช้ไม่ได้)" },
@@ -122,9 +123,10 @@ const routes: Record<string, RouteLeg[]> = {
     { from: "Motohakone-ko", to: "Hakone Shrine", mode: "walking", note: "10 นาที" },
     { time: "15:15", from: "Hakone Shrine", to: "Motohakone-ko", mode: "walking", note: "เวลาว่าง 15:15–17:35 (ยังไม่ได้ใส่แผน)" },
     { time: "17:43", from: "Motohakone-ko", to: "Odawara Station", mode: "transit", note: "รถบัส Izuhakone" },
-    { time: "18:51", from: "Odawara Station", to: "Shinjuku Station", mode: "transit", note: "Odakyu ไปที่พักในโตเกียว (ยังไม่ได้เลือกโรงแรม)" },
+    { time: "18:51", from: "Odawara Station", to: "Kayabacho Station", mode: "transit", note: "Odakyu 快速急行 → Yoyogi-Uehara → Chiyoda Line → Otemachi → Tozai ถึง 20:49" },
   ],
   "14": [
+    { time: "06:08", from: "Kayabacho Station", to: "Shinjuku Station", mode: "transit", note: "Tozai → Kudanshita → Toei Shinjuku Line" },
     { from: "Shinjuku Station", to: "Busta Shinjuku", mode: "walking", note: "ถึงก่อน 06:45 ชั้น 4 เหนือทางออกใต้" },
     { time: "06:55", from: "Busta Shinjuku", to: "Kawaguchiko Station", mode: "transit", note: "รถบัสทางด่วน Fujikyu ต้องจองที่นั่ง" },
     { time: "09:00", from: "Kawaguchiko Station", to: "Kawaguchiko Station", via: "Lawson Kawaguchiko Station-mae|Kawaguchiko Ohashi Bridge|Nagasaki Park Fujikawaguchiko|Oishi Park Fujikawaguchiko|Yagisaki Park", mode: "driving", note: "เส้นปั่นจักรยานรอบทะเลสาบตามคลิป (ราว 20 กม. Google Maps ไม่มีโหมดจักรยานในญี่ปุ่น)" },
@@ -132,9 +134,12 @@ const routes: Record<string, RouteLeg[]> = {
     { time: "17:18", from: "Shinjuku Station", to: "Takadanobaba Station", mode: "transit", note: "JR Yamanote ชานชาลา 15" },
     { from: "Takadanobaba Station", to: SHIMAMURA, mode: "walking", note: "ทางออก Toyama 1 นาที" },
     { time: "18:38", from: "Takadanobaba Station", to: "Shimokitazawa Station", mode: "transit", note: "JR Yamanote → Shinjuku → Odakyu 18:50" },
+    { time: "20:31", from: "Shimokitazawa Station", to: "Suitengumae Station", mode: "transit", note: "Keio Inokashira → Shibuya → Hanzomon Line" },
+    { from: "Suitengumae Station", to: HOTEL_TOKYO, mode: "walking", note: "340 ม." },
   ],
   "15": [
-    { time: "13:09", from: "Ikebukuro Station", to: "Narita Airport Terminal 1 Station", mode: "transit", note: "แผนเก่า ต้องแก้เมื่อรู้ที่พัก" },
+    { from: HOTEL_TOKYO, to: "Ningyocho Station", mode: "walking", note: "รับกระเป๋า 12:50 เดินราว 10 นาที (ยังไม่ได้เช็ก)" },
+    { time: "13:07", from: "Ningyocho Station", to: "Narita Airport Terminal 1 Station", mode: "transit", note: "Toei Asakusa Line 快速 成田空港行 วิ่งต่อ Keisei Main Line ไม่ต้องเปลี่ยนรถ" },
   ],
 };
 
@@ -143,14 +148,16 @@ const extraPlaces: Record<string, MapLink[]> = {
   "9": [{ name: "Suvarnabhumi Airport", url: placeUrl("Suvarnabhumi Airport") }],
   "10": [{ name: HOTEL_FUJISAWA, url: placeUrl(HOTEL_FUJISAWA) }],
   "11": [{ name: "Morito Beach", url: placeUrl("Morito Beach Hayama") }],
+  "12": [{ name: HOTEL_TOKYO, url: placeUrl(HOTEL_TOKYO) }],
   "13": [
     { name: "Motohakone-ko", url: placeUrl("Motohakone-ko") },
     { name: "Odawara Station", url: placeUrl("Odawara Station") },
   ],
   "14": [{ name: "Busta Shinjuku", url: placeUrl("Busta Shinjuku") }],
   "15": [
-    { name: "Seibu Ikebukuro (depachika)", url: placeUrl("Seibu Ikebukuro Main Store") },
-    { name: "Sunshine City", url: placeUrl("Sunshine City Ikebukuro") },
+    { name: "Nihonbashi Mitsukoshi (depachika)", url: placeUrl("Nihonbashi Mitsukoshi Main Store") },
+    { name: "COREDO Muromachi", url: placeUrl("COREDO Muromachi") },
+    { name: "Ningyocho Amazake Yokocho", url: placeUrl("Ningyocho Amazake Yokocho") },
     { name: "Narita Airport", url: placeUrl("Narita International Airport") },
   ],
 };
@@ -173,14 +180,17 @@ const baseDays: Omit<Day, "routes">[] = [
     details: "",
     checklist: `ก่อนเดินทาง
 ☐ พาสปอร์ตทั้งสองคน และตั๋ว TG682 / TG677
-☐ จองที่พัก 3 คืนแรก: Fujisawa 2 คืน (10–11 มิ.ย. เลือก Smile Hotel Shonan Fujisawa ไว้ก่อน) และใกล้ Saitama-Shintoshin 1 คืน (12 มิ.ย. คืนคอนเสิร์ต ควรจองก่อน)
-☐ คืนวันที่ 13–14 ยังไม่ได้เลือกเมืองที่พัก
-☐ เช็กเอกสารเข้าเมืองญี่ปุ่นที่ต้องกรอกล่วงหน้า (ยังไม่ได้เช็กกฎปี 2027)
-☐ แลกเงินเยนสด
+☐ จองที่พัก 2 ที่: Fujisawa 2 คืน (10–11 มิ.ย. เลือก Smile Hotel Shonan Fujisawa ไว้ก่อน) และ Almont Inn Nihonbashi 3 คืน (12–14 มิ.ย. เลือกไว้ก่อน ห้องเตียงใหญ่ 14 ตร.ม. ยกเลิกฟรี รวมอาหารเช้า 7,205 บาท ตัวเลือกสำรองคือ APA Hotel Ueno Ekimae 8,442 บาท)
+☐ เช็กตั๋วคอนเสิร์ต Radiohead: ออกตั๋วแบบไหน (แอปหรือกระดาษ) ต้องใช้เบอร์โทรญี่ปุ่นไหม ชื่อบนตั๋วต้องตรงกับบัตรประจำตัวไหม และโอนให้แฟนได้ไหม
+☐ ลงทะเบียน Visit Japan Web (ข้อมูล ตม. และศุลกากร) ให้ได้ QR code ไว้ใช้ที่ Haneda ช่วยให้ทันรถไฟ 08:04 (ยังไม่ได้เช็กกฎปี 2027)
+☐ บัตร IC: ใช้ iPhone เพิ่ม Suica ใน Apple Wallet และเติมเงินด้วยบัตรเครดิตได้ ใช้ Android ให้ซื้อ Welcome Suica ที่ Haneda
+☐ eSIM หรือแพ็กเกจเน็ตญี่ปุ่น (ต้องเปิดแผนที่และเช็กเวลารถทั้งทริป)
+☐ แลกเงินเยนสด พกติดตัวราว 5,000–10,000 เยนต่อคนต่อวัน (ค่าประมาณ) ร้านเล็กที่ Hayama, Kawaguchiko และตลาดนัดหลายร้านรับแต่เงินสด
+☐ ประกันเดินทาง (เที่ยวบินล่าช้า กระเป๋าหาย ค่ารักษาพยาบาล)
 
-ตัวเลือกที่พักที่เจอ (ฝั่ง Saitama-Shintoshin ยังไม่ได้เช็กราคาของวันที่จะไป)
-• Fujisawa: Smile Hotel Shonan Fujisawa (ทางออกใต้ของสถานี Fujisawa เดิน 2–5 นาที) 3,572 บาทสำหรับ 2 คืน 2 คน บน Trip.com เมื่อ 13 ต.ค. 2026 ตัวเลือกสำรองคือ Sotetsu Fresa Inn Kamakura-Ofuna สาขา Higashiguchi 4,608 บาท
-• Saitama-Shintoshin: Hotel Metropolitan Saitama-Shintoshin (ติดสถานี เดินถึงสนาม 3 นาที), APA Hotel Saitama-Shintoshin Eki-kita (เดินจากสถานี 8 นาที), APA Hotel Saitama-Shintoshin Eki-nishi (เดิน 5 นาที)
+ตัวเลือกที่พักที่เจอ (ราคาบน Trip.com)
+• Fujisawa: Smile Hotel Shonan Fujisawa (ทางออกใต้ของสถานี Fujisawa เดิน 2–5 นาที) 3,572 บาทสำหรับ 2 คืน 2 คน เมื่อ 13 ต.ค. 2026 ตัวเลือกสำรองคือ Sotetsu Fresa Inn Kamakura-Ofuna สาขา Higashiguchi 4,608 บาท
+• โตเกียว 3 คืน (เช็ก 23 ต.ค. 2026): Almont Inn Nihonbashi ห้อง 14 ตร.ม. 7,205 บาท (เลือกไว้ก่อน), APA Hotel Ueno Ekimae 8,442 บาท (ติดสถานี Ueno รถตรงทุกเที่ยว ห้อง 11 ตร.ม.), Tosei Hotel Cocone Ueno 10,781 บาท, Hotel Resol Ueno 13,249 บาท (ห้อง 15 ตร.ม.)
 
 วันนี้
 ☐ กระเป๋าโหลดคนละ 1 ใบ รวมในตั๋วแล้ว
@@ -194,7 +204,7 @@ const baseDays: Omit<Day, "routes">[] = [
     stay: "Smile Hotel Shonan Fujisawa (คืนที่ 1/2)",
     accent: "sky",
     place: `ถึง Haneda T3 06:55 นั่ง Keikyu + JR ไป Fujisawa ถึงราว 09:00 ฝากกระเป๋าที่โรงแรม กินข้าวเช้า
-10:30–17:35: เส้นชายทะเล Enoden แบบไม่เร่งหลังบินข้ามคืน ข้าวเที่ยงที่ Cafe Yoridokoro: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
+10:30–17:35: เส้นชายทะเล Enoden แบบไม่เร่งหลังบินข้ามคืน ข้าวเที่ยงที่ Cafe Yoridokoro: ทางข้ามรถไฟ Slam Dunk ที่ Kamakurakokomae และ Koshigoe Rakko Park ที่อยู่ติดกัน, เดินเลียบหาด Shichirigahama (ริมหาดคามาคุระ), Cafe Yoridokoro ริมราง Enoden ที่ Inamuragasaki, ศาลเจ้า Goryo (ดอกไฮเดรนเยียกับ Enoden), ถนนคนเดินย่านพระไดบุตสึ, พระใหญ่ Kotoku-in และ KANNON COFFEE แถว Hase
 เย็น: กลับ Fujisawa เช็กอิน
 พัก Fujisawa ที่ Smile Hotel Shonan Fujisawa (คืนที่ 1 จาก 2)`,
     howto: `เครื่องลง Haneda T3 06:55 ผ่าน ตม. รับกระเป๋า ซื้อหรือเติมบัตร IC เผื่อราว 1 ชม.
@@ -205,7 +215,9 @@ const baseDays: Omit<Day, "routes">[] = [
 10:30 Enoden Fujisawa → 10:47 Kamakurakokomae ไม่ต้องเปลี่ยนรถ ทางข้ามรถไฟอยู่ห่างสถานี 3 นาที Koshigoe Rakko Park อยู่ติดทางข้าม
 11:30 เดินเลียบทะเลไป Shichirigahama 1 สถานี เดินเล่นที่หาดถึงราว 12:35
 12:42 Enoden Shichirigahama → 12:49 Inamuragasaki เดิน 3–5 นาทีถึง Cafe Yoridokoro กินข้าวเที่ยง (เปิด 07:00–18:00 ปิดวันอังคาร คิวมักยาว)
-14:41 Enoden Inamuragasaki → 14:47 Hase เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in (เปิดถึง 17:30) แล้วแวะ KANNON COFFEE
+14:41 Enoden Inamuragasaki → 14:47 Hase
+14:50 เดินไปศาลเจ้า Goryo ใกล้สถานี (ราว 300 ม. ยังไม่ได้เช็กเวลาเดิน) ทางข้ามรถไฟหน้าโทริอิเป็นจุดถ่ายรูป Enoden กับดอกไฮเดรนเยีย ราว 15:15 เดินกลับมาทางสถานี Hase
+เดินถนนคนเดินหน้าพระใหญ่ 7 นาทีถึง Kotoku-in (เปิดถึง 17:30) แล้วแวะ KANNON COFFEE
 17:35 Enoden Hase → 18:07 Fujisawa ไม่ต้องเปลี่ยนรถ (ถ้าเหนื่อยกลับรอบก่อนหน้าได้)
 หมายเหตุ: Enoden ออกทุก 14 นาที ใช้บัตร Noriorikun (เลือกไว้ก่อน) ขึ้นลงได้ไม่จำกัด ถ้าเหนื่อยนั่ง Enoden จาก Kamakurakokomae ไป Shichirigahama แทนเดินได้โดยไม่จ่ายเพิ่ม`,
     rain: `ฝนปรอย: ไปตามแผน พกร่ม ถ้าทะเลมองไม่เห็นให้ข้าม Kamakurakokomae, Koshigoe Rakko Park และ Shichirigahama นั่ง Enoden จาก Fujisawa ตรงไป Inamuragasaki (Cafe Yoridokoro อยู่ในร่ม) และ Hase ดูพระใหญ่
@@ -217,6 +229,7 @@ const baseDays: Omit<Day, "routes">[] = [
       { name: "Koshigoe Rakko Park", url: m("%E8%85%B0%E8%B6%8A%E3%83%A9%E3%83%83%E3%82%B3%E5%85%AC%E5%9C%92") },
       { name: "Shichirigahama Beach", url: m("Shichirigahama%20Beach%20Kanagawa") },
       { name: "Cafe Yoridokoro (Inamuragasaki)", url: m("%E3%83%A8%E3%83%AA%E3%83%89%E3%82%B3%E3%83%AD%20%E7%A8%B2%E6%9D%91%E3%83%B6%E5%B4%8E") },
+      { name: "Goryo Shrine (御霊神社)", url: m("%E5%BE%A1%E9%9C%8A%E7%A5%9E%E7%A4%BE%20%E9%8E%8C%E5%80%89") },
       { name: "Kotoku-in Great Buddha", url: m("Kotoku-in%20Great%20Buddha%20Kanagawa") },
       { name: "KANNON COFFEE kamakura", url: m("KANNON%20COFFEE%20kamakura%20Kanagawa") },
     ],
@@ -246,6 +259,7 @@ const baseDays: Omit<Day, "routes">[] = [
 • หาด Shichirigahama (ริมหาดคามาคุระในบล็อก paikondieow: หาดทรายสีดำ เห็นฟูจิไกลๆ ในวันฟ้าเปิด): หาดยาวเลียบทางรถไฟ Enoden มองเห็นเกาะ Enoshima นักโต้คลื่นเยอะ มีคาเฟ่และร้านอาหารริมทะเล บล็อกในแท็บ kanagawa แนะนำช่วงพระอาทิตย์ตก (กลาง มิ.ย. พระอาทิตย์ตกราว 19:00 ตามแผนนี้ไม่ได้อยู่รอ)
 • Cafe Yoridokoro (ヨリドコロ สาขา Inamuragasaki): ร้านอาหารและคาเฟ่ในบ้านไม้เก่าสมัยไทโช อยู่ข้างทางข้ามรถไฟ นั่งริมหน้าต่างหรือบาร์ด้านนอกจะเห็นรถไฟ Enoden สีเขียววิ่งผ่านหน้าร้าน ขึ้นชื่อเรื่องชุดปลาตากแห้งย่าง (ราคาบนเว็บมีตั้งแต่ราว 1,000 ถึง 1,600 เยน ยังไม่ได้ยืนยัน) และไข่สดตีฟูราดข้าว เปิด 07:00–18:00 ปิดวันอังคาร รับออร์เดอร์สุดท้ายราว 17:00–17:30 คิวมักยาว
 • ถนนคนเดินย่านพระไดบุตสึ: ถนนจากสถานี Hase ขึ้นไปพระใหญ่ เดินราว 7 นาที สองข้างทางเป็นร้านของกิน ของฝาก ร้านเซรามิก และคาเฟ่ บล็อก paikondieow แนะนำร้านเซรามิกและมุมดอกไม้ตามกำแพง
+• ศาลเจ้า Goryo (御霊神社): ศาลเจ้าเล็กใกล้สถานี Hase คนไม่ค่อยเยอะ ทางข้ามรถไฟอยู่หน้าโทริอิ ช่วงดอกไฮเดรนเยียบานถ่ายรูป Enoden ออกจากอุโมงค์ผ่านดอกไม้ได้ (ปกติ Kamakura ดอกบานช่วงต้นถึงกลาง มิ.ย. ยังไม่ได้เช็กปี 2027) มีโพสต์บอกว่าห้ามถ่ายรูปในบริเวณศาลเจ้า ให้ถ่ายจากทางข้าม ค่าเข้ายังไม่ได้เช็ก (รีวิวไม่พูดถึงค่าเข้า)
 • พระใหญ่ Kotoku-in: พระพุทธรูปอมิตาภะสำริด สมบัติของชาติ เริ่มหล่อปี 1252 สูงราว 11.3 เมตร หนักราว 121 ตัน วิหารที่เคยคลุมถูกพายุและสึนามิพัดไปตั้งแต่ศตวรรษที่ 15 จึงนั่งกลางแจ้ง เข้าไปดูข้างในองค์พระได้ จ่ายเพิ่ม 50 เยนเป็นเงินสด (ยังไม่ได้เช็กซ้ำว่ายังเปิด)
 • KANNON COFFEE kamakura: คาเฟ่เล็กแถว Hase ขึ้นชื่อเรื่องเครปและคุกกี้รูปพระใหญ่
 • Fujisawa: เมืองใหญ่ของย่าน Shonan เป็นต้นสาย Enoden และจุดตัดของ JR Tokaido Line กับ Odakyu มีห้างและร้านอาหารรอบสถานีทั้งสองฝั่ง`,
@@ -280,18 +294,18 @@ const baseDays: Omit<Day, "routes">[] = [
     accent: "violet",
     place: `เช้า: Kamakura ฝั่งศาลเจ้าและเมืองเก่า: 09:30 ศาลเจ้า Tsurugaoka Hachimangu
 10:30 กินข้าวและเดินถนน Komachi-dori
-บ่าย: Hayama: ราว 14:15 ศาลเจ้า Morito Daimyojin และหาด Morito, ของกินเล่นและคาเฟ่ย่าน Morito (Asahiya, Misaki Donuts, SOSO HAYAMA), หาด Suwa, Hayama Marina
+บ่าย: Hayama: ราว 14:00 ศาลเจ้า Morito Daimyojin และหาด Morito, ของกินเล่นและคาเฟ่ย่าน Morito (Asahiya, Misaki Donuts, SOSO HAYAMA), หาด Suwa, Hayama Marina
 เย็น: กลับ Fujisawa
 พัก Fujisawa ที่ Smile Hotel Shonan Fujisawa (คืนที่ 2 จาก 2)`,
     howto: `09:02 JR Tokaido Line Fujisawa → Ofuna 1 สถานี
 09:12 JR Shonan-Shinjuku Line Ofuna → 09:18 Kamakura (รอบถัดไป ออก Fujisawa 09:09 ถึง 09:28)
 เดินจากสถานี Kamakura ไปศาลเจ้า Tsurugaoka Hachimangu ราว 10 นาที แล้วเดินกลับลงมาทาง Komachi-dori
-13:34 JR Kamakura → 13:39 Zushi
-รถบัส Keikyu สาย 逗11 หรือ 逗12 ป้าย 3 หน้าสถานี Zushi ราว 15 นาที ลงป้าย Morito Jinja (森戸神社)
-ราว 14:15 เดินเที่ยวจากศาลเจ้า Morito ถึง Hayama Marina ตามเส้นทางในลิงก์ visitkanagawa (แท็บ Hayama) ราว 2.5 ชม.
-รถบัสกลับที่ป้าย Abuzuri (鐙摺) ใกล้ Hayama Marina ไปสถานี Zushi
-18:34 JR Zushi → เปลี่ยนที่ Ofuna → 18:56 Fujisawa (รอบถัดไป 18:41 ถึง 18:59)
-หมายเหตุ: เวลารถบัสยังไม่ได้เช็ก
+13:24 JR Yokosuka Line Kamakura (ชานชาลา 1) → 13:30 Zushi
+13:40 รถบัส Keikyu สาย 逗12 ขบวนไป 葉山 ป้าย 3 ทางออกตะวันออก → 13:55 Morito Jinja (森戸神社) 280 เยน (ถ้าพลาด รอบถัดไป 14:00 ถึง 14:15)
+ราว 14:00 เดินเที่ยวจากศาลเจ้า Morito ถึง Hayama Marina ตามเส้นทางในลิงก์ visitkanagawa (แท็บ Hayama) ราว 2.5 ชม.
+18:17 รถบัส Keikyu 逗12 ป้าย Abuzuri (鐙摺) ใกล้ Hayama Marina → 18:30 Zushi 250 เยน
+18:41 JR Yokosuka Line Zushi → 18:51 Ofuna เปลี่ยนเป็น JR 18:55 → 18:59 Fujisawa (เผื่อเวลาเปลี่ยนรถ 11 นาที ถ้ารถบัสถึงเร็วขึ้นรอบ 18:34 ได้ ถึง 18:56)
+หมายเหตุ: เวลาและค่ารถบัสเช็กกับ Yahoo Transit ตารางวันศุกร์ 30 ต.ค. 2026 แล้ว (24 ต.ค. 2026 ปรับให้ออกจาก Kamakura เร็วขึ้น 10 นาทีเพื่อได้เวลาที่ Hayama เพิ่ม)
 หมายเหตุ: ตัดวัด Meigetsu-in ออก (ผู้ใช้สั่ง 18 ต.ค. 2026) จึงไม่ต้องออกเช้าและไม่ต้องลงที่ Kita-Kamakura เวลารถเป็นตารางวันศุกร์เดือน ต.ค. 2026`,
     rain: `ฝนปรอย: ไปตามแผน พกร่มและรองเท้ากันลื่น
 ฝนหนัก: เที่ยวแค่ครึ่งเช้า (ศาลเจ้า Tsurugaoka Hachimangu, Komachi-dori) ตัด Hayama ออกเพราะเป็นทางเดินริมทะเลกลางแจ้งทั้งหมด`,
@@ -305,18 +319,18 @@ const baseDays: Omit<Day, "routes">[] = [
     costs: [
       { name: "JR Fujisawa → Kamakura (เปลี่ยนรถที่ Ofuna)", type: "ค่าเดินทาง", yen: 209, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันศุกร์ 16 ต.ค. 2026)" },
       { name: "JR Kamakura → Zushi", type: "ค่าเดินทาง", yen: 199, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
-      { name: "รถบัส Keikyu สถานี Zushi ↔ Morito Jinja / Abuzuri ไป-กลับ (250 × 2)", type: "ค่าเดินทาง", yen: 500, status: "ประมาณ", source: "ยังไม่เจอค่าโดยสารบนเว็บ ประมาณเที่ยวละ 250 เยน" },
+      { name: "รถบัส Keikyu 逗12 สถานี Zushi → Morito Jinja (280) + Abuzuri → Zushi (250)", type: "ค่าเดินทาง", yen: 530, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันศุกร์ 30 ต.ค. 2026)" },
       { name: "JR Zushi → Fujisawa (เปลี่ยนรถที่ Ofuna)", type: "ค่าเดินทาง", yen: 253, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "ศาลเจ้า Tsurugaoka Hachimangu, ศาลเจ้า Morito และชายหาด Hayama (ฟรี)", type: "ค่าเข้า", yen: 0, status: "ประมาณ", source: "ศาลเจ้า Morito ยังไม่ได้ยืนยันว่าไม่เก็บค่าเข้า" },
     ],
     board: `1. Fujisawa ชานชาลา 3: ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Takasaki 09:02 ลง Ofuna 09:06 (ถึงชานชาลา 1/2) เดินไปชานชาลา 7/8 ขึ้น JR Shonan-Shinjuku Line ขบวนไป Zushi 09:12 ลง Kamakura 09:18 ชานชาลา 1 (รอบถัดไป ออก Fujisawa 09:09 เปลี่ยนเป็น JR Yokosuka 09:22 ถึง 09:28)
 2. Kamakura ทางออกตะวันออก: เดินไปศาลเจ้า Tsurugaoka Hachimangu ราว 10 นาที
 3. จากศาลเจ้าเดินถนน Komachi-dori ลงมาถึงสถานี Kamakura ราว 10 นาที
-4. Kamakura ชานชาลา 1: ขึ้น JR ขบวนไป Zushi 13:34 ลง Zushi 13:39 (รอบถัดไป 13:45 และ 13:54)
-5. สถานี Zushi ป้ายรถบัส 3: ขึ้นรถบัส Keikyu สาย 逗11 หรือ 逗12 ราว 15 นาที ลงป้าย Morito Jinja (森戸神社) รถผ่านป้าย Abuzuri, Hayama Marina และ Morito Kaigan ก่อนถึง
+4. Kamakura ชานชาลา 1: ขึ้น JR ขบวนไป Zushi 13:24 ลง Zushi 13:30 (ถ้าพลาด ขึ้น 13:34 แล้วต่อรถบัสรอบ 14:00)
+5. สถานี Zushi ทางออกตะวันออก ป้ายรถบัส 3: ขึ้นรถบัส Keikyu สาย 逗12 ขบวนไป 葉山 13:40 ลงป้าย Morito Jinja (森戸神社) 13:55 280 เยน รถผ่านป้าย Abuzuri, Hayama Marina และ Morito Kaigan ก่อนถึง
 6. เดินเที่ยวย้อนขึ้นเหนือ: ศาลเจ้า Morito → หาด Morito → Asahiya (5 นาที) → Misaki Donuts (2 นาที) → SOSO HAYAMA (2 นาที) → Genbe (3 นาที) → หาด Suwa → Hayama Marina
-7. ป้าย Abuzuri (鐙摺) ใกล้ Hayama Marina: ขึ้นรถบัสกลับสถานี Zushi ราว 10 นาที
-8. Zushi: ขึ้น JR 18:34 ลง Ofuna เปลี่ยนเป็น JR Tokaido Line ขบวนไปทาง Odawara ลง Fujisawa 18:56 (รอบถัดไป 18:41 ถึง 18:59 และ 18:49 ถึง 19:10)`,
+7. ป้าย Abuzuri (鐙摺) ใกล้ Hayama Marina: ขึ้นรถบัส 逗12 ขบวนไปสถานี Zushi 18:17 ถึง 18:30 250 เยน
+8. Zushi ชานชาลา 3: ขึ้น JR Yokosuka 18:41 ลง Ofuna 18:51 เปลี่ยนเป็น JR ขบวนไป Odawara 18:55 ลง Fujisawa 18:59 (ถ้าทันรอบ 18:34 ถึง 18:56 รอบหลังสุดที่สบาย 18:49 ถึง 19:10)`,
     details: `• ศาลเจ้า Tsurugaoka Hachimangu: ศาลเจ้าสำคัญที่สุดของ Kamakura ก่อตั้งปี 1063 Minamoto no Yoritomo ย้ายมาที่ปัจจุบันปี 1180 ขึ้นบันไดหิน 61 ขั้นไปอาคารหลักแล้วมองลงมาเห็นถนน Wakamiya Oji ยาวไปถึงทะเล สองข้างทางเข้าเป็นสระ Genpei เข้าฟรี
 • Komachi-dori: ถนนคนเดินยาวราว 360 เมตรจากศาลเจ้าถึงสถานี Kamakura ร้านของกินและของฝากกว่า 200 ร้าน เมืองขอความร่วมมือไม่เดินกินไปด้วย ให้ยืนกินหน้าร้าน
 
@@ -332,16 +346,16 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     checklist: `ไม่ต้องจองอะไร
 
 พกไป
-☐ บัตร IC ใช้ได้ทั้ง JR และรถบัส Keikyu ค่ารถวันนี้ 1,161 เยนต่อคน
+☐ บัตร IC ใช้ได้ทั้ง JR และรถบัส Keikyu ค่ารถวันนี้ 1,191 เยนต่อคน
 ☐ เงินสด ของกินเล่นร้านเล็กที่ Hayama (ยังไม่ได้เช็กว่ารับบัตรไหม)
 ☐ ร่มพับและรองเท้าที่เดินสบาย กันลื่น
 
 เวลา
 ☐ ออกจาก Fujisawa 09:02 เปลี่ยนรถที่ Ofuna ขึ้นขบวน 09:12 ถึง Kamakura 09:18
+☐ JR Kamakura 13:24 → Zushi ต่อรถบัส 逗12 รอบ 13:40 ป้าย 3 ทางออกตะวันออก ขากลับรถบัส Abuzuri 18:17
 ☐ ศาลเจ้า Morito ปิด 17:00 ควรถึง Hayama ไม่เกิน 15:00
 
 ยังไม่ได้เช็ก
-☐ ตารางและค่ารถบัส Keikyu สถานี Zushi ไป Morito Jinja และขากลับจาก Abuzuri (ค่ารถในชีตเป็นค่าประมาณ)
 ☐ วันหยุดและเวลาเปิดของ Asahiya, Misaki Donuts, SOSO HAYAMA`,
   },
   {
@@ -349,27 +363,41 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     date: "2027-06-12 (เสาร์)",
     short: "12 มิ.ย. เสาร์",
     title: "ตลาดนัด Ohi · คอนเสิร์ต Radiohead",
-    stay: "ใกล้ Saitama-Shintoshin (ยังไม่ได้เลือกโรงแรม)",
+    stay: "Almont Inn Nihonbashi (คืนที่ 1/3)",
     accent: "rose",
-    place: `เช้า: เช็กเอาต์จาก Fujisawa ไปตลาดนัด Tokyo City Flea Market ที่สนามแข่งม้า Ohi (เลือกไว้ก่อน เปิดเฉพาะเสาร์อาทิตย์ งดถ้าฝนตก) ลากกระเป๋าไปด้วย
-บ่าย: ไป Saitama-Shintoshin ฝากกระเป๋าที่โรงแรม กินข้าวเที่ยงที่ศูนย์อาหาร Cocoon City
-ถ้ายังมีแรง นั่ง JR 1 สถานีไปศาลเจ้า Musashi Ichinomiya Hikawa และ Omiya Park แล้วกลับมาก่อน 15:15
-พักผ่อนก่อนคอนเสิร์ต: เช็กอินโรงแรม 15:00 อาบน้ำ งีบในห้องจนถึงราว 17:00 (ถ้ายังเข้าห้องไม่ได้ นั่งพักที่ Keyaki Hiroba หรือ Starbucks ข้างสนาม)
-คอนเสิร์ต Radiohead @ GMO ARENA saitama 18:00 JST
-พัก Saitama (1 คืน)`,
-    howto: `08:12 เช็กเอาต์ Fujisawa ขึ้น JR Tokaido Line (Ueno-Tokyo Line) → เปลี่ยนที่ Yokohama ขึ้น Keikyu Main Line รถด่วน → เปลี่ยนที่ Tenkubashi ขึ้น Tokyo Monorail → 09:23 Ōi-keibajō-mae
-(เปลี่ยนรถ 2 ครั้ง 1 ชม. 11 นาที อีกเส้นทางเปลี่ยนที่ Kawasaki และ Hamamatsucho เวลาเท่ากัน 1,219 เยน)
-09:30–12:00 เดินตลาดนัด
-12:03 Tokyo Monorail → เปลี่ยนที่ Hamamatsucho ขึ้น JR Keihin-Tohoku Rapid → 13:05 Saitama-Shintoshin
-(เปลี่ยนรถ 1 ครั้ง รอบถัดไป 12:13 ถึง 13:07 เปลี่ยน 2 ครั้ง)
-13:10 ฝากกระเป๋าที่โรงแรม กินข้าวที่ Cocoon City
-13:45–15:15 ถ้ายังมีแรง: JR 1 สถานีไป Omiya 3 นาที เดินไปศาลเจ้าราว 15 นาที กลับทางเดิม (ไม่เดิน Hikawa Sando 2 กม. เพื่อเก็บแรง)
-15:15–17:00 เช็กอินแล้วพักในห้อง
-17:00 เดินไปสนาม 3 นาที (ปรับตามเวลาเปิดประตูบนตั๋ว)
-หลังคอนเสิร์ตเดินกลับโรงแรม ไม่ต้องขึ้นรถไฟ
-หมายเหตุ: เวลารถเป็นตารางวันเสาร์เดือน ต.ค. 2026`,
-    rain: `ฝนตกหรือตลาดนัดงด: ใช้แผนเดิม Fujisawa 09:32 JR Tokaido Line (Ueno-Tokyo Line) ถึง Saitama-Shintoshin 10:47 ไม่ต้องเปลี่ยนรถ 1,408 เยน (รอบถัดไป 09:41 ถึง 10:59) ฝากกระเป๋าแล้วอยู่ใน Cocoon City ซึ่งเป็นห้างในร่มติดสถานี จนเช็กอินได้ ค่ารถในแท็บค่าใช้จ่ายคิดแบบไปตลาดนัด
-เหนื่อยหลังตลาดนัด: ข้ามศาลเจ้า Hikawa นั่งพักที่ Keyaki Hiroba หรือ Cocoon City จนเช็กอินได้`,
+    place: `เช้า: เช็กเอาต์จาก Fujisawa นั่งรถไฟตรงไปสถานี Tokyo ต่อแท็กซี่ไปฝากกระเป๋าที่ Almont Inn Nihonbashi แล้วไปตลาดนัด Tokyo City Flea Market ที่สนามแข่งม้า Ohi (เลือกไว้ก่อน เปิดเฉพาะเสาร์อาทิตย์ งดถ้าฝนตก) ไม่ต้องลากกระเป๋าไปตลาด
+เที่ยง: กลับโรงแรม กินข้าวเที่ยงแถว Nihonbashi / Ningyocho
+15:00–16:00 เช็กอินโรงแรม อาบน้ำ งีบในห้อง
+16:11 ออกไป Saitama-Shintoshin (เปลี่ยนรถที่ Ueno)
+คอนเสิร์ต Radiohead @ GMO ARENA saitama 18:00 JST (เปิดประตู 15:30 เลิกราว 20:05–20:30 เป็นค่าประมาณ)
+หลังคอนเสิร์ต: นั่งรถไฟกลับ Kayabacho (เปลี่ยนที่ Ueno) ถึงราว 21:30–22:45
+พัก Almont Inn Nihonbashi (คืนที่ 1 จาก 3 เลือกไว้ก่อน)`,
+    howto: `08:01 เช็กเอาต์ Fujisawa ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno → 08:50 Tokyo ไม่ต้องเปลี่ยนรถ 49 นาที (รอบถัดไป 08:06 ถึง 08:57)
+08:55 แท็กซี่จากสถานี Tokyo ฝั่ง Yaesu → Almont Inn Nihonbashi ราว 2.5 กม. 10–15 นาที (ค่าประมาณ 1,200–1,500 เยนต่อคัน ไม่ต้องลากกระเป๋าเปลี่ยนรถใต้ดิน)
+09:10 ฝากกระเป๋าที่โรงแรม เดินไปสถานี Kayabacho ราว 5 นาที
+09:26 Tozai → Nihonbashi → Ginza Line → Shimbashi → JR → Hamamatsucho → Tokyo Monorail 09:55 → 10:03 Ōi-keibajō-mae (เปลี่ยนรถ 3 ครั้ง 37 นาที)
+10:05–12:00 เดินตลาดนัด
+12:03 Tokyo Monorail → Hamamatsucho เดินไป Daimon → Toei Asakusa → Higashi-Ginza → Hibiya Line → 12:43 Kayabacho (เปลี่ยนรถ 2 ครั้ง)
+12:45–15:00 กินข้าวเที่ยงและพักแถวโรงแรม
+15:00–16:00 เช็กอินแล้วพักในห้อง (ยังไม่ได้เช็กเวลาเช็กอินของ Almont)
+16:11 Hibiya Line Kayabacho → 16:20 Ueno เปลี่ยนเป็น JR Takasaki Line 16:32 → 16:54 Saitama-Shintoshin (เปลี่ยนรถ 1 ครั้ง 43 นาที)
+17:00 เดินไปสนาม 3 นาที (เปิดประตู 15:30)
+18:00 คอนเสิร์ต เลิกราว 20:05–20:30 (ค่าประมาณจากความยาวโชว์ทัวร์ปี 2025 ราว 2 ชม. ถึง 2 ชม. ครึ่ง)
+กลับโรงแรม เลือกตามแรงที่เหลือ (ทุกแบบเปลี่ยนเป็น Hibiya Line ที่ Ueno):
+• เดินจากประตู W1 ราว 20 นาทีไปสถานี Omiya ขึ้น JR ไป Ueno แล้ว Hibiya Line เช่น Omiya 20:58 ถึง Kayabacho 21:43 เลี่ยงคนแน่นที่สถานี Saitama-Shintoshin (ผมแนะนำ)
+• ต่อแถวที่สถานี Saitama-Shintoshin เช่น 20:46 ถึง Kayabacho 21:31 (ยังไม่รู้ว่าต้องรอเข้าสถานีนานเท่าไร)
+• นั่งกินข้าวเย็นแถว Cocoon City รอให้คนซาแล้วค่อยกลับ
+เที่ยวสุดท้าย: Saitama-Shintoshin 23:15 → Ueno 23:38 → Hibiya Line 23:49 → Kayabacho 23:58 แท็กซี่ราว 10,000–13,000 เยนต่อคัน เป็นค่าประมาณ ไม่แนะนำ
+หมายเหตุ: เวลารถเป็นตารางวันเสาร์เดือน ต.ค. 2026
+หมายเหตุ: 23 ต.ค. 2026 เลือกไว้ก่อนให้พัก Almont Inn Nihonbashi 3 คืน (ห้องเตียงใหญ่ 14 ตร.ม.) ตัวเลือกสำรองคือ APA Hotel Ueno Ekimae (รถตรงทุกเที่ยวแต่เกินงบ)`,
+    rain: `เช็กตอนเช้าก่อนออกจาก Fujisawa 08:01: ตลาดนัดงดถ้าฝนตก (ยังไม่เจอว่าประกาศงดกี่โมง ให้ดูเว็บหรือ X ของตลาดนัด) ถ้าฝนตกตั้งแต่เช้าให้ใช้แผนสำรองเลย
+ทุกแบบ: ออกจาก Fujisawa สายลงได้ (เช่น 09:01) นั่ง JR ตรงไป Tokyo แล้วแท็กซี่ไปฝากกระเป๋าที่โรงแรมเหมือนเดิม
+แบบ 1 Akihabara (ผมแนะนำ ใกล้และถูก): Hibiya Line Kayabacho → Akihabara 5 นาที ไม่ต้องเปลี่ยนรถ 178 เยนต่อเที่ยว เดินร้านของมือสอง ของเล่น เกม ของสะสม ส่วนใหญ่อยู่ในตึก กินข้าวเที่ยงแถวนั้น กลับโรงแรมเช็กอิน 15:00 พักในห้อง แล้วออก 16:11 ตามเดิม
+แบบ 2 ไป Saitama เร็วขึ้น: กินข้าวเที่ยงแถวโรงแรม ออกจาก Kayabacho ราว 13:00 (เส้นทางเดียวกับรอบ 16:11) เดินห้าง Cocoon City กับ Shimamura สาขา Saitama-Shintoshin (เปิดถึง 19:00) ใกล้สถานี แต่จะไม่ได้พักในห้องก่อนคอนเสิร์ต
+แบบ 3 พักอย่างเดียว: กินข้าวและเดินในร่มแถว Nihonbashi (COREDO Muromachi) เช็กอิน 15:00 นอนพักจนถึง 16:11
+ค่ารถ: ถูกกว่าแผนตลาดนัด (ไม่ต้องจ่ายค่ารถไป-กลับ Ohi 1,253 เยน) แบบ 1 จ่ายเพิ่มแค่ 356 เยน ค่ารถในตารางค่าใช้จ่ายยังคิดแบบไปตลาดนัด
+เหนื่อยหลังตลาดนัด: กลับโรงแรมแล้วพักในห้องให้นานขึ้นตั้งแต่เช็กอินได้
+ดูแล้วไม่เหมาะ: Heiwajima Antique Fair (ตลาดของเก่าในร่มใกล้ Ohi) ปี 2026 จัดแค่ มี.ค. พ.ค. ก.ย. ธ.ค. ไม่มีเดือน มิ.ย.`,
     rainStat: "ฝน 1/5",
     maps: [
       { name: "Tokyo City Flea Market (Ohi Racecourse)", url: m("Ohi+Racecourse+Flea+Market+2-1-2+Katsushima+Shinagawa") },
@@ -379,29 +407,32 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "GMO ARENA saitama", url: m("Saitama+Super+Arena") },
     ],
     costs: [
-      { name: "Fujisawa → Ōi-keibajō-mae (ตลาดนัด): JR Tokaido เปลี่ยนที่ Yokohama ขึ้น Keikyu เปลี่ยนที่ Tenkubashi ขึ้น Tokyo Monorail", type: "ค่าเดินทาง", yen: 1070, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 17 ต.ค. 2026)" },
-      { name: "Ōi-keibajō-mae → Saitama-Shintoshin: Tokyo Monorail 317 + JR Keihin-Tohoku เปลี่ยนที่ Hamamatsucho 616", type: "ค่าเดินทาง", yen: 933, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 17 ต.ค. 2026)" },
+      { name: "Fujisawa → Tokyo: JR Ueno-Tokyo Line ไม่ต้องเปลี่ยนรถ (แล้วต่อแท็กซี่ไปฝากกระเป๋าที่ Almont Inn Nihonbashi)", type: "ค่าเดินทาง", yen: 1034, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "แท็กซี่ สถานี Tokyo (ฝั่ง Yaesu) → Almont Inn Nihonbashi ราว 2.5 กม. พร้อมกระเป๋าใหญ่ (ราว 1,200–1,500 เยนต่อคัน หาร 2 คน)", type: "ค่าเดินทาง", yen: 700, status: "ประมาณ", source: "ประมาณจากระยะทาง ยังไม่ได้เช็กค่าแท็กซี่จริง" },
+      { name: "Kayabacho → Ōi-keibajō-mae (ตลาดนัด): Tokyo Metro Tozai + Ginza ถึง Shimbashi, JR ถึง Hamamatsucho, Tokyo Monorail (เปลี่ยนรถ 3 ครั้ง)", type: "ค่าเดินทาง", yen: 650, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
       { name: "ตลาดนัด Tokyo City Flea Market ที่ Ohi Racecourse (เข้าฟรี)", type: "ค่าเข้า", yen: 0, status: "ประมาณ", source: "ยังไม่ได้ยืนยันว่าเข้าฟรี" },
-      { name: "JR Saitama-Shintoshin → Omiya", type: "ค่าเดินทาง", yen: 155, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
-      { name: "ศาลเจ้า Hikawa, Omiya Park และทางเดิน Hikawa Sando (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว" },
+      { name: "Ōi-keibajō-mae → Kayabacho: Tokyo Monorail ถึง Hamamatsucho เดินไป Daimon, Toei Asakusa ถึง Higashi-Ginza, Hibiya Line (เปลี่ยนรถ 2 ครั้ง)", type: "ค่าเดินทาง", yen: 603, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "Kayabacho → Saitama-Shintoshin (ไปคอนเสิร์ต): Hibiya Line ถึง Ueno แล้ว JR Takasaki Line", type: "ค่าเดินทาง", yen: 706, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "Saitama-Shintoshin หรือ Omiya → Kayabacho (หลังคอนเสิร์ต): JR ถึง Ueno แล้ว Hibiya Line ราคาเท่ากันทั้งสองสถานี", type: "ค่าเดินทาง", yen: 706, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
     ],
-    board: `1. Fujisawa: เช็กเอาต์ Smile Hotel ขึ้น JR Tokaido Line (Ueno-Tokyo Line) 08:12 ลง Yokohama (ยังไม่ได้เช็กชานชาลา)
-2. Yokohama: เปลี่ยนเป็น Keikyu Main Line รถด่วน (Express) ลง Tenkubashi
-3. Tenkubashi: เปลี่ยนเป็น Tokyo Monorail ลง Ōi-keibajō-mae 09:23
-4. Ōi-keibajō-mae: เดินไปลานจอดรถที่ 1 ของสนามแข่งม้า Ohi ที่ตั้งตลาดนัด (ยังไม่ได้เช็กเวลาเดินและตู้ล็อกเกอร์)
-5. Ōi-keibajō-mae: ขึ้น Tokyo Monorail ไป Hamamatsucho 12:03 เปลี่ยนเป็น JR Keihin-Tohoku Rapid ลง Saitama-Shintoshin 13:05 ไม่ต้องเปลี่ยนอีก
-6. Saitama-Shintoshin: ฝากกระเป๋าที่โรงแรม กินข้าวที่ศูนย์อาหาร Cocoon City (ทางออกตะวันออก)
-7. ถ้ายังมีแรง (13:45–15:15): Saitama-Shintoshin ชานชาลา 2 หรือ 4 ขึ้น JR Keihin-Tohoku หรือ JR Utsunomiya Line ลง Omiya 3 นาที ทางออกตะวันออกเดินราว 15 นาทีถึงศาลเจ้า Hikawa สวน Omiya Park อยู่ติดกัน กลับทางเดิมแล้วนั่ง JR 1 สถานี
-8. Saitama-Shintoshin: เช็กอินโรงแรม (ส่วนใหญ่เช็กอินได้ 15:00) พักในห้องถึงราว 17:00
-9. 17:00 เดินไปสนาม สนามและ Keyaki Hiroba อยู่ฝั่งตะวันตกของสถานี เดิน 3 นาที
-10. หลังคอนเสิร์ต: เดินกลับโรงแรม`,
+    board: `1. Fujisawa ชานชาลา 3: เช็กเอาต์ Smile Hotel ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno 08:01 ลง Tokyo 08:50 ชานชาลา 7 ไม่ต้องเปลี่ยนรถ
+2. Tokyo: ออกทางฝั่ง Yaesu ไปจุดขึ้นแท็กซี่ บอกที่อยู่ Nihonbashi Koami-cho 4-6 (Almont Inn Tokyo Nihonbashi) ฝากกระเป๋าที่โรงแรม
+3. เดินไปสถานี Kayabacho ราว 5 นาที (โรงแรมห่าง 350 ม.) ขึ้น Tozai Line ขบวนไป Nakano 09:26 ลง Nihonbashi 09:27 เปลี่ยนเป็น Ginza Line ไป Shibuya 09:32 ลง Shimbashi 09:37 ขึ้น JR Yamanote หรือ Keihin-Tohoku 09:46 ลง Hamamatsucho 09:49 ขึ้น Tokyo Monorail ขบวนไปสนามบิน Haneda 09:55 ลง Ōi-keibajō-mae 10:03
+4. Ōi-keibajō-mae: เดินไปลานจอดรถที่ 1 ของสนามแข่งม้า Ohi ที่ตั้งตลาดนัด (ยังไม่ได้เช็กเวลาเดิน)
+5. Ōi-keibajō-mae: ขึ้น Tokyo Monorail ไป Hamamatsucho 12:03 เดินไปสถานี Daimon ขึ้น Toei Asakusa Line 12:27 ลง Higashi-Ginza 12:31 เปลี่ยนเป็น Hibiya Line ขบวนไป Kita-Senju 12:38 ลง Kayabacho 12:43
+6. กินข้าวเที่ยงแถว Nihonbashi / Ningyocho เช็กอินโรงแรม พักในห้อง
+7. Kayabacho: ขึ้น Hibiya Line ขบวนไป Ueno 16:11 ลง Ueno 16:20 เดินไป JR ชานชาลา 14 ขึ้น JR Takasaki Line ขบวนไป Takasaki 16:32 (ขบวนต้นทาง Ueno มีโอกาสได้ที่นั่ง) ลง Saitama-Shintoshin 16:54 ชานชาลา 4
+8. Saitama-Shintoshin ทางออกตะวันตก: เดินตรงแล้วเลี้ยวขวาที่ Keyaki Hiroba ถึงสนาม 3 นาที ประตูที่ใกล้สุดคือ Gate C
+9. หลังคอนเสิร์ต แบบที่แนะนำ: ออกประตู W1 เดินขึ้นเหนือราว 20 นาทีไปสถานี Omiya ขึ้น JR Utsunomiya / Takasaki Line ขบวนที่ไป Ueno ลง Ueno แล้วเดินไป Tokyo Metro Hibiya Line ขบวนไป Naka-Meguro ลง Kayabacho
+10. ทางเลือก: กลับทางสถานี Saitama-Shintoshin ขึ้น JR ไป Ueno 22 นาที แล้ว Hibiya Line ไป Kayabacho 9 นาที
+11. Kayabacho: เดินกลับโรงแรมราว 5 นาที`,
     details: `• Tokyo City Flea Market (大井競馬場フリーマーケット): ตลาดนัดของมือสองในลานจอดรถที่ 1 ของสนามแข่งม้า Ohi ที่อยู่ 2-1-2 Katsushima, Shinagawa ผู้จัดคือ 東京リサイクル運動市民の会 เปิดเกือบทุกเสาร์อาทิตย์ 09:00–15:00 (บางเว็บบอกปิด 14:30) งดถ้าฝนตก มีเสื้อผ้า ของใช้ และของเก่า ปีที่แล้วมีตารางวันเปิดรายเดือน ตารางปี 2027 ยังไม่ออก
-• ศาลเจ้า Musashi Ichinomiya Hikawa: ศาลเจ้าหลักของศาลเจ้า Hikawa ราว 280 แห่งทั่วคันโต ตามตำนานอายุกว่า 2,400 ปี ชื่อเมือง Omiya (ศาลเจ้าใหญ่) มาจากที่นี่ จุดเด่นคือประตู romon สีแดง สะพานข้ามสระ และป่าต้นไม้ใหญ่ เข้าฟรี
+• Almont Inn Nihonbashi: โรงแรมที่เลือกไว้ก่อน 3 คืน ห้องเตียงใหญ่ 14 ตร.ม. คะแนน 9.2 จาก 202 รีวิวบน Trip.com ฝากกระเป๋าฟรี มีเครื่องดื่มฟรีที่ชั้น 1 ย่านเงียบ สถานีใกล้: Suitengumae 340 ม. Kayabacho 350 ม. Ningyocho ราว 10 นาที
+• (ไม่อยู่ในแผนแล้ว เก็บไว้เป็นตัวเลือก) ศาลเจ้า Musashi Ichinomiya Hikawa: ศาลเจ้าหลักของศาลเจ้า Hikawa ราว 280 แห่งทั่วคันโต ตามตำนานอายุกว่า 2,400 ปี จุดเด่นคือประตู romon สีแดง สะพานข้ามสระ และป่าต้นไม้ใหญ่ เข้าฟรี
 • Omiya Park: สวนของจังหวัดที่เก่าที่สุดใน Saitama (เปิดปี 1885) อยู่ติดหลังศาลเจ้า มีสระน้ำ ป่าสน และสวนสัตว์เล็กเข้าฟรี
-• Hikawa Sando: ทางเดินเข้าศาลเจ้ายาวราว 2 กม. ร่มด้วยต้นเคยากิตลอดทาง ว่ากันว่าเป็นทางเข้าศาลเจ้าที่ยาวที่สุดในญี่ปุ่น วันนี้ไม่เดินทั้งเส้นเพื่อเก็บแรงไว้ดูคอนเสิร์ต
 
 จุดพักผ่อนก่อนคอนเสิร์ต (ฟรี ยกเว้นค่าอาหาร)
-• ห้องพักโรงแรม: พักได้ดีที่สุด ส่วนใหญ่เช็กอินได้ 15:00 Hotel Metropolitan Saitama-Shintoshin อยู่ติดสถานี (เดิน 1 นาที) APA Hotel Saitama-Shintoshin Eki-kita เช็กอิน 15:00 เดิน 8 นาที
+• ห้องพักโรงแรม: พัก Almont Inn Nihonbashi (เลือกไว้ก่อน) พักในห้อง 15:00–16:00 ก่อนออกมาสนาม จุดพักใกล้สนามด้านล่างใช้ถ้ามาถึงเร็วหรือรอให้คนซาหลังคอนเสิร์ต
 • Cocoon City: ห้างติดทางออกตะวันออก ร้านกว่า 250 ร้าน ศูนย์อาหาร 2 แห่ง ที่นั่งเยอะ คนหมุนเร็ว แม้วันมีคอนเสิร์ต
 • Keyaki Hiroba: ชั้น 2 เป็นลานกลางแจ้งร่มต้นเคยากิ มีม้านั่ง ติดสนาม ชั้นล่างเป็นร้านอาหาร วันมีคอนเสิร์ตคนจะเยอะ
 • Starbucks สาขา Saitama-Shintoshin Keyaki Hiroba: ใกล้สนาม มีม้านั่งด้านนอก
@@ -410,22 +441,26 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 • GMO ARENA saitama: ชื่อใหม่ของ Saitama Super Arena สนามในร่ม ให้ดูเวลาเปิดประตูบนตั๋ว และเช็กกฎเรื่องขนาดกระเป๋าก่อนไป
 • ตัวเลือกเพิ่ม: ร้าน Shimamura สาขา Saitama-Shintoshin สาขาใหญ่ที่สุดในญี่ปุ่น ชั้น 2 ของ Saitama Shintoshin Fashion Mall ทางออกตะวันออกเดิน 3 นาที เปิด 10:00–19:00 (ข้อมูลปี 2021) แผนหลักของ Shimamura อยู่วันที่ 14`,
     checklist: `ต้องจองล่วงหน้า
-☐ โรงแรมใกล้ Saitama-Shintoshin 1 คืน (12 มิ.ย.) คืนคอนเสิร์ตห้องมักเต็มเร็วและราคาขึ้น ควรจองเป็นอย่างแรก ถามว่าฝากกระเป๋าก่อนเช็กอินได้ไหมและเช็กอินได้กี่โมง แผนนี้ใช้ห้องพักผ่อน 15:15–17:00 (ถึงราว 13:05 ถ้าไปตลาดนัด หรือ 10:47 ถ้าไปตรง)
+☐ Almont Inn Nihonbashi 3 คืน (12–14 มิ.ย. เลือกไว้ก่อน) ห้องเตียงใหญ่ 14 ตร.ม. แบบยกเลิกฟรีรวมอาหารเช้า 7,205 บาทบน Trip.com (เช็ก 23 ต.ค. 2026 ยกเลิกฟรีถึง 10 มิ.ย. 2027 12:00 ราคาคืนเงินไม่ได้ 6,727 บาท) หน้าเว็บบอกว่าฝากกระเป๋าฟรี ถามว่าเช็กอินได้กี่โมง แผนนี้ถึงโรงแรมราว 09:10 และใช้ห้องพักผ่อน 15:00–16:00
 ☐ ตั๋วคอนเสิร์ต Radiohead (เช็กว่าเป็นตั๋วกระดาษหรือตั๋วในมือถือ และต้องแสดงบัตรประจำตัวไหม)
 
 เช็กก่อนไป
 ☐ ตลาดนัด Ohi เปิดวันเสาร์ 12 มิ.ย. 2027 ไหม (ดูตารางของ 東京リサイクル運動市民の会) และเช้าวันนั้นเช็กว่างดเพราะฝนไหม
-☐ Smile Hotel Shonan Fujisawa เช็กเอาต์ภายใน 10:00 (วันนี้ออก 08:12)
-☐ เวลาเปิดประตู (คอนเสิร์ตเริ่ม 18:00) ถ้าเปิดก่อน 17:00 ให้ออกจากห้องเร็วขึ้น
+☐ Smile Hotel Shonan Fujisawa เช็กเอาต์ภายใน 10:00 (วันนี้ออก 08:01)
+☐ เวลาเปิดประตูบนตั๋ว (ข่าวบอกเปิด 15:30 เริ่ม 18:00)
+☐ ประกาศของผู้จัดเรื่องการปล่อยคนออกจากสนามเป็นรอบ
 ☐ กฎขนาดกระเป๋าและของต้องห้ามของสนาม
+☐ บันทึกเส้นทางเดินจากสนามไปสถานี Omiya ใน Google Maps ไว้ก่อน (ทางไม่ค่อยมีจุดสังเกต)
 
 พกไป
-☐ บัตร IC ค่ารถวันนี้ 2,158 เยนต่อคน
+☐ บัตร IC เติมเงินไว้ก่อนเข้าคอนเสิร์ต จะได้ไม่ต้องต่อแถวซื้อตั๋วขากลับ ค่ารถวันนี้ 4,399 เยนต่อคน
 ☐ เงินสดและเหรียญสำหรับตลาดนัด
-☐ ร่มพับ (ช่วงเช้าถึงบ่ายเดินกลางแจ้งเกือบทั้งหมด)
+☐ ร่มพับ (ช่วงเช้าเดินกลางแจ้ง)
+☐ รถเที่ยวสุดท้ายกลับโรงแรม: Saitama-Shintoshin 23:15 (เปลี่ยนเป็น Hibiya Line ที่ Ueno 23:49)
 
 ยังไม่ได้เช็ก
-☐ ตู้ล็อกเกอร์ที่สถานี Ōi-keibajō-mae หรือที่ตลาดนัด (ต้องลากกระเป๋าเดินทางไปด้วย)
+☐ ค่าแท็กซี่จริงจากสถานี Tokyo ไปโรงแรม (ประมาณ 1,200–1,500 เยนต่อคัน)
+☐ เวลาเลิกคอนเสิร์ตจริง (ประมาณจากทัวร์ปี 2025 ว่าเลิกราว 20:05–20:30)
 ☐ เวลาเดินจากสถานี Ōi-keibajō-mae ถึงลานตลาดนัด
 ☐ ค่าเข้าตลาดนัด (คิดว่าฟรี)`,
   },
@@ -434,17 +469,17 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     date: "2027-06-13 (อาทิตย์)",
     short: "13 มิ.ย. อาทิตย์",
     title: "Hakone วันเกิดแฟน",
-    stay: "โตเกียว (ยังไม่ได้เลือกโรงแรม)",
+    stay: "Almont Inn Nihonbashi (คืนที่ 2/3)",
     accent: "amber",
     place: `วันเกิดแฟน เที่ยว Hakone แบบไปเช้าเย็นกลับ
-เช้า: เช็กเอาต์จาก Saitama นั่งรถไฟไป Odawara ฝากกระเป๋าที่ตู้ล็อกเกอร์ ต่อรถบัสขึ้นเขา
+เช้า: นั่งรถไฟจาก Kayabacho ไป Odawara (Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องขนกระเป๋า ต่อรถบัสขึ้นเขา
 สาย: แวะ Owakudani หุบควันภูเขาไฟ (เลือกไว้ก่อน) แล้วนั่ง Hakone Ropeway ลงไป Togendai ริมทะเลสาบ ต่อรถบัสไป Hakone-en
 เที่ยง: Hakone-en Aquarium ริมทะเลสาบ Ashi และกินข้าวเที่ยง
 บ่าย: Hakone Shrine กับโทริอิริมน้ำ
 ราว 15:15–17:35 เวลาว่างที่ Motohakone (รอผู้ใช้หาที่มาลง)
-เย็น: รถบัสกลับ Odawara รับกระเป๋า ไปที่พัก
-พัก: โตเกียว (ยังไม่ได้เลือกโรงแรม)`,
-    howto: `08:05 JR Saitama-Shintoshin → 09:59 Odawara ไม่ต้องเปลี่ยนรถ 1 ชม. 54 นาที
+เย็น: รถบัสกลับ Odawara นั่งรถไฟกลับ Kayabacho ถึง 20:49
+พัก Almont Inn Nihonbashi (คืนที่ 2 จาก 3 เลือกไว้ก่อน)`,
+    howto: `08:13 Tozai Kayabacho → 08:16 Otemachi เปลี่ยนเป็น Chiyoda Line 08:24 → 08:44 Yoyogi-Uehara เปลี่ยนเป็น Odakyu ขบวน 快速急行 08:45 → 10:11 Odawara เปลี่ยนรถ 2 ครั้ง 1 ชม. 58 นาที 1,057 เยน (เผื่อเวลาถึงรถบัส 10:30 อยู่ 19 นาที)
 10:30 รถบัส Izuhakone J03 (大涌谷経由 箱根園行) ทางออกตะวันออก ป้าย 5 → 11:19 Owakudani (รอบสำรอง 10:55 ถึง 11:44)
 11:20–11:50 เดินเที่ยว Owakudani
 11:53 Hakone Ropeway Owakudani → 12:23 Togendai (ผ่าน Ubako ไม่ต้องลง)
@@ -453,6 +488,8 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 14:00 รถบัส Hakone-en → 14:12 Motohakone เดินราว 10 นาทีถึง Hakone Shrine
 15:15–17:35 เวลาว่างที่ Motohakone (ยังไม่ได้ใส่แผน)
 17:43 รถบัส Motohakone → 18:37 Odawara
+18:51 Odakyu ขบวน 快速急行 Odawara → 20:18 Yoyogi-Uehara เปลี่ยนเป็น Chiyoda Line 20:19 → 20:39 Otemachi เปลี่ยนเป็น Tozai 20:47 → 20:49 Kayabacho เปลี่ยนรถ 2 ครั้ง 1,057 เยน
+หมายเหตุ: 24 ต.ค. 2026 เปลี่ยนจาก JR ผ่าน Shimbashi (1,773 เยน 09:47 / 20:31) เป็น Odakyu ถูกกว่าเที่ยวละ 716 เยน นั่งนานขึ้นราว 20 นาทีต่อเที่ยว ทั้งสองแบบไม่เสียค่าเพิ่ม (ไม่ขึ้น Romancecar)
 หมายเหตุ: เวลารถเป็นตารางวันอาทิตย์เดือน ต.ค. 2026 รถบัสขึ้นเขาวันอาทิตย์อาจช้ากว่านี้
 หมายเหตุ: ไม่ขึ้น Komagatake Ropeway (ผู้ใช้ตัดออก 13 ต.ค. 2026) และไม่เดินถนนต้นสนโบราณไป Onshi Hakone Park (ผู้ใช้ตัดออก 18 ต.ค. 2026)
 หมายเหตุ: Owakudani กับกระเช้าเที่ยวเดียวลง Togendai ผู้ใช้เลือกไว้ก่อน 18 ต.ค. 2026 ตัวเลือกที่ไม่ได้เลือกคือกระเช้าไป-กลับ Owakudani ↔ Sounzan 3,000 เยน (10,940 เยนต่อคนทั้งวัน)`,
@@ -469,7 +506,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "Hakone Shrine", url: m("Hakone+Shrine") },
     ],
     costs: [
-      { name: "JR Saitama-Shintoshin → Odawara (ไม่ต้องเปลี่ยนรถ)", type: "ค่าเดินทาง", yen: 2090, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "Kayabacho → Odawara: Tozai ถึง Otemachi, Chiyoda Line ถึง Yoyogi-Uehara แล้ว Odakyu ขบวน 快速急行 (เปลี่ยนรถ 2 ครั้ง ไม่เสียค่าเพิ่ม เดิม JR ผ่าน Shimbashi 1,773)", type: "ค่าเดินทาง", yen: 1057, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันอาทิตย์ 25 ต.ค. 2026)" },
       { name: "รถบัส Izuhakone J03 (ผ่าน Owakudani) สถานี Odawara → Owakudani (เลือกไว้ก่อน แผนสำรองคือนั่งไป Hakone-en ตรง 1,880)", type: "ค่าเดินทาง", yen: 1480, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันอาทิตย์ 18 ต.ค. 2026)" },
       { name: "ลานชมวิว Owakudani (ฟรี)", type: "ค่าเข้า", yen: 0, status: "ประมาณ", source: "ยังไม่ได้ยืนยันว่าเข้าฟรี" },
       { name: "Hakone Ropeway Owakudani → Togendai เที่ยวเดียว ผ่าน Ubako ไม่ต้องเปลี่ยน (เลือกไว้ก่อน ตัวเลือกที่ไม่ได้เลือก: ไป-กลับ Owakudani ↔ Sounzan 3,000)", type: "ค่าเดินทาง", yen: 2000, status: "เช็กแล้ว", source: "hakonenavi.jp, odakyu.jp (ราคาเดียวทั้งสายตั้งแต่ ต.ค. 2025)" },
@@ -477,10 +514,11 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "Hakone-en Aquarium", type: "ค่าเข้า", yen: 1600, status: "เช็กแล้ว", source: "princehotels.co.jp" },
       { name: "รถบัส Izuhakone Hakone-en → Motohakone", type: "ค่าเดินทาง", yen: 460, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
       { name: "รถบัส Izuhakone Motohakone → สถานี Odawara", type: "ค่าเดินทาง", yen: 1510, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "Odawara → Kayabacho: Odakyu ขบวน 快速急行 ถึง Yoyogi-Uehara, Chiyoda Line ถึง Otemachi แล้ว Tozai (เปลี่ยนรถ 2 ครั้ง ไม่เสียค่าเพิ่ม เดิม JR ผ่าน Shimbashi 1,773)", type: "ค่าเดินทาง", yen: 1057, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันอาทิตย์ 25 ต.ค. 2026)" },
       { name: "Hakone Shrine และโทริอิริมน้ำ (ฟรี)", type: "ค่าเข้า", yen: 0, status: "เช็กแล้ว", source: "hakonenavi.jp" },
     ],
-    board: `1. Saitama-Shintoshin: ขึ้น JR ขบวนตรงไป Odawara 08:05 ลง Odawara 09:59 (ยังไม่ได้เช็กชานชาลา)
-2. Odawara: ฝากกระเป๋าที่ตู้ล็อกเกอร์ในสถานี (ยังไม่ได้เช็กขนาดและราคา)
+    board: `1. Kayabacho: ขึ้น Tozai Line ขบวนไป Mitaka 08:13 ลง Otemachi 08:16 เปลี่ยนเป็น Chiyoda Line ขบวน 準急 ไป Seijogakuen-mae 08:24 ลง Yoyogi-Uehara 08:44 เปลี่ยนเป็น Odakyu ขบวน 快速急行 ไป Odawara 08:45 ลง Odawara 10:11 (มีเวลาเปลี่ยนรถ 1 นาที ยังไม่ได้เช็กว่าเป็นชานชาลาฝั่งตรงข้ามไหม ทางเลือก: Hibiya Line 08:13 ลง Hibiya 08:21 ขึ้น Chiyoda Line ขบวนเดียวกัน 08:28)
+2. Odawara: ไม่ต้องฝากกระเป๋า (พัก Almont Inn Nihonbashi 3 คืน) เดินไปทางออกตะวันออก
 3. Odawara ทางออกตะวันออก ป้ายรถบัส 5: ขึ้นรถบัส Izuhakone สาย J03 ไป Hakone-en ผ่าน Owakudani (J03 大涌谷経由 箱根園行) 10:30 ลงป้าย Owakudani (大涌谷) 11:19 (รอบสำรอง 10:55 ถึง 11:44) ต้องเป็นรถบัส Izuhakone ไม่ใช่ Hakone Tozan วันคนเยอะรถอาจไม่ผ่าน Owakudani ถ้าเป็นแบบนั้นให้นั่งไปลงปลายทาง Hakone-en
 4. Owakudani: เดินจากป้ายราว 5 นาทีถึงลานชมวิวและสถานีกระเช้า เที่ยวราว 30 นาที
 5. สถานีกระเช้า Owakudani: ซื้อตั๋วเที่ยวเดียว ขึ้น Hakone Ropeway ไป Togendai (桃源台行) 11:53 ผ่าน Ubako (姥子) 12:08 ไม่ต้องลง ถึง Togendai 12:23 (กระเช้าวิ่งราวนาทีละคัน)
@@ -490,24 +528,24 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 9. Motohakone: เดินราว 10 นาทีถึง Hakone Shrine
 10. 15:15–17:35 เวลาว่างที่ Motohakone (ยังไม่ได้ใส่แผน)
 11. ป้าย Motohakone: ขึ้นรถบัส Izuhakone ไป Odawara 17:43 ลง Odawara 18:37 (รอบถัดไปของ Izuhakone 18:33 ถ้าพลาด รถบัส Hakone Tozan รอบสุดท้ายออก 20:03 จากป้าย Hakone-jinja-iriguchi ใช้บัตร Izuhakone ไม่ได้)
-12. Odawara: รับกระเป๋า แล้วไปที่พักในโตเกียว เช่น Odakyu ไป Shinjuku 18:51 ถึง 20:24 ไม่ต้องเปลี่ยนรถ 901 เยน (ยังไม่ได้ใส่ในค่าใช้จ่าย รอรู้ที่พัก)`,
+12. Odawara: เดินไปชานชาลา Odakyu ขึ้นขบวน 快速急行 ไป Shinjuku 18:51 ลง Yoyogi-Uehara 20:18 เปลี่ยนเป็น Chiyoda Line ไป Ayase 20:19 ลง Otemachi 20:39 ขึ้น Tozai Line ไป Nishi-Funabashi 20:47 ลง Kayabacho 20:49 (ทางเลือก: ลง Chiyoda Line ที่ Hibiya 20:35 ขึ้น Hibiya Line 20:43 ถึง Kayabacho 20:52)`,
     details: `• Hakone-en Aquarium: พิพิธภัณฑ์สัตว์น้ำริมทะเลสาบ Ashi ในบริเวณ Hakone-en มีโซนน้ำเค็ม โซนน้ำจืด และลานแมวน้ำไบคาล เปิด 09:00–16:30 เข้าได้ถึง 16:00 ค่าเข้า 1,600 เยน
 • Hakone Shrine: ศาลเจ้าเก่าแก่ในป่าสนริมทะเลสาบ Ashi จุดถ่ายรูปดังคือโทริอิสีแดงในน้ำ (Heiwa no Torii) คิวถ่ายรูปมักยาว ในเขตศาลเจ้ามี Kuzuryu Shrine สาขาใหม่ให้แวะได้ เข้าฟรี
 • Owakudani (大涌谷): หุบภูเขาไฟที่ยังมีควันกำมะถันพวยขึ้นมา มีลานชมวิวและร้านไข่ดำที่ต้มในบ่อน้ำร้อน เวลาเปิดราว 09:00–16:00 (จากเว็บท่องเที่ยว ยังไม่ได้ยืนยัน) อาจปิดบางส่วนถ้าภูเขาไฟมีความเคลื่อนไหว
 • Hakone Ropeway ช่วง Owakudani → Togendai: กระเช้าไต่ลงจากหุบควันไปริมทะเลสาบ Ashi ราว 30 นาที วันฟ้าเปิดเห็นฟูจิ ราคาเดียวทั้งสาย เที่ยวเดียว 2,000 เยน ไป-กลับ 3,000 เยน หยุดวิ่งเมื่อลมแรงหรือก๊าซภูเขาไฟสูง
 • ตัวเลือกเพิ่ม: Hakone Checkpoint ด่านตรวจสมัยเอโดะที่สร้างขึ้นใหม่ อยู่ติด Onshi Hakone Park ค่าเข้า 500 เยน (ราคาจากเว็บท่องเที่ยว ยังไม่ได้ยืนยัน) ยังไม่อยู่ในแผน`,
     checklist: `ต้องจองล่วงหน้า
-☐ ที่พักคืนวันที่ 13: โตเกียว (ยังไม่ได้เลือกโรงแรม) เช้าวันที่ 14 ต้องขึ้นรถบัสที่ Busta Shinjuku 06:55 พักใกล้ Shinjuku จะสะดวกสุด
-☐ ดินเนอร์วันเกิดแฟน: ยังไม่ได้เลือกร้านและยังไม่ได้จอง ถ้ากินที่โตเกียวจะถึง Shinjuku ราว 20:30
+☐ ที่พักคืนวันที่ 13: Almont Inn Nihonbashi (คืนที่ 2 จาก 3 เลือกไว้ก่อน จองรวมกับคืนวันที่ 12)
+☐ ดินเนอร์วันเกิดแฟน: ยังไม่ได้เลือกร้านและยังไม่ได้จอง ถ้ากินที่โตเกียวจะถึง Kayabacho 20:49
 
 พกไป
-☐ บัตร IC ค่ารถและค่าเข้าวันนี้ 9,710 เยนต่อคน (ยังไม่รวมรถไฟจาก Odawara ไปที่พัก)
+☐ บัตร IC ค่ารถและค่าเข้าวันนี้ 9,734 เยนต่อคน (รวมรถไฟไป-กลับโรงแรมแล้ว)
 ☐ ตั๋วกระเช้า Owakudani → Togendai เที่ยวเดียว 2,000 เยน ซื้อที่สถานีกระเช้า Owakudani
 ☐ ไม่ต้องซื้อบัตร Izuhakone 1Day Bus Free (3,500 เยน) เพราะแผนนี้นั่งรถบัส Izuhakone รวม 3,450 เยน ถูกกว่าบัตร
 ☐ เงินสด และร่มพับ
 
 เวลา
-☐ ออกจาก Saitama-Shintoshin 08:05
+☐ ออกจาก Kayabacho 08:13
 ☐ รถบัส J03 ที่ Odawara 10:30 ป้าย 5 ดูว่าป้ายหน้ารถมีคำว่า 大涌谷経由
 ☐ ขึ้นกระเช้าที่ Owakudani ไม่เกิน 11:53 เพื่อทันรถบัส Odakyu 12:30 ที่ Togendai
 ☐ Hakone-en Aquarium เข้าได้ถึง 16:00
@@ -519,7 +557,6 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 ☐ วันคนเยอะรถบัส J03 อาจไม่ผ่าน Owakudani และกระเช้าหยุดได้ถ้าลมแรง แผนสำรองคือรถบัส J03 จาก Owakudani 12:14 → Hakone-en 12:40
 
 ยังไม่ได้เช็ก
-☐ ตู้ล็อกเกอร์ที่สถานี Odawara
 ☐ คิวถ่ายรูปที่โทริอิริมน้ำ
 ☐ เวลาเปิดของ Owakudani และสถานะภูเขาไฟก่อนวันไป
 ☐ จะใช้ช่วงว่าง 15:15–17:35 ที่ Motohakone ทำอะไร (ร้านแถวนั้น: Bakery & Table Hakone ปิดราว 17:00, La Terrazza Ashinoko)
@@ -530,7 +567,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     date: "2027-06-14 (จันทร์)",
     short: "14 มิ.ย. จันทร์",
     title: "Kawaguchiko ปั่นจักรยาน · Shimamura · Shimokitazawa",
-    stay: "ยังไม่ได้เลือก",
+    stay: "Almont Inn Nihonbashi (คืนที่ 3/3)",
     accent: "emerald",
     place: `Kawaguchiko แบบไปเช้าเย็นกลับ แล้วกลับมาช้อปในโตเกียว (เลือกไว้ก่อน)
 เช้า: รถบัสทางด่วนจาก Busta Shinjuku ถึง Kawaguchiko 08:30
@@ -538,8 +575,9 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 บ่าย: คืนจักรยาน กินเทมปุระร้าน Idaten แล้วนั่งรถบัสกลับ 15:10
 17:30–18:30 Shimamura สาขา Takadanobaba
 ค่ำ: Shimokitazawa เดินร้านเสื้อผ้ามือสองและกินข้าวเย็น
-พัก: ยังไม่ได้เลือก`,
-    howto: `06:55 รถบัสทางด่วน Fujikyu สาย Shinjuku–Fujigoko จาก Busta Shinjuku (ชั้น 4 เหนือทางออกใต้) → 08:30 Kawaguchiko Station ไม่ต้องเปลี่ยนรถ 1 ชม. 35 นาที (อีกรอบ Keio 06:45 ถึง 08:30)
+พัก Almont Inn Nihonbashi (คืนที่ 3 จาก 3 เลือกไว้ก่อน)`,
+    howto: `06:08 Tozai Kayabacho → Kudanshita เปลี่ยนเป็น Toei Shinjuku Line 06:21 → 06:30 Shinjuku เดินไป Busta Shinjuku (เปลี่ยนรถ 1 ครั้ง ยังไม่ได้เช็กเวลาเดินจากชานชาลา Toei Shinjuku Line ถึง Busta)
+06:55 รถบัสทางด่วน Fujikyu สาย Shinjuku–Fujigoko จาก Busta Shinjuku (ชั้น 4 เหนือทางออกใต้) → 08:30 Kawaguchiko Station ไม่ต้องเปลี่ยนรถ 1 ชม. 35 นาที (อีกรอบ Keio 06:45 ถึง 08:30)
 09:00 เช่าจักรยานไฟฟ้าหน้าสถานี (ยังไม่ได้เช็กเวลาเปิดร้าน)
 09:00–14:00 ปั่นรอบทะเลสาบตามคลิป ราว 20 กม. (คลิปใช้ราว 5 ชม. รวมเวลาแวะ)
 14:00 คืนจักรยาน กินเทมปุระ Idaten ใกล้สถานี
@@ -548,11 +586,20 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 17:30–18:30 Shimamura Takadanobaba (เปิดถึง 20:00)
 18:38 JR Yamanote → 18:43 Shinjuku → 18:50 Odakyu → 18:58 Shimokitazawa
 19:00–20:30 Shimokitazawa (หลายร้านปิดราว 20:00) และกินข้าวเย็น
+20:31 Keio Inokashira Shimokitazawa → 20:35 Shibuya เปลี่ยนเป็น Hanzomon Line 20:45 → 21:06 Suitengumae เดินถึงโรงแรม 340 ม.
 ทางเลือกขากลับด้วยรถไฟ: Fujikyu 14:25 Kawaguchiko → Otsuki ต่อ JR Chuo เปลี่ยนเป็น Tozai ที่ Nakano → 16:57 Takadanobaba 2,747 เยน เปลี่ยนรถ 2 ครั้ง
-หมายเหตุ: ค่ารถจากที่พักไป Busta Shinjuku ตอนเช้าและกลับที่พักตอนค่ำยังไม่ได้ใส่ เพราะยังไม่รู้ที่พัก
+หมายเหตุ: พัก Almont Inn Nihonbashi (เลือกไว้ก่อน 23 ต.ค. 2026) ค่ารถไปและกลับที่พักใส่ในค่าใช้จ่ายแล้ว
 หมายเหตุ: ตัด Koenji ออก (ผู้ใช้สั่ง 18 ต.ค. 2026) เวลารถเป็นตารางวันจันทร์เดือน ต.ค. 2026 รถบัสอาจช้าถ้ารถติด`,
-    rain: `ฝน: ปั่นจักรยานไม่สะดวกและมักมองไม่เห็นฟูจิ (โตเกียววันนี้ฝน 3 ใน 5 ปี) ตัวเลือก: เที่ยว Kawaguchiko ด้วยรถบัสวนรอบทะเลสาบแทนจักรยาน (ยังไม่ได้เช็กราคา) หรือไม่ไป Kawaguchiko แล้วเที่ยวแค่ Shimamura กับ Shimokitazawa
-รถบัสขากลับช้า: ข้าม Shimamura ไป Shimokitazawa เลย`,
+    rain: `ตัดสินใจคืนวันที่ 13 จากพยากรณ์ฝนที่ Fujikawaguchiko (โตเกียววันนี้ฝน 3 ใน 5 ปี) ตอนจองรถบัสทางด่วนให้ดูเงื่อนไขยกเลิกด้วย (ยังไม่ได้เช็กค่ายกเลิก ตั้งแต่ ต.ค. 2026 รถบัส Fujikyu จองผ่าน FUJIYAMA CONNECT)
+ฝนปรอยหรือเมฆมาก: ไป Kawaguchiko ตามแผนแต่ไม่เช่าจักรยาน ใช้รถบัสวนรอบทะเลสาบสาย Red Line แทน (ราว 4 เที่ยวต่อชั่วโมง ค่ารถยังไม่ได้เช็ก) แวะ Oishi Park กับร้านและพิพิธภัณฑ์ริมทะเลสาบฝั่งเหนือ ฟูจิมักมองไม่เห็น
+ฝนทั้งวัน: ไม่ไป Kawaguchiko เที่ยวโตเกียวฝั่งตะวันตกแทน ตื่นสายได้ ทุกช่วงไม่ต้องเปลี่ยนรถ
+• 10:34 Tozai Kayabacho → 10:52 Takadanobaba (209 เยน) Shimamura เปิด 10:00 ช้อปราว 1 ชม.
+• 12:13 Tozai ขบวนไป Mitaka → 12:31 Kichijoji (367 เยน) ข้าวเที่ยง เดินถนน Sun Road ที่มีหลังคา Harmonica Yokocho และร้านมือสองแถวสถานี
+• ราว 15:04 Keio Inokashira ขบวนด่วน Kichijoji → 15:16 Shimokitazawa (209 เยน) ร้านเสื้อผ้ามือสองถึงราว 20:00 กินข้าวเย็น
+• กลับเหมือนเดิม Shimokitazawa 20:31 → Suitengumae 21:06 (349 เยน) หรือกลับเร็วกว่านั้นก็ได้
+ค่ารถแบบฝนทั้งวัน 1,134 เยนต่อคน ถูกกว่าแผน Kawaguchiko (8,512 เยน) ราว 7,400 เยน
+รถบัสขากลับช้า (วันปกติ): ข้าม Shimamura ไป Shimokitazawa เลย
+หมายเหตุ: เวลารถเป็นตารางวันจันทร์เดือน ต.ค. 2026`,
     rainStat: "ฝน 3/5",
     maps: [
       { name: "Kawaguchiko Station", url: placeUrl("Kawaguchiko Station") },
@@ -565,13 +612,16 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "Shimokitazawa", url: m("Shimokitazawa+Station") },
     ],
     costs: [
+      { name: "Kayabacho → Shinjuku (ไป Busta Shinjuku): Tozai ถึง Kudanshita แล้ว Toei Shinjuku Line", type: "ค่าเดินทาง", yen: 286, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันจันทร์ 26 ต.ค. 2026)" },
       { name: "Busta Shinjuku → Kawaguchiko: รถบัสทางด่วน Fujikyu สาย Shinjuku–Fujigoko (ไม่ต้องเปลี่ยนรถ)", type: "ค่าเดินทาง", yen: 2200, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันจันทร์ 19 ต.ค. 2026)" },
       { name: "เช่าจักรยานไฟฟ้า 1 วัน ที่หน้าสถานี Kawaguchiko", type: "ค่าเดินทาง", yen: 3000, status: "ประมาณ", source: "บล็อก banzokubiology.com (ร้าน Fuji Kanko Travel ข้อมูลอาจเก่า) คลิป TikTok @pangrmttt พูดถึง 2,600 เยน ยังไม่ได้ยืนยันกับร้าน" },
       { name: "Kawaguchiko → Takadanobaba: รถบัสทางด่วน Fujikyu ถึง Busta Shinjuku 2,200 + JR Yamanote 155", type: "ค่าเดินทาง", yen: 2355, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันจันทร์ 19 ต.ค. 2026)" },
       { name: "Takadanobaba → Shimokitazawa: JR Yamanote ถึง Shinjuku 155 + Odakyu 167", type: "ค่าเดินทาง", yen: 322, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันจันทร์ 19 ต.ค. 2026)" },
+      { name: "Shimokitazawa → Suitengumae: Keio Inokashira ถึง Shibuya แล้ว Hanzomon Line", type: "ค่าเดินทาง", yen: 349, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันจันทร์ 26 ต.ค. 2026)" },
       { name: "จุดชมวิวและสวนรอบทะเลสาบ Kawaguchiko, Shimamura และ Shimokitazawa (ฟรี)", type: "ค่าเข้า", yen: 0, status: "ประมาณ", source: "ยังไม่ได้ยืนยันว่าสวนริมทะเลสาบทุกแห่งเข้าฟรี" },
     ],
-    board: `1. Busta Shinjuku: ชั้น 4 เหนือทางออกใต้ของสถานี Shinjuku ขึ้นรถบัส Fujikyu สาย Shinjuku–Fujigoko 06:55 (ต้องจองที่นั่ง) ลงป้าย Kawaguchiko Station 08:30 (จอด Fujikyu Highland 08:25 ก่อน)
+    board: `เช้า Kayabacho: ขึ้น Tozai Line ขบวนไป Mitaka 06:08 ลง Kudanshita 06:15 เปลี่ยนเป็น Toei Shinjuku Line ขบวนไป Hashimoto 06:21 ลง Shinjuku 06:30 เดินไป Busta Shinjuku
+1. Busta Shinjuku: ชั้น 4 เหนือทางออกใต้ของสถานี Shinjuku ขึ้นรถบัส Fujikyu สาย Shinjuku–Fujigoko 06:55 (ต้องจองที่นั่ง) ลงป้าย Kawaguchiko Station 08:30 (จอด Fujikyu Highland 08:25 ก่อน)
 2. Kawaguchiko Station: เช่าจักรยานไฟฟ้า 1 วัน ร้านในคลิปอยู่ทางซ้ายเมื่อออกจากสถานี
 3. ปั่นตามลำดับในคลิป: Lawson หน้าสถานี → ข้ามสะพาน Kawaguchiko Ohashi ไปฝั่งเหนือ → สวนริมทะเลสาบ → Nagasaki Park → Oishi Park → อ้อมไปอีกฝั่ง → Yagisaki Park → ปั่นกลับสถานี
 4. คืนจักรยาน แล้วกินเทมปุระ Idaten (ยังไม่ได้เช็กที่ตั้งและเวลาเปิด)
@@ -580,7 +630,7 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 7. Takadanobaba: ทางออก Toyama (戸山口) ของสถานี Seibu เดิน 1 นาทีถึง Shimamura
 8. Takadanobaba ชานชาลา 2: ขึ้น JR Yamanote ไปทาง Shinjuku 18:38 ลง Shinjuku 18:43 ชานชาลา 5 ขึ้น Odakyu ขบวน Rapid Express ไป Fujisawa 18:50 ลง Shimokitazawa 18:58 (รอบก่อนหน้า ออก 18:30 ถึง 18:51)
 9. Shimokitazawa: เดินรอบสถานี ร้านอยู่ทั้งฝั่งเหนือและใต้ และตามทางเดินบนแนวทางรถไฟเก่า
-10. ค่ำ: กลับที่พัก (ยังไม่ได้เลือก)`,
+10. Shimokitazawa: ขึ้น Keio Inokashira Line ขบวน Express ไป Shibuya 20:31 ลง Shibuya 20:35 เปลี่ยนเป็น Hanzomon Line ขบวนไป Oshiage 20:45 ลง Suitengumae 21:06 เดินกลับโรงแรม 340 ม.`,
     details: `Kawaguchiko (จากคลิป TikTok @pangrmttt ปั่นจักรยานรอบทะเลสาบราว 20 กม.)
 • เช่าจักรยาน: คลิปแนะนำจักรยานไฟฟ้าแบบเหมาวัน เพราะทางขึ้นเนินเยอะ ร้าน Fuji Kanko Travel หน้าสถานี จักรยานไฟฟ้า 1 วัน 3,000 เยน จักรยานธรรมดา 2,500 เยน จองล่วงหน้าไม่ได้ (บล็อก banzokubiology ข้อมูลอาจเก่า) คลิปพูดถึงราคา 2,600 เยน
 • Lawson หน้าสถานี Kawaguchiko: จุดถ่ายรูปฟูจิอยู่เหนือหลังคาร้านสะดวกซื้อ คิวยาว คลิปถ่ายจากอีกฝั่งแทน
@@ -599,16 +649,16 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 • Shimokitazawa: ย่านเสื้อผ้ามือสองที่ใหญ่ที่สุด มีทั้งร้านใหญ่ราคาถูกและร้าน vintage เล็กในซอย คาเฟ่เยอะ ร้านที่เจอ: 古着屋ジャム (11:00–20:00 ไม่มีวันหยุด ข้อมูลปี 2023), signal (12:00–20:00), NOTIME (เปิด 24 ชม. มีพนักงาน 12:00–21:00) ร้านเล็กมีวันปิดไม่ตรงกัน`,
     checklist: `ต้องจองล่วงหน้า
 ☐ ที่นั่งรถบัสทางด่วน Fujikyu ไป-กลับ (Busta Shinjuku 06:55 และ Kawaguchiko 15:10) ยังไม่ได้เช็กว่าเปิดจองกี่วันก่อนเดินทาง
-☐ ที่พักคืนวันที่ 13 และ 14 ในโตเกียว ถ้าใกล้ Shinjuku จะไปขึ้นรถบัส 06:55 ได้ง่าย
+☐ ที่พักคืนวันที่ 14: Almont Inn Nihonbashi (คืนที่ 3 จาก 3 เลือกไว้ก่อน)
 
 พกไป
-☐ บัตร IC และเงินสด ค่ารถและค่าเช่าจักรยานวันนี้ 7,877 เยนต่อคน (ไม่รวมค่ารถจากและกลับที่พัก)
-☐ พาสปอร์ต ใช้ทำ tax-free
+☐ บัตร IC และเงินสด ค่ารถและค่าเช่าจักรยานวันนี้ 8,512 เยนต่อคน (รวมค่ารถไป-กลับโรงแรมแล้ว)
+☐ พาสปอร์ต ใช้ซื้อของแบบขอคืนภาษี (ระบบใหม่: จ่ายรวมภาษีแล้วขอคืนที่สนามบินวันที่ 15)
 ☐ ครีมกันแดด หมวก เสื้อกันลม (คลิปบอกลมแรงบนสะพาน)
 ☐ ร่มพับ และถุงผ้าใส่ของที่ซื้อ
 
 เวลา
-☐ ถึง Busta Shinjuku ก่อน 06:45
+☐ ออกจาก Kayabacho 06:08 ถึง Busta Shinjuku ก่อน 06:45
 ☐ คืนจักรยานราว 14:00 ขึ้นรถบัสกลับ 15:10
 ☐ Shimamura ปิด 20:00 ร้านใน Shimokitazawa ส่วนใหญ่ปิดราว 20:00
 
@@ -626,39 +676,56 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     title: "ของฝาก · บินกลับ",
     stay: "กลับถึงกรุงเทพ 21:55",
     accent: "slate",
-    place: `เช้า: ช้อปของฝากสั้นๆ แล้วเช็กเอาต์
+    place: `เช้า: ช้อปของฝากแถว Nihonbashi / Ningyocho แล้วเช็กเอาต์
 บ่าย: ไป Narita กลับกรุงเทพ TG677 NRT T1 17:25 → BKK 21:55`,
-    howto: `13:09 JR Yamanote Ikebukuro → Nippori ต่อ Keisei Main Line เปลี่ยนรถที่ Keisei-Sakura → 14:45 สนามบิน (ราว 1 ชม. 40 นาที)
+    howto: `เช้า: ซื้อของฝากแถว Nihonbashi / Ningyocho เช็กเอาต์ ฝากกระเป๋าที่โรงแรม (หน้าเว็บบอกว่าฝากฟรี)
+12:50 รับกระเป๋า เดินไปสถานี Ningyocho (Toei Asakusa Line) ราว 10 นาที (จากรีวิว ยังไม่ได้เช็ก)
+13:07 Toei Asakusa Line ขบวน 快速 成田空港行 จาก Ningyocho วิ่งต่อเข้า Keisei Main Line → 14:45 Airport Terminal 2 นั่งต่อ 1 สถานีถึง Narita Airport (Terminal 1) ไม่ต้องเปลี่ยนรถ ไม่เสียค่าเพิ่ม
+รอบสำรอง: Ningyocho 13:22 → Keisei-Takasago 13:44 เปลี่ยนเป็น Keisei Main Line 快速特急 13:45 → Keisei-Sakura 14:20 ต่อรถ 14:23 → Airport Terminal 2 14:45 (เปลี่ยนรถ 2 ครั้ง ถึงเวลาเดียวกัน)
 ควรถึง Narita ราว 15:00
-หมายเหตุ: ยังเป็นแผนเก่าที่ออกจาก Ikebukuro ต้องแก้เมื่อรู้ที่พักคืนวันที่ 14`,
+หมายเหตุ: ไม่ขึ้น Skyliner, Access Express หรือ エアポート快特 (วิ่งสาย Narita Sky Access) เวลารถเป็นตารางวันอังคารเดือน ต.ค. 2026 ยังไม่ได้เช็กว่าขบวนตรงแบบ 13:07 มีทุกชั่วโมงไหม`,
     rain: "-",
     rainStat: "ฝน 4/5",
     maps: [],
     costs: [
-      { name: "Ikebukuro → Narita: JR Yamanote 209 + Keisei Main Line 1,052", type: "ค่าเดินทาง", yen: 1261, status: "เช็กแล้ว", source: "transit.yahoo.co.jp" },
+      { name: "Ningyocho → Narita Airport: Toei Asakusa Line ขบวน 快速 成田空港行 วิ่งต่อเข้า Keisei Main Line ไม่ต้องเปลี่ยนรถ (ไม่เสียค่าเพิ่ม)", type: "ค่าเดินทาง", yen: 1219, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันอังคาร 27 ต.ค. 2026)" },
     ],
-    board: `1. Ikebukuro ชานชาลา 7: ขึ้น JR Yamanote 13:09 ลง Nippori 13:22
-2. Nippori ชานชาลา 2: ขึ้น Keisei Main Line ไป Keisei-Narita 13:30 ลง Keisei-Sakura 14:20 (ไม่ใช่ Skyliner และไม่ใช่ Access Express)
-3. Keisei-Sakura: ต่อรถไป Narita Airport 14:23 ผ่าน Airport Terminal 2 14:45 อย่าลง นั่งต่ออีก 1 สถานีถึงปลายสาย Narita Airport ซึ่งคือ Terminal 1 ที่ TG677 ออก`,
-    details: `ของฝากรอบสถานี Ikebukuro ไม่ต้องเดินทางไกล
-• ชั้นใต้ดินห้าง Seibu และ Tobu (depachika): ขนมกล่องของฝากและเบนโตะ ติดกับสถานี
-• Sunshine City: ห้างใหญ่ฝั่งตะวันออก เดินจากสถานีราว 10 นาที มีร้านขนม ร้านคาแรกเตอร์ และร้านของใช้
-• Don Quijote และร้านขายยารอบสถานี: ขนม เครื่องสำอาง ของใช้ ราคาถูก ทำ tax-free ได้เมื่อแสดงพาสปอร์ต`,
+    board: `1. Almont Inn Nihonbashi: เช็กเอาต์ ฝากกระเป๋า ไปซื้อของฝาก แล้วกลับมารับกระเป๋าราว 12:50
+2. เดินไปสถานี Ningyocho ชานชาลาของ Toei Asakusa Line (คนละชานชาลากับ Hibiya Line) ขึ้นขบวน 快速 成田空港行 13:07 ดูป้ายปลายทางต้องเป็น 成田空港 และไม่ใช่ アクセス特急 หรือ エアポート快特
+3. นั่งไม่ต้องเปลี่ยนรถ รถวิ่งต่อเข้า Keisei Main Line ผ่าน Airport Terminal 2 14:45 อย่าลง นั่งต่ออีก 1 สถานีถึงปลายสาย Narita Airport ซึ่งคือ Terminal 1 ที่ TG677 ออก
+4. ถ้าพลาดขบวน 13:07: ขึ้น Toei Asakusa Line 13:22 ลง Keisei-Takasago 13:44 เปลี่ยนเป็น Keisei Main Line 快速特急 ไป Keisei-Narita 13:45 ลง Keisei-Sakura 14:20 ต่อขบวนไป Narita Airport 14:23`,
+    details: `ของฝากแถวโรงแรม เดินได้ (ยังไม่ได้เช็กเวลาเปิดของแต่ละร้าน และระยะเดิน)
+• ห้าง Nihonbashi Mitsukoshi: ห้างเก่าแก่ของญี่ปุ่น ชั้นใต้ดิน (depachika) ขนมกล่องของฝาก ห่างโรงแรมราว 760 ม. (จาก Trip.com)
+• COREDO Muromachi: ห้างข้าง Mitsukoshi ร้านขนมและของใช้ญี่ปุ่น
+• Takashimaya Nihonbashi: ห้างใหญ่ ชั้นใต้ดินมีของฝาก
+• Ningyocho Amazake Yokocho: ถนนร้านเก่าใกล้สถานี Ningyocho ขนมญี่ปุ่นและของทำมือ อยู่ทางเดียวกับสถานีที่จะขึ้นไปสนามบิน
+• ร้านขายยาแถวสถานี Suitengumae (Matsumoto Kiyoshi ห่างโรงแรมราว 330 ม. จาก Trip.com)
+ถ้าอยากได้ Ameyoko หรือ Don Quijote แบบที่ Ueno นั่ง Hibiya Line จาก Kayabacho ไป Ueno ราว 10 นาที แต่ต้องกลับมารับกระเป๋าก่อน 12:50`,
     checklist: `ถามโรงแรมไว้ก่อน
-☐ เวลาเช็กเอาต์
-☐ ฝากกระเป๋าหลังเช็กเอาต์ได้ไหม ระหว่างไปซื้อของฝาก
+☐ เวลาเช็กเอาต์ของ Almont Inn Nihonbashi
+☐ ฝากกระเป๋าหลังเช็กเอาต์ถึงราว 12:50 (หน้าเว็บบอกว่าฝากฟรี)
 
 พกไป
-☐ พาสปอร์ต ใช้ทำ tax-free ตอนซื้อของฝากและเช็กอินที่สนามบิน
-☐ เงินในบัตร IC หรือเงินสด 1,261 เยนต่อคนสำหรับไป Narita
+☐ พาสปอร์ต ใช้ซื้อของแบบขอคืนภาษีและเช็กอินที่สนามบิน
+
+คืนภาษี (ระบบใหม่ตั้งแต่ 1 พ.ย. 2026)
+☐ ร้านเก็บเงินรวมภาษีตอนซื้อ แล้วคืนเงินหลังสแกนพาสปอร์ตที่เครื่องของศุลกากรในสนามบินตอนออกนอกประเทศ (ภายใน 90 วันหลังซื้อ)
+☐ ของกินหรือเครื่องสำอางที่แกะใช้ในญี่ปุ่นแล้วขอคืนไม่ได้
+☐ ศุลกากรอาจขอดูของ ถ้าจะใส่ของที่ขอคืนภาษีไว้ในกระเป๋าโหลด ให้ถามเคาน์เตอร์ก่อนโหลด (ยังไม่ได้เช็กขั้นตอนที่ Narita T1)
+☐ เงินในบัตร IC หรือเงินสด 1,219 เยนต่อคนสำหรับไป Narita
 ☐ เผื่อที่ว่างและน้ำหนักกระเป๋าโหลดสำหรับของฝาก (คนละ 1 ใบ)
 
 เวลา
-☐ ออกจาก Ikebukuro 13:09 ชานชาลา 7 ถึง Narita 14:45 เครื่องออก 17:25
-☐ ขึ้น Keisei Main Line เท่านั้น ไม่ขึ้น Skyliner หรือ Access Express
+☐ ออกจาก Ningyocho 13:07 ถึง Narita ราว 14:50 เครื่องออก 17:25
+☐ ขึ้นขบวนที่วิ่ง Keisei Main Line เท่านั้น ไม่ขึ้น Skyliner, Access Express หรือ エアポート快特
 
 ระวัง
-☐ TG677 ออกจาก Narita Terminal 1 ลงสถานีปลายสาย Narita Airport อย่าลงที่ Airport Terminal 2`,
+☐ ที่ Ningyocho ต้องขึ้น Toei Asakusa Line ไม่ใช่ Hibiya Line
+☐ TG677 ออกจาก Narita Terminal 1 ลงสถานีปลายสาย Narita Airport อย่าลงที่ Airport Terminal 2
+
+ยังไม่ได้เช็ก
+☐ ระยะเดินจากโรงแรมไปชานชาลา Toei Asakusa Line ที่ Ningyocho และลิฟต์สำหรับกระเป๋าใหญ่
+☐ ขบวนตรงแบบ 13:07 มีทุกชั่วโมงไหม`,
   },
 ];
 

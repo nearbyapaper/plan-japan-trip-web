@@ -3,12 +3,12 @@ import { placeUrl } from "./maps";
 import { photos, type Photo } from "./minimap-photos";
 
 // แผนที่ย่อรายวัน: หมุดเรียงตามลำดับในไทม์ไลน์ เชื่อมด้วยเส้นตรง (ไม่ใช่แนวรางหรือถนนจริง)
-// พิกัดจาก OpenStreetMap (Nominatim) ดึงเมื่อ 18 ต.ค. 2026
+// พิกัดจาก OpenStreetMap (Nominatim) ดึงเมื่อ 18 ต.ค. 2026 หมุดย่านโตเกียววันที่ 12–14 ดึงเพิ่ม 23 ต.ค. 2026
 // จุดที่ OpenStreetMap ไม่มีพิกัด (Smile Hotel, Cafe Yoridokoro, KANNON COFFEE, ร้านย่าน Morito) ไม่ได้ปักแยก
 // แต่เขียนไว้ในรายละเอียดของหมุดที่อยู่ใกล้ที่สุดแทน
 
 export type PinKind = "station" | "spot" | "food" | "hotel";
-export type LegMode = "transit" | "bus" | "walking" | "bike" | "ropeway";
+export type LegMode = "transit" | "bus" | "walking" | "bike" | "ropeway" | "taxi";
 
 type PinDef = {
   name: string;
@@ -29,6 +29,7 @@ const pins = {
   shichirigahama: { name: "หาด Shichirigahama", lat: 35.306, lng: 139.5108, kind: "spot", desc: "หาดทรายสีดำยาวเลียบทางรถไฟ Enoden มองเห็นเกาะ Enoshima วันฟ้าเปิดเห็นฟูจิไกลๆ ขึ้น Enoden ต่อที่สถานี Shichirigahama 12:42", q: "Shichirigahama Beach" },
   inamuragasaki: { name: "Inamuragasaki · Cafe Yoridokoro", lat: 35.30436, lng: 139.5219, kind: "food", desc: "Cafe Yoridokoro อยู่ห่างสถานี 3–5 นาที ร้านในบ้านไม้เก่าข้างทางข้ามรถไฟ นั่งริมหน้าต่างเห็น Enoden วิ่งผ่าน ขึ้นชื่อชุดปลาตากแห้งย่าง เปิด 07:00–18:00 ปิดวันอังคาร คิวยาว หมุดนี้ปักที่สถานี Inamuragasaki", q: "ヨリドコロ 稲村ヶ崎" },
   hase: { name: "สถานี Hase", lat: 35.3115, lng: 139.53563, kind: "station", desc: "14:47 ถึง ขากลับขึ้น Enoden ไป Fujisawa 17:35 (ขึ้นฝั่งตรงข้ามกับขบวนไป Kamakura)", q: "Hase Station Kanagawa" },
+  goryo: { name: "ศาลเจ้า Goryo", lat: 35.31099, lng: 139.53279, kind: "spot", desc: "ศาลเจ้าเล็กห่างสถานี Hase ราว 300 ม. ทางข้ามรถไฟหน้าโทริอิเป็นจุดถ่ายรูป Enoden กับดอกไฮเดรนเยีย (ปกติบานต้นถึงกลาง มิ.ย.) มีโพสต์บอกว่าห้ามถ่ายรูปในบริเวณศาลเจ้า", q: "御霊神社 鎌倉" },
   kotokuin: { name: "พระใหญ่ Kotoku-in · KANNON COFFEE", lat: 35.3165, lng: 139.53573, kind: "spot", desc: "พระพุทธรูปสำริดสูงราว 11.3 เมตร นั่งกลางแจ้ง ค่าเข้า 300 เยน เปิดถึง 17:30 เดินถนนคนเดินจากสถานี Hase 7 นาที KANNON COFFEE (เครปและคุกกี้รูปพระใหญ่) อยู่แถวนี้", q: "Kotoku-in Great Buddha" },
 
   // วันที่ 11
@@ -41,21 +42,22 @@ const pins = {
   moritoBeach: { name: "หาด Morito และร้านย่าน Morito", lat: 35.27391, lng: 139.57208, kind: "food", desc: "ข้ามสะพานแดงหลังศาลเจ้าไปหาด Morito จุดชมฟูจิข้ามอ่าว เดินต่อไปทางเหนือ: Asahiya (คร็อกเกต์เนื้อ), Misaki Donuts, SOSO HAYAMA, Genbe, หาด Suwa ร้านเหล่านี้ไม่ได้ปักหมุดแยกเพราะไม่มีพิกัดใน OpenStreetMap", q: "Morito Beach Hayama" },
   hayamaMarina: { name: "Hayama Marina · ป้ายรถบัส Abuzuri", lat: 35.28272, lng: 139.56898, kind: "spot", desc: "ท่าเรือยอชต์ต้นกำเนิดกีฬาเรือใบของญี่ปุ่น มีร้านอาหารและร้านพุดดิ้ง Marlowe ขากลับขึ้นรถบัสที่ป้าย Abuzuri (鐙摺) ใกล้ๆ ไปสถานี Zushi", q: "Hayama Marina" },
 
-  // วันที่ 12
-  yokohama: { name: "Yokohama (เปลี่ยนรถ)", lat: 35.46601, lng: 139.62264, kind: "station", desc: "เปลี่ยนจาก JR Tokaido เป็น Keikyu Main Line รถด่วน", q: "Yokohama Station" },
-  tenkubashi: { name: "Tenkubashi (เปลี่ยนรถ)", lat: 35.54833, lng: 139.75434, kind: "station", desc: "เปลี่ยนจาก Keikyu เป็น Tokyo Monorail", q: "Tenkubashi Station" },
-  oiKeibajo: { name: "สถานี Ōi-keibajō-mae", lat: 35.59513, lng: 139.74706, kind: "station", desc: "09:23 ถึง ขาออกขึ้น Tokyo Monorail 12:03 ไป Hamamatsucho", q: "Oi Keibajo Mae Station" },
-  ohiRacecourse: { name: "ตลาดนัด Tokyo City Flea Market (สนามแข่งม้า Ohi)", lat: 35.59231, lng: 139.7434, kind: "spot", desc: "ตลาดนัดของมือสองในลานจอดรถที่ 1 เปิดเสาร์อาทิตย์ 09:00–15:00 งดถ้าฝนตก ลากกระเป๋าไปด้วย (ยังไม่ได้เช็กตู้ล็อกเกอร์)", q: "Ohi Racecourse Flea Market 2-1-2 Katsushima Shinagawa" },
-  hamamatsucho: { name: "Hamamatsucho (เปลี่ยนรถ)", lat: 35.65511, lng: 139.75706, kind: "station", desc: "เปลี่ยนจาก Tokyo Monorail เป็น JR Keihin-Tohoku Rapid ไป Saitama-Shintoshin", q: "Hamamatsucho Station" },
-  saitamaShintoshin: { name: "Saitama-Shintoshin · โรงแรมคืนคอนเสิร์ต", lat: 35.89364, lng: 139.63395, kind: "hotel", desc: "13:05 ถึง ฝากกระเป๋าที่โรงแรม (ยังไม่ได้เลือก ตัวเลือกที่เจอ: Hotel Metropolitan ติดสถานี, APA Hotel Eki-kita) เช็กอิน 15:00 พักในห้องถึงราว 17:00", q: "Saitama-Shintoshin Station" },
-  cocoon: { name: "Cocoon City", lat: 35.89567, lng: 139.63498, kind: "food", desc: "ห้างติดทางออกตะวันออก ร้านกว่า 250 ร้าน ศูนย์อาหาร 2 แห่ง ข้าวเที่ยงวันนี้", q: "Cocoon City Saitama-Shintoshin" },
-  omiya: { name: "สถานี Omiya", lat: 35.90638, lng: 139.62433, kind: "station", desc: "ถ้ายังมีแรง: JR 1 สถานีจาก Saitama-Shintoshin 3 นาที ทางออกตะวันออกเดินราว 15 นาทีถึงศาลเจ้า", q: "Omiya Station Saitama" },
-  hikawa: { name: "ศาลเจ้า Musashi Ichinomiya Hikawa", lat: 35.91677, lng: 139.62977, kind: "spot", desc: "ศาลเจ้าหลักของศาลเจ้า Hikawa ราว 280 แห่งทั่วคันโต ประตู romon สีแดง สะพานข้ามสระ ป่าต้นไม้ใหญ่ เข้าฟรี", q: "Musashi Ichinomiya Hikawa Shrine" },
-  omiyaPark: { name: "Omiya Park", lat: 35.91903, lng: 139.63181, kind: "spot", desc: "สวนของจังหวัดที่เก่าที่สุดใน Saitama อยู่ติดหลังศาลเจ้า สระน้ำ ป่าสน สวนสัตว์เล็กเข้าฟรี", q: "Omiya Park Saitama" },
-  arena: { name: "GMO ARENA saitama · Radiohead", lat: 35.89512, lng: 139.63075, kind: "spot", desc: "คอนเสิร์ต Radiohead 18:00 ชื่อเดิม Saitama Super Arena เดินจากสถานีและโรงแรม 3 นาที ดูเวลาเปิดประตูบนตั๋ว", q: "Saitama Super Arena" },
+  // วันที่ 12 (พัก Almont Inn Nihonbashi 12–14 มิ.ย. เลือกไว้ก่อน 23 ต.ค. 2026)
+  tokyoSt: { name: "สถานี Tokyo", lat: 35.68107, lng: 139.765, kind: "station", desc: "08:50 ถึงด้วย JR ตรงจาก Fujisawa ออกฝั่ง Yaesu ขึ้นแท็กซี่ไปโรงแรมราว 2.5 กม. (ค่าประมาณ 1,200–1,500 เยนต่อคัน)", q: "Tokyo Station Yaesu" },
+  hotelTokyo: { name: "Almont Inn Nihonbashi (ที่พัก 3 คืน)", lat: 35.68268, lng: 139.78072, kind: "hotel", desc: "เลือกไว้ก่อน ห้องเตียงใหญ่ 14 ตร.ม. ฝากกระเป๋าฟรี สถานีใกล้: Suitengumae 340 ม. Kayabacho 350 ม. Ningyocho ราว 10 นาที หมุดนี้ปักกลางย่าน Nihonbashi Koami-cho เพราะ OpenStreetMap ไม่มีพิกัดโรงแรม", q: "Almont Inn Tokyo Nihonbashi" },
+  kayabacho: { name: "สถานี Kayabacho", lat: 35.68072, lng: 139.77792, kind: "station", desc: "สถานีหลักของวันที่ 12–14 (Tozai Line และ Hibiya Line) เดินจากโรงแรมราว 5 นาที", q: "Kayabacho Station" },
+  shimbashi: { name: "Shimbashi (เปลี่ยนรถ)", lat: 35.66607, lng: 139.75968, kind: "station", desc: "เปลี่ยนจาก Ginza Line เป็น JR ไป Hamamatsucho (วันที่ 12)", q: "Shimbashi Station" },
+  oiKeibajo: { name: "สถานี Ōi-keibajō-mae", lat: 35.59513, lng: 139.74706, kind: "station", desc: "10:03 ถึง ขาออกขึ้น Tokyo Monorail 12:03 ไป Hamamatsucho", q: "Oi Keibajo Mae Station" },
+  ohiRacecourse: { name: "ตลาดนัด Tokyo City Flea Market (สนามแข่งม้า Ohi)", lat: 35.59231, lng: 139.7434, kind: "spot", desc: "ตลาดนัดของมือสองในลานจอดรถที่ 1 เปิดเสาร์อาทิตย์ 09:00–15:00 งดถ้าฝนตก ฝากกระเป๋าไว้ที่โรงแรมแล้ว ไม่ต้องลากมา", q: "Ohi Racecourse Flea Market 2-1-2 Katsushima Shinagawa" },
+  hamamatsucho: { name: "Hamamatsucho (เปลี่ยนรถ)", lat: 35.65511, lng: 139.75706, kind: "station", desc: "ขาไป: JR → Tokyo Monorail 09:55 ขากลับ: ลง Monorail เดินไปสถานี Daimon ขึ้น Toei Asakusa Line 12:27", q: "Hamamatsucho Station" },
+  ueno: { name: "Ueno (เปลี่ยนรถ)", lat: 35.71196, lng: 139.77772, kind: "station", desc: "เปลี่ยนระหว่าง Hibiya Line กับ JR ขาไป JR Takasaki Line 16:32 ชานชาลา 14 ขากลับ Hibiya Line เที่ยวสุดท้าย 23:49", q: "Ueno Station" },
+  saitamaShintoshin: { name: "สถานี Saitama-Shintoshin", lat: 35.89364, lng: 139.63395, kind: "station", desc: "16:54 ถึงจาก Ueno ทางออกตะวันตกเดินไปสนาม 3 นาที รถเที่ยวสุดท้ายกลับโรงแรม 23:15", q: "Saitama-Shintoshin Station" },
+  cocoon: { name: "Cocoon City", lat: 35.89567, lng: 139.63498, kind: "food", desc: "ห้างติดทางออกตะวันออก ร้านกว่า 250 ร้าน ศูนย์อาหาร 2 แห่ง นั่งรอให้คนซาหลังคอนเสิร์ตได้", q: "Cocoon City Saitama-Shintoshin" },
+  omiya: { name: "สถานี Omiya", lat: 35.90638, lng: 139.62433, kind: "station", desc: "หลังคอนเสิร์ต: เดินจากประตู W1 ราว 20 นาที ขึ้น JR ไป Ueno แล้วเปลี่ยนเป็น Hibiya Line ไป Kayabacho เช่น 20:58 ถึง 21:43 เลี่ยงคนแน่นที่ Saitama-Shintoshin", q: "Omiya Station Saitama" },
+  arena: { name: "GMO ARENA saitama · Radiohead", lat: 35.89512, lng: 139.63075, kind: "spot", desc: "คอนเสิร์ต Radiohead 18:00 ชื่อเดิม Saitama Super Arena เดินจากสถานี 3 นาที เปิดประตู 15:30 เลิกราว 20:05–20:30 (ค่าประมาณ)", q: "Saitama Super Arena" },
 
   // วันที่ 13
-  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "09:59 ถึงจาก Saitama-Shintoshin ฝากกระเป๋าที่ตู้ล็อกเกอร์ (ยังไม่ได้เช็ก) ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:30 ขากลับ Odakyu ไป Shinjuku 18:51", q: "Odawara Station" },
+  odawara: { name: "สถานี Odawara", lat: 35.25575, lng: 139.15666, kind: "station", desc: "10:11 ถึงจาก Kayabacho (Tokyo Metro + Odakyu เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) ไม่ต้องฝากกระเป๋า ทางออกตะวันออก ป้าย 5 ขึ้นรถบัส Izuhakone J03 (大涌谷経由 箱根園行) 10:30 ขากลับ Odakyu 18:51 ไป Yoyogi-Uehara แล้วต่อรถใต้ดินถึง Kayabacho 20:49", q: "Odawara Station" },
   owakudani: { name: "Owakudani (หุบควันภูเขาไฟ)", lat: 35.24442, lng: 139.01958, kind: "spot", desc: "11:19 ลงรถบัส J03 ป้าย 大涌谷 หุบภูเขาไฟที่ยังมีควันกำมะถัน ลานชมวิวและร้านไข่ดำ เดินเที่ยวราว 30 นาที เปิดราว 09:00–16:00 (ยังไม่ได้ยืนยัน) ซื้อตั๋วกระเช้าเที่ยวเดียว 2,000 เยนที่สถานี ขึ้นกระเช้าไป Togendai (桃源台行) ไม่เกิน 11:53 ถ้ากระเช้าหยุด: รถบัส J03 12:14 ไป Hakone-en", q: "Owakudani" },
   togendai: { name: "Togendai (กระเช้า → รถบัส Odakyu)", lat: 35.23791, lng: 138.9953, kind: "station", desc: "12:23 ถึงด้วยกระเช้า (ผ่าน Ubako ไม่ต้องลง) เดินราว 5 นาทีไปป้าย 箱根桃源台 ขึ้นรถบัส Odakyu ไป Hakone-en 12:30 (570 เยน บัตร Izuhakone ใช้ไม่ได้)", q: "Hakone Ropeway Togendai Station" },
   hakoneen: { name: "Hakone-en Aquarium", lat: 35.21224, lng: 139.00931, kind: "spot", desc: "12:45 ถึง พิพิธภัณฑ์สัตว์น้ำริมทะเลสาบ Ashi ลานแมวน้ำไบคาล ค่าเข้า 1,600 เยน เข้าได้ถึง 16:00 กินข้าวเที่ยงในบริเวณ Hakone-en รถบัสต่อ 14:00", q: "Hakone-en Aquarium" },
@@ -64,6 +66,8 @@ const pins = {
   heiwaTorii: { name: "โทริอิริมน้ำ (Heiwa no Torii)", lat: 35.20274, lng: 139.02574, kind: "spot", desc: "โทริอิสีแดงในทะเลสาบ จุดถ่ายรูปดังของ Hakone คิวถ่ายรูปมักยาว", q: "Heiwa no Torii Hakone" },
 
   // วันที่ 14
+  shibuya: { name: "Shibuya (เปลี่ยนรถ)", lat: 35.66057, lng: 139.70253, kind: "station", desc: "ขากลับ: ลง Keio Inokashira 20:35 เปลี่ยนเป็น Hanzomon Line 20:45", q: "Shibuya Station" },
+  suitengumae: { name: "สถานี Suitengumae", lat: 35.68408, lng: 139.78416, kind: "station", desc: "21:06 ถึงด้วย Hanzomon Line เดินถึงโรงแรม 340 ม.", q: "Suitengumae Station" },
   busta: { name: "Busta Shinjuku", lat: 35.68829, lng: 139.70063, kind: "station", desc: "ชั้น 4 เหนือทางออกใต้ของสถานี Shinjuku ถึงก่อน 06:45 ขึ้นรถบัส Fujikyu 06:55 (ต้องจอง) ขากลับลงชั้น 3 16:55", q: "Busta Shinjuku" },
   kawaguchiko: { name: "สถานี Kawaguchiko · ร้านเช่าจักรยาน", lat: 35.49835, lng: 138.76849, kind: "station", desc: "08:30 ถึง เช่าจักรยานไฟฟ้า 1 วัน ร้านในคลิปอยู่ทางซ้ายเมื่อออกจากสถานี (ยังไม่ได้เช็กชื่อร้านและราคา) ขากลับรถบัส 15:10 ป้าย 3 กินเทมปุระ Idaten ก่อนกลับ (ยังไม่ได้เช็กที่ตั้ง)", q: "Kawaguchiko Station" },
   lawsonKawaguchiko: { name: "Lawson หน้าสถานี (จุดถ่ายรูปฟูจิ)", lat: 35.49858, lng: 138.76712, kind: "spot", desc: "ฟูจิอยู่เหนือหลังคาร้านสะดวกซื้อ คิวยาว คลิปถ่ายจากอีกฝั่งถนนแทน", q: "Lawson Kawaguchiko Station-mae" },
@@ -98,6 +102,8 @@ const dayMaps: Record<string, MapDef[]> = {
         ["shichirigahama", "walking"],
         ["inamuragasaki", "transit"],
         ["hase", "transit"],
+        ["goryo", "walking"],
+        ["hase", "walking"],
         ["kotokuin", "walking"],
         ["hase", "walking"],
         ["fujisawa", "transit"],
@@ -126,37 +132,46 @@ const dayMaps: Record<string, MapDef[]> = {
   ],
   "12": [
     {
-      title: "เช้า: Fujisawa → ตลาดนัด Ohi → Saitama",
-      note: "วันฝนหรือตลาดงด: นั่ง JR จาก Fujisawa ตรงไป Saitama-Shintoshin",
+      title: "เช้า: Fujisawa → Tokyo → โรงแรม",
+      note: "JR ตรง 49 นาทีถึงสถานี Tokyo แล้วแท็กซี่ไปฝากกระเป๋า ไม่ต้องลากกระเป๋าเปลี่ยนรถใต้ดิน",
+      steps: ["fujisawa", ["tokyoSt", "transit"], ["hotelTokyo", "taxi"]],
+    },
+    {
+      title: "สาย: ตลาดนัด Ohi แล้วกลับโรงแรม",
+      note: "ขาไปเปลี่ยนที่ Nihonbashi, Shimbashi, Hamamatsucho ขากลับเปลี่ยนที่ Hamamatsucho/Daimon และ Higashi-Ginza (เส้นในแผนที่เป็นเส้นตรง ไม่ใช่แนวราง)",
       steps: [
-        "fujisawa",
-        ["yokohama", "transit"],
-        ["tenkubashi", "transit"],
+        "hotelTokyo",
+        ["kayabacho", "walking"],
+        ["shimbashi", "transit"],
+        ["hamamatsucho", "transit"],
         ["oiKeibajo", "transit"],
         ["ohiRacecourse", "walking"],
         ["oiKeibajo", "walking"],
         ["hamamatsucho", "transit"],
-        ["saitamaShintoshin", "transit"],
+        ["kayabacho", "transit"],
+        ["hotelTokyo", "walking"],
       ],
     },
     {
-      title: "บ่าย–ค่ำ: Saitama-Shintoshin · Omiya · คอนเสิร์ต",
+      title: "16:11–ค่ำ: คอนเสิร์ต Radiohead",
+      note: "ขากลับแนะนำเดินไป Omiya เลี่ยงคนแน่น เที่ยวสุดท้ายจาก Saitama-Shintoshin 23:15",
       steps: [
-        "saitamaShintoshin",
-        ["cocoon", "walking"],
-        ["omiya", "transit"],
-        ["hikawa", "walking"],
-        ["omiyaPark", "walking"],
-        ["omiya", "walking"],
+        "hotelTokyo",
+        ["kayabacho", "walking"],
+        ["ueno", "transit"],
         ["saitamaShintoshin", "transit"],
         ["arena", "walking"],
+        ["omiya", "walking"],
+        ["ueno", "transit"],
+        ["kayabacho", "transit"],
+        ["hotelTokyo", "walking"],
       ],
     },
   ],
   "13": [
     {
       title: "Hakone วันเกิดแฟน",
-      note: "เช้านั่ง JR จาก Saitama-Shintoshin ตรงมา Odawara ค่ำนั่ง Odakyu จาก Odawara ไป Shinjuku (อยู่นอกแผนที่)",
+      note: "เช้านั่ง Tokyo Metro + Odakyu จาก Kayabacho (เปลี่ยนที่ Otemachi และ Yoyogi-Uehara) มา Odawara 10:11 ค่ำกลับทางเดิมถึง Kayabacho 20:49 (อยู่นอกแผนที่)",
       steps: [
         "odawara",
         ["owakudani", "bus"],
@@ -173,7 +188,7 @@ const dayMaps: Record<string, MapDef[]> = {
   "14": [
     {
       title: "Kawaguchiko ปั่นจักรยานรอบทะเลสาบ",
-      note: "รถบัสทางด่วนจาก Busta Shinjuku 06:55 ถึง 08:30 เส้นปั่นวาดตามลำดับในคลิป ไม่ใช่เส้นถนนจริง",
+      note: "เช้าออกจาก Kayabacho 06:08 (Tozai + Toei Shinjuku Line) รถบัสทางด่วนจาก Busta Shinjuku 06:55 ถึง 08:30 เส้นปั่นวาดตามลำดับในคลิป ไม่ใช่เส้นถนนจริง",
       steps: [
         "kawaguchiko",
         ["lawsonKawaguchiko", "walking"],
@@ -185,7 +200,7 @@ const dayMaps: Record<string, MapDef[]> = {
       ],
     },
     {
-      title: "เย็น–ค่ำ: Shimamura · Shimokitazawa",
+      title: "เย็น–ค่ำ: Shimamura · Shimokitazawa · กลับโรงแรม",
       steps: [
         "busta",
         ["shinjuku", "walking"],
@@ -194,6 +209,9 @@ const dayMaps: Record<string, MapDef[]> = {
         ["takadanobaba", "walking"],
         ["shinjuku", "transit"],
         ["shimokitazawa", "transit"],
+        ["shibuya", "transit"],
+        ["suitengumae", "transit"],
+        ["hotelTokyo", "walking"],
       ],
     },
   ],
