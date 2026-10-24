@@ -102,13 +102,13 @@ const routes: Record<string, RouteLeg[]> = {
     { time: "18:41", from: "Zushi Station", to: "Fujisawa Station", mode: "transit", note: "JR เปลี่ยนที่ Ofuna" },
   ],
   "12": [
-    { time: "08:01", from: "Fujisawa Station", to: "Tokyo Station", mode: "transit", note: "JR Ueno-Tokyo Line ไม่ต้องเปลี่ยนรถ" },
-    { time: "08:55", from: "Tokyo Station Yaesu", to: HOTEL_TOKYO, mode: "driving", note: "แท็กซี่ไปฝากกระเป๋า ราว 2.5 กม." },
-    { from: HOTEL_TOKYO, to: "Kayabacho Station", mode: "walking", note: "5 นาที" },
-    { time: "09:26", from: "Kayabacho Station", to: "Oi Keibajo Mae Station", mode: "transit", note: "Tozai → Ginza Line → JR → Tokyo Monorail" },
+    { time: "08:01", from: "Fujisawa Station", to: "Ningyocho Station", mode: "transit", note: "JR ถึง Shimbashi → Toei Asakusa Line 08:57" },
+    { time: "09:04", from: "Ningyocho Station", to: HOTEL_TOKYO, mode: "walking", note: "ลากกระเป๋าไปฝากที่โรงแรม 5–10 นาที" },
+    { from: HOTEL_TOKYO, to: "Ningyocho Station", mode: "walking", note: "5–10 นาที" },
+    { time: "09:32", from: "Ningyocho Station", to: "Oi Keibajo Mae Station", mode: "transit", note: "Toei Asakusa → Daimon เดินไป Hamamatsucho → Tokyo Monorail" },
     { from: "Oi Keibajo Mae Station", to: "Ohi Racecourse", mode: "walking", note: "ตลาดนัด Tokyo City Flea Market" },
-    { time: "12:03", from: "Oi Keibajo Mae Station", to: "Kayabacho Station", mode: "transit", note: "Monorail → เดินไป Daimon → Toei Asakusa → Hibiya Line" },
-    { from: "Kayabacho Station", to: HOTEL_TOKYO, mode: "walking", note: "เช็กอิน พักในห้อง 15:00–16:00" },
+    { time: "12:03", from: "Oi Keibajo Mae Station", to: "Ningyocho Station", mode: "transit", note: "Monorail → เดินไป Daimon → Toei Asakusa ถึง 12:36" },
+    { from: "Ningyocho Station", to: HOTEL_TOKYO, mode: "walking", note: "เช็กอิน พักในห้อง 15:00–16:00" },
     { time: "16:11", from: "Kayabacho Station", to: "Saitama-Shintoshin Station", mode: "transit", note: "Hibiya Line → Ueno → JR Takasaki 16:32" },
     { time: "17:00", from: "Saitama-Shintoshin Station", to: "Saitama Super Arena", mode: "walking", note: "GMO ARENA saitama 3 นาที" },
     { from: "Saitama Super Arena", to: "Omiya Station Saitama", mode: "walking", note: "หลังคอนเสิร์ต เดินราว 20 นาที เลี่ยงคนแน่น" },
@@ -365,20 +365,20 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
     title: "ตลาดนัด Ohi · คอนเสิร์ต Radiohead",
     stay: "Almont Inn Nihonbashi (คืนที่ 1/3)",
     accent: "rose",
-    place: `เช้า: เช็กเอาต์จาก Fujisawa นั่งรถไฟตรงไปสถานี Tokyo ต่อแท็กซี่ไปฝากกระเป๋าที่ Almont Inn Nihonbashi แล้วไปตลาดนัด Tokyo City Flea Market ที่สนามแข่งม้า Ohi (เลือกไว้ก่อน เปิดเฉพาะเสาร์อาทิตย์ งดถ้าฝนตก) ไม่ต้องลากกระเป๋าไปตลาด
+    place: `เช้า: เช็กเอาต์จาก Fujisawa นั่ง JR ไป Shimbashi ต่อ Toei Asakusa Line ไป Ningyocho แล้วเดินไปฝากกระเป๋าที่ Almont Inn Nihonbashi แล้วไปตลาดนัด Tokyo City Flea Market ที่สนามแข่งม้า Ohi (เลือกไว้ก่อน เปิดเฉพาะเสาร์อาทิตย์ งดถ้าฝนตก) ไม่ต้องลากกระเป๋าไปตลาด
 เที่ยง: กลับโรงแรม กินข้าวเที่ยงแถว Nihonbashi / Ningyocho
 15:00–16:00 เช็กอินโรงแรม อาบน้ำ งีบในห้อง
 16:11 ออกไป Saitama-Shintoshin (เปลี่ยนรถที่ Ueno)
 คอนเสิร์ต Radiohead @ GMO ARENA saitama 18:00 JST (เปิดประตู 15:30 เลิกราว 20:05–20:30 เป็นค่าประมาณ)
 หลังคอนเสิร์ต: นั่งรถไฟกลับ Kayabacho (เปลี่ยนที่ Ueno) ถึงราว 21:30–22:45
 พัก Almont Inn Nihonbashi (คืนที่ 1 จาก 3 เลือกไว้ก่อน)`,
-    howto: `08:01 เช็กเอาต์ Fujisawa ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno → 08:50 Tokyo ไม่ต้องเปลี่ยนรถ 49 นาที (รอบถัดไป 08:06 ถึง 08:57)
-08:55 แท็กซี่จากสถานี Tokyo ฝั่ง Yaesu → Almont Inn Nihonbashi ราว 2.5 กม. 10–15 นาที (ค่าประมาณ 1,200–1,500 เยนต่อคัน ไม่ต้องลากกระเป๋าเปลี่ยนรถใต้ดิน)
-09:10 ฝากกระเป๋าที่โรงแรม เดินไปสถานี Kayabacho ราว 5 นาที
-09:26 Tozai → Nihonbashi → Ginza Line → Shimbashi → JR → Hamamatsucho → Tokyo Monorail 09:55 → 10:03 Ōi-keibajō-mae (เปลี่ยนรถ 3 ครั้ง 37 นาที)
+    howto: `08:01 เช็กเอาต์ Fujisawa ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno → 08:46 Shimbashi (ชานชาลา 2)
+08:57 Toei Asakusa Line ขบวนไป Inzai-Makinohara → 09:04 Ningyocho (เปลี่ยนรถ 1 ครั้ง ทั้งหมด 1 ชม. 3 นาที 1,080 เยน) เดินลากกระเป๋าไปโรงแรมราว 5–10 นาที (เดิมแท็กซี่จากสถานี Tokyo ผู้ใช้เปลี่ยน 24 ต.ค. 2026)
+09:10 ฝากกระเป๋าที่โรงแรม เดินกลับไปสถานี Ningyocho ราว 5–10 นาที
+09:32 Toei Asakusa Line → 09:41 Daimon เดินไป Hamamatsucho 7 นาที → Tokyo Monorail 09:55 → 10:03 Ōi-keibajō-mae (เปลี่ยนรถ 1 ครั้ง 31 นาที 537 เยน รอบก่อนหน้า 09:21 ถึง 09:53)
 10:05–12:00 เดินตลาดนัด
-12:03 Tokyo Monorail → Hamamatsucho เดินไป Daimon → Toei Asakusa → Higashi-Ginza → Hibiya Line → 12:43 Kayabacho (เปลี่ยนรถ 2 ครั้ง)
-12:45–15:00 กินข้าวเที่ยงและพักแถวโรงแรม
+12:03 Tokyo Monorail → Hamamatsucho เดินไป Daimon → Toei Asakusa 12:27 → 12:36 Ningyocho (เปลี่ยนรถ 1 ครั้ง 537 เยน)
+12:40–15:00 กินข้าวเที่ยงและพักแถวโรงแรม
 15:00–16:00 เช็กอินแล้วพักในห้อง (ยังไม่ได้เช็กเวลาเช็กอินของ Almont)
 16:11 Hibiya Line Kayabacho → 16:20 Ueno เปลี่ยนเป็น JR Takasaki Line 16:32 → 16:54 Saitama-Shintoshin (เปลี่ยนรถ 1 ครั้ง 43 นาที)
 17:00 เดินไปสนาม 3 นาที (เปิดประตู 15:30)
@@ -391,11 +391,11 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 หมายเหตุ: เวลารถเป็นตารางวันเสาร์เดือน ต.ค. 2026
 หมายเหตุ: 23 ต.ค. 2026 เลือกไว้ก่อนให้พัก Almont Inn Nihonbashi 3 คืน (ห้องเตียงใหญ่ 14 ตร.ม.) ตัวเลือกสำรองคือ APA Hotel Ueno Ekimae (รถตรงทุกเที่ยวแต่เกินงบ)`,
     rain: `เช็กตอนเช้าก่อนออกจาก Fujisawa 08:01: ตลาดนัดงดถ้าฝนตก (ยังไม่เจอว่าประกาศงดกี่โมง ให้ดูเว็บหรือ X ของตลาดนัด) ถ้าฝนตกตั้งแต่เช้าให้ใช้แผนสำรองเลย
-ทุกแบบ: ออกจาก Fujisawa สายลงได้ (เช่น 09:01) นั่ง JR ตรงไป Tokyo แล้วแท็กซี่ไปฝากกระเป๋าที่โรงแรมเหมือนเดิม
+ทุกแบบ: ออกจาก Fujisawa สายลงได้ (เช่น 09:01) นั่ง JR ไป Shimbashi ต่อ Toei Asakusa Line ไป Ningyocho แล้วเดินไปฝากกระเป๋าที่โรงแรมเหมือนเดิม
 แบบ 1 Akihabara (ผมแนะนำ ใกล้และถูก): Hibiya Line Kayabacho → Akihabara 5 นาที ไม่ต้องเปลี่ยนรถ 178 เยนต่อเที่ยว เดินร้านของมือสอง ของเล่น เกม ของสะสม ส่วนใหญ่อยู่ในตึก กินข้าวเที่ยงแถวนั้น กลับโรงแรมเช็กอิน 15:00 พักในห้อง แล้วออก 16:11 ตามเดิม
 แบบ 2 ไป Saitama เร็วขึ้น: กินข้าวเที่ยงแถวโรงแรม ออกจาก Kayabacho ราว 13:00 (เส้นทางเดียวกับรอบ 16:11) เดินห้าง Cocoon City กับ Shimamura สาขา Saitama-Shintoshin (เปิดถึง 19:00) ใกล้สถานี แต่จะไม่ได้พักในห้องก่อนคอนเสิร์ต
 แบบ 3 พักอย่างเดียว: กินข้าวและเดินในร่มแถว Nihonbashi (COREDO Muromachi) เช็กอิน 15:00 นอนพักจนถึง 16:11
-ค่ารถ: ถูกกว่าแผนตลาดนัด (ไม่ต้องจ่ายค่ารถไป-กลับ Ohi 1,253 เยน) แบบ 1 จ่ายเพิ่มแค่ 356 เยน ค่ารถในตารางค่าใช้จ่ายยังคิดแบบไปตลาดนัด
+ค่ารถ: ถูกกว่าแผนตลาดนัด (ไม่ต้องจ่ายค่ารถไป-กลับ Ohi 1,074 เยน) แบบ 1 จ่ายเพิ่มแค่ 356 เยน ค่ารถในตารางค่าใช้จ่ายยังคิดแบบไปตลาดนัด
 เหนื่อยหลังตลาดนัด: กลับโรงแรมแล้วพักในห้องให้นานขึ้นตั้งแต่เช็กอินได้
 ดูแล้วไม่เหมาะ: Heiwajima Antique Fair (ตลาดของเก่าในร่มใกล้ Ohi) ปี 2026 จัดแค่ มี.ค. พ.ค. ก.ย. ธ.ค. ไม่มีเดือน มิ.ย.`,
     rainStat: "ฝน 1/5",
@@ -407,19 +407,18 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
       { name: "GMO ARENA saitama", url: m("Saitama+Super+Arena") },
     ],
     costs: [
-      { name: "Fujisawa → Tokyo: JR Ueno-Tokyo Line ไม่ต้องเปลี่ยนรถ (แล้วต่อแท็กซี่ไปฝากกระเป๋าที่ Almont Inn Nihonbashi)", type: "ค่าเดินทาง", yen: 1034, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
-      { name: "แท็กซี่ สถานี Tokyo (ฝั่ง Yaesu) → Almont Inn Nihonbashi ราว 2.5 กม. พร้อมกระเป๋าใหญ่ (ราว 1,200–1,500 เยนต่อคัน หาร 2 คน)", type: "ค่าเดินทาง", yen: 700, status: "ประมาณ", source: "ประมาณจากระยะทาง ยังไม่ได้เช็กค่าแท็กซี่จริง" },
-      { name: "Kayabacho → Ōi-keibajō-mae (ตลาดนัด): Tokyo Metro Tozai + Ginza ถึง Shimbashi, JR ถึง Hamamatsucho, Tokyo Monorail (เปลี่ยนรถ 3 ครั้ง)", type: "ค่าเดินทาง", yen: 650, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "Fujisawa → Ningyocho: JR Tokaido Line (Ueno-Tokyo Line) ถึง Shimbashi แล้ว Toei Asakusa Line (เปลี่ยนรถ 1 ครั้ง เดินไปฝากกระเป๋าที่ Almont Inn Nihonbashi ราว 5–10 นาที เดิมแท็กซี่จากสถานี Tokyo รวม 1,734)", type: "ค่าเดินทาง", yen: 1080, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "Ningyocho → Ōi-keibajō-mae (ตลาดนัด): Toei Asakusa Line ถึง Daimon เดินไป Hamamatsucho แล้ว Tokyo Monorail (เปลี่ยนรถ 1 ครั้ง เดิมขึ้นที่ Kayabacho 650 เปลี่ยน 3 ครั้ง)", type: "ค่าเดินทาง", yen: 537, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
       { name: "ตลาดนัด Tokyo City Flea Market ที่ Ohi Racecourse (เข้าฟรี)", type: "ค่าเข้า", yen: 0, status: "ประมาณ", source: "ยังไม่ได้ยืนยันว่าเข้าฟรี" },
-      { name: "Ōi-keibajō-mae → Kayabacho: Tokyo Monorail ถึง Hamamatsucho เดินไป Daimon, Toei Asakusa ถึง Higashi-Ginza, Hibiya Line (เปลี่ยนรถ 2 ครั้ง)", type: "ค่าเดินทาง", yen: 603, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
+      { name: "Ōi-keibajō-mae → Ningyocho: Tokyo Monorail ถึง Hamamatsucho เดินไป Daimon แล้ว Toei Asakusa Line (เปลี่ยนรถ 1 ครั้ง เดิมไป Kayabacho 603 เปลี่ยน 2 ครั้ง)", type: "ค่าเดินทาง", yen: 537, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
       { name: "Kayabacho → Saitama-Shintoshin (ไปคอนเสิร์ต): Hibiya Line ถึง Ueno แล้ว JR Takasaki Line", type: "ค่าเดินทาง", yen: 706, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
       { name: "Saitama-Shintoshin หรือ Omiya → Kayabacho (หลังคอนเสิร์ต): JR ถึง Ueno แล้ว Hibiya Line ราคาเท่ากันทั้งสองสถานี", type: "ค่าเดินทาง", yen: 706, status: "เช็กแล้ว", source: "transit.yahoo.co.jp (ตารางวันเสาร์ 24 ต.ค. 2026)" },
     ],
-    board: `1. Fujisawa ชานชาลา 3: เช็กเอาต์ Smile Hotel ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno 08:01 ลง Tokyo 08:50 ชานชาลา 7 ไม่ต้องเปลี่ยนรถ
-2. Tokyo: ออกทางฝั่ง Yaesu ไปจุดขึ้นแท็กซี่ บอกที่อยู่ Nihonbashi Koami-cho 4-6 (Almont Inn Tokyo Nihonbashi) ฝากกระเป๋าที่โรงแรม
-3. เดินไปสถานี Kayabacho ราว 5 นาที (โรงแรมห่าง 350 ม.) ขึ้น Tozai Line ขบวนไป Nakano 09:26 ลง Nihonbashi 09:27 เปลี่ยนเป็น Ginza Line ไป Shibuya 09:32 ลง Shimbashi 09:37 ขึ้น JR Yamanote หรือ Keihin-Tohoku 09:46 ลง Hamamatsucho 09:49 ขึ้น Tokyo Monorail ขบวนไปสนามบิน Haneda 09:55 ลง Ōi-keibajō-mae 10:03
+    board: `1. Fujisawa ชานชาลา 3: เช็กเอาต์ Smile Hotel ขึ้น JR Tokaido Line (Ueno-Tokyo Line) ขบวนไป Ueno 08:01 ลง Shimbashi 08:46 ชานชาลา 2
+2. Shimbashi: เดินตามป้าย Toei Asakusa Line ขึ้นขบวนไป Inzai-Makinohara 08:57 ชานชาลา 2 ลง Ningyocho 09:04 ชานชาลา 4 เดินไปโรงแรม (Nihonbashi Koami-cho 4-6, Almont Inn Tokyo Nihonbashi) ราว 5–10 นาที ฝากกระเป๋าที่โรงแรม
+3. เดินกลับไปสถานี Ningyocho ราว 5–10 นาที ขึ้น Toei Asakusa Line ขบวนไป Keikyu Kurihama 09:32 ลง Daimon 09:41 เดินตามป้ายไป Hamamatsucho (Tokyo Monorail) ราว 7 นาที ขึ้น Tokyo Monorail ขบวนไปสนามบิน Haneda 09:55 ลง Ōi-keibajō-mae 10:03
 4. Ōi-keibajō-mae: เดินไปลานจอดรถที่ 1 ของสนามแข่งม้า Ohi ที่ตั้งตลาดนัด (ยังไม่ได้เช็กเวลาเดิน)
-5. Ōi-keibajō-mae: ขึ้น Tokyo Monorail ไป Hamamatsucho 12:03 เดินไปสถานี Daimon ขึ้น Toei Asakusa Line 12:27 ลง Higashi-Ginza 12:31 เปลี่ยนเป็น Hibiya Line ขบวนไป Kita-Senju 12:38 ลง Kayabacho 12:43
+5. Ōi-keibajō-mae: ขึ้น Tokyo Monorail ไป Hamamatsucho 12:03 เดินไปสถานี Daimon ราว 7 นาที ขึ้น Toei Asakusa Line ขบวน 快特 ไป Keisei Takasago 12:27 ลง Ningyocho 12:36 เดินกลับโรงแรม 5–10 นาที
 6. กินข้าวเที่ยงแถว Nihonbashi / Ningyocho เช็กอินโรงแรม พักในห้อง
 7. Kayabacho: ขึ้น Hibiya Line ขบวนไป Ueno 16:11 ลง Ueno 16:20 เดินไป JR ชานชาลา 14 ขึ้น JR Takasaki Line ขบวนไป Takasaki 16:32 (ขบวนต้นทาง Ueno มีโอกาสได้ที่นั่ง) ลง Saitama-Shintoshin 16:54 ชานชาลา 4
 8. Saitama-Shintoshin ทางออกตะวันตก: เดินตรงแล้วเลี้ยวขวาที่ Keyaki Hiroba ถึงสนาม 3 นาที ประตูที่ใกล้สุดคือ Gate C
@@ -453,13 +452,13 @@ Hayama (จากลิงก์ visitkanagawa ในแท็บ Hayama)
 ☐ บันทึกเส้นทางเดินจากสนามไปสถานี Omiya ใน Google Maps ไว้ก่อน (ทางไม่ค่อยมีจุดสังเกต)
 
 พกไป
-☐ บัตร IC เติมเงินไว้ก่อนเข้าคอนเสิร์ต จะได้ไม่ต้องต่อแถวซื้อตั๋วขากลับ ค่ารถวันนี้ 4,399 เยนต่อคน
+☐ บัตร IC เติมเงินไว้ก่อนเข้าคอนเสิร์ต จะได้ไม่ต้องต่อแถวซื้อตั๋วขากลับ ค่ารถวันนี้ 3,566 เยนต่อคน
 ☐ เงินสดและเหรียญสำหรับตลาดนัด
 ☐ ร่มพับ (ช่วงเช้าเดินกลางแจ้ง)
 ☐ รถเที่ยวสุดท้ายกลับโรงแรม: Saitama-Shintoshin 23:15 (เปลี่ยนเป็น Hibiya Line ที่ Ueno 23:49)
 
 ยังไม่ได้เช็ก
-☐ ค่าแท็กซี่จริงจากสถานี Tokyo ไปโรงแรม (ประมาณ 1,200–1,500 เยนต่อคัน)
+☐ ทางเดินเปลี่ยนจาก JR ไป Toei Asakusa Line ที่ Shimbashi และเส้นทางเดินจาก Ningyocho ไปโรงแรม (ลากกระเป๋าใหญ่ ดูว่ามีลิฟต์ทางไหน)
 ☐ เวลาเลิกคอนเสิร์ตจริง (ประมาณจากทัวร์ปี 2025 ว่าเลิกราว 20:05–20:30)
 ☐ เวลาเดินจากสถานี Ōi-keibajō-mae ถึงลานตลาดนัด
 ☐ ค่าเข้าตลาดนัด (คิดว่าฟรี)`,
