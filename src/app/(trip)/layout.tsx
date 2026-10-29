@@ -6,6 +6,7 @@ import { days } from "@/lib/plan";
 import { logout } from "../login/actions";
 import { getLang } from "@/lib/lang";
 import LangToggle from "@/components/LangToggle";
+import OfflineSupport, { OfflineBanner } from "@/components/OfflineSupport";
 
 // ด่านที่สอง: เช็ก cookie ซ้ำฝั่ง server ก่อนแสดงข้อมูล เผื่อ middleware ถูกข้าม
 export default async function TripLayout({ children }: { children: React.ReactNode }) {
@@ -38,8 +39,10 @@ export default async function TripLayout({ children }: { children: React.ReactNo
             </button>
           </form>
         </div>
+        <OfflineBanner lang={lang} />
       </header>
       <main className="mx-auto max-w-3xl px-4 py-6">{children}</main>
+      <OfflineSupport lang={lang} paths={["/", ...days.map((d) => `/day/${d.slug}`)]} />
     </div>
   );
 }

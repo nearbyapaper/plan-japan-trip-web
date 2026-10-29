@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { safeNext } from "@/lib/auth";
 import LoginForm from "./LoginForm";
+import { ClearOfflineData } from "@/components/OfflineSupport";
 
 export const metadata: Metadata = { title: "เข้าสู่ระบบ · Japan 2027" };
 
@@ -24,6 +25,7 @@ export default async function LoginPage({
         </div>
         <LoginForm next={safeNext(next)} />
       </div>
+      <ClearOfflineData />
     </main>
   );
 }

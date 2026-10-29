@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
+import { getLang } from "@/lib/lang";
 
 const thai = Noto_Sans_Thai({
   variable: "--font-thai",
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
   title: "Japan 2027",
   description: "แผนเที่ยวส่วนตัว",
   robots: { index: false, follow: false },
+  appleWebApp: { capable: true, title: "Japan 2027", statusBarStyle: "default" },
+  icons: { apple: "/icons/apple-touch-icon.png" },
 };
 
 export const viewport: Viewport = {
@@ -21,9 +24,10 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // service worker อ่านค่า lang นี้เพื่อแยกเก็บหน้าไทย / ญี่ปุ่น
   return (
-    <html lang="th">
+    <html lang={await getLang()}>
       <body className={`${thai.variable} font-sans antialiased`}>{children}</body>
     </html>
   );

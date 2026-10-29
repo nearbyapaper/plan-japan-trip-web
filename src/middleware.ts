@@ -24,5 +24,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!login|_next/static|_next/image|favicon.ico|robots.txt).*)"],
+  // sw.js, manifest และไอคอน ไม่มีข้อมูลแผน และเบราว์เซอร์โหลด manifest โดยไม่ส่ง cookie
+  matcher: ["/((?!login|_next/static|_next/image|favicon.ico|robots.txt|sw.js|manifest.webmanifest|icons/).*)"],
 };
